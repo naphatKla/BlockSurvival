@@ -24,11 +24,6 @@ public class CombatSystem : MonoBehaviour
         PlayerRoatateOnMouseCursor();
     }
 
-    private void BulletHit(float playerHP, float damage)
-    {
-        playerHP -= damage;
-    }
-
     private void BulletSpawn()
     {
         Vector3 bulletOffSet = transform.up * offSetScale;
