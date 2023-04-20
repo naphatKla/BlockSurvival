@@ -13,6 +13,7 @@ public class CombatSystem : MonoBehaviour
     
     
     
+    
     void Start()
     {
         InvokeRepeating("BulletSpawn",0,bulletSpeedAttack);
@@ -24,23 +25,12 @@ public class CombatSystem : MonoBehaviour
         PlayerRoatateOnMouseCursor();
     }
 
-    private void BulletHit(float playerHP, float damage)
-    {
-        playerHP -= damage;
-    }
-
     private void BulletSpawn()
     {
         Vector3 bulletOffSet = transform.up * offSetScale;
         
         GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
         Destroy(bulletSpawn,0.5f);
-        
-        GameObject bulletSpawn2 = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
-        Destroy(bulletSpawn2,0.5f);
-        
-        GameObject bulletSpawn3 = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
-        Destroy(bulletSpawn3,0.5f);
     }
     
     private void PlayerRoatateOnMouseCursor()
