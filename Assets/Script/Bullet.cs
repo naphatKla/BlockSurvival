@@ -11,12 +11,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletDamage;
     void Start()
     {
-        Rigidbody2D.velocity = transform.up * bulletSpeed;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Rigidbody2D.velocity = transform.up * bulletSpeed;
     }
 }

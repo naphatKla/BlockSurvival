@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class CombatSystem : MonoBehaviour
 {
-    
+
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeedAttack;
 
     [SerializeField] private float offSetScale;
-    
-    
-    
+
+
+
     void Start()
     {
-        InvokeRepeating("BulletSpawn",0,bulletSpeedAttack);
+        InvokeRepeating("BulletSpawn", 0, bulletSpeedAttack);
     }
 
     // Update is called once per frame
@@ -32,18 +32,24 @@ public class CombatSystem : MonoBehaviour
     private void BulletSpawn()
     {
         Vector3 bulletOffSet = transform.up * offSetScale;
-        
         GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
         Destroy(bulletSpawn,0.5f);
-        
-        GameObject bulletSpawn2 = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
-        Destroy(bulletSpawn2,0.5f);
-        
-        GameObject bulletSpawn3 = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
-        Destroy(bulletSpawn3,0.5f);
     }
-    
-    private void PlayerRoatateOnMouseCursor()
+
+    private void BulletShortGunPatternSpawn()
+    {
+        Vector3 bulletOffSet = transform.up * offSetScale;
+        float angle = 30;
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation * Quaternion.Euler(0,0,angle));
+            Destroy(bulletSpawn,0.5f);
+            angle -= 30;
+        }
+    }
+
+private void PlayerRoatateOnMouseCursor()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
