@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,13 +23,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject player;
     private float _currentSpeed;
     private float _currentHp;
+    
+    [Header("Bar")]
+    [SerializeField] private Scrollbar hpBar;
     void Start()
     {
+        _currentHp = maxHp;
+        player = GameObject.Find("PlayerTest");
+        hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
     }
     
     void Update()
     {
         FollowTargetHandle(player);
+        EnemyBarFollowEnemy();
+        EnemyBarUpdate();
     }
 
     
@@ -49,4 +58,16 @@ public class Enemy : MonoBehaviour
             ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
             : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
     }
+
+    private void EnemyBarFollowEnemy()
+    {
+        Transform hpBarRecTransform = hpBar.GetComponent<RectTransform>();
+        hpBarRecTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3(0,0.7f,0));
+    }
+
+    private void EnemyBarUpdate()
+    {
+        hpBar.size = _currentHp / maxHp;
+    }
+
 }
