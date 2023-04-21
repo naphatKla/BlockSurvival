@@ -7,27 +7,29 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [Header("Component")] [SerializeField] private Rigidbody2D playerRigidbody2D;
-    [SerializeField] private TrailRenderer trainEffect;
+    [Header("Component")] 
+    [SerializeField] private Rigidbody2D playerRigidbody2D;
+    [SerializeField] private TrailRenderer trailEffect;
 
-    [Header("PlayerStat")] [SerializeField]
-    private float maxMana;
+    [Header("PlayerStat")] 
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float stamina;
+    [SerializeField] private float staminaRegen;
+    [SerializeField] private float dashStaminaDrain;
+    [SerializeField] private float sprintStaminaDrain;
 
-    [SerializeField] private float mana;
-    [SerializeField] private float reMana;
-    [SerializeField] private float manaDash;
-    [SerializeField] private float manaSprint;
-
-    [Header("UI Bar")] [SerializeField] private Scrollbar manaBar;
-    [SerializeField] private TextMeshProUGUI manaText;
+    [Header("UI Bar")] 
+    [SerializeField] private Scrollbar staminaBar;
+    [SerializeField] private TextMeshProUGUI staminaText;
 
     [Header("Camera")] 
-    [SerializeField] private Camera followCam;
-    [SerializeField] private float dampCam;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float cameraSmoothDamp;
     private Vector2 _velocity = Vector2.zero;
 
-    [Header("Movement")] [SerializeField] private float walkSpeed;
-    [SerializeField] private float runSpeed;
+    [Header("Movement")] 
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     private float _currentSpeed;
@@ -35,30 +37,27 @@ public class Player : MonoBehaviour
     private bool _isDash;
     private bool _isSprint;
     
-
-// Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         FollowCam();
         
-        mana = Mathf.Clamp(mana, 0, maxMana);
-        if (!_isDash && !_isSprint && mana < maxMana )
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        if (!_isDash && !_isSprint && stamina < maxStamina )
         {
-            mana += Time.deltaTime * reMana;
+            stamina += Time.deltaTime * staminaRegen;
         }
         
         
         _currentSpeed = walkSpeed;
-        if (Input.GetKey(KeyCode.LeftShift) && mana >= manaSprint )
+        if (Input.GetKey(KeyCode.LeftShift) && stamina >= sprintStaminaDrain )
         {
-            mana -= Time.deltaTime * manaSprint;
-            _currentSpeed = runSpeed;
+            stamina -= Time.deltaTime * sprintStaminaDrain;
+            _currentSpeed = sprintSpeed;
             _isSprint = true;
         }
         else
@@ -66,11 +65,11 @@ public class Player : MonoBehaviour
             _isSprint = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !_isDash && mana >= manaDash)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !_isDash && stamina >= dashStaminaDrain)
         {
             _isDash = true;
-            mana -= manaDash;
-            trainEffect.emitting = true;
+            stamina -= dashStaminaDrain;
+            trailEffect.emitting = true;
             _dashTime = 0;
         }
 
@@ -81,12 +80,12 @@ public class Player : MonoBehaviour
         }
         else
         {
-            trainEffect.emitting = false;
+            trailEffect.emitting = false;
             _isDash = false;
         }
 
-        manaBar.size = mana / maxMana;
-        manaText.text = $"{mana:F0} / {maxMana}";
+        staminaBar.size = stamina / maxStamina;
+        staminaText.text = $"{stamina:F0} / {maxStamina}";
         
         Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")) * _currentSpeed;
         playerRigidbody2D.velocity = playerVelocity;
@@ -95,10 +94,10 @@ public class Player : MonoBehaviour
     }
     private void FollowCam()
     {
-        Vector2 cameraPosition = Vector2.SmoothDamp(followCam. transform.position, transform.position,
-            ref _velocity, dampCam);
+        Vector2 cameraPosition = Vector2.SmoothDamp(playerCamera. transform.position, transform.position,
+            ref _velocity, cameraSmoothDamp);
 
-        followCam.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, -10);
+        playerCamera.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, -10);
     }
 }
 
