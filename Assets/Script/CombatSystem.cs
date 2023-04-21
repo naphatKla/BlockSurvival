@@ -1,85 +1,99 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class CombatSystem : MonoBehaviour
 {
-
+    #region Declare Variables
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeedAttack;
+    [SerializeField] private float bulletOffSetScale;
+    [SerializeField] private Skill skill1;
+    #endregion
 
-    [SerializeField] private float offSetScale;
+    
+    #region Declare Struct
+    [Serializable] public struct Skill
+    {
+        [Header("Skill Type")]
+        public GameObject skillType;
+        public float skillOffset;
+        
+        [Header("Skill Data")]
+        public SkillSlot skillSlot;
+        public string name;
+        public float cooldown;
+        [HideInInspector] public bool isCooldown;
+    }
+    public enum SkillSlot
+    {
+        Skill1,
+        Skill2,
+        Skill3,
+        Skill4,
+        Skill5,
+        Skill6,
+        Skill7,
+        Skill8,
+        Skill9,
+        Skill10
+    }
+    #endregion
 
-    [SerializeField] private GameObject Skill_1;
-    [SerializeField] private float SkillLaserOffScale;
-
-    [SerializeField] private float Skill_1Cooldown;
-    private float _skillsCooldown01;
-    private bool _skillsisCooldown = false;
-
-
-
+    
+    #region Unity Method
     void Start()
     {
         InvokeRepeating("BulletSpawn", 0, bulletSpeedAttack);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        PlayerRoatateOnMouseCursor();
+        PlayerRotateOnMouseCursor();
         UsingSkillHandle();
-        SkillsCooldown();
     }
+    private IEnumerator SkillsCooldown(Skill skill)
+    {
+        if (skill.skillType.Equals(skill1.skillType))
+        {
+            skill1.isCooldown = true;
+            yield return new WaitForSeconds(skill1.cooldown);
+            skill1.isCooldown = false;
+        }
+    }
+    #endregion
 
+    
+    #region Method
     private void BulletSpawn()
     {
-        Vector3 bulletOffSet = transform.up * offSetScale;
+        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
         GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
         Destroy(bulletSpawn,0.5f);
     }
     
-    private void SkillSpawn(GameObject SkillsType,float _skillCooldown,float SkillsCooldown)
+    private void SkillSpawn(GameObject skillsType)
     {
-        Vector3 SkillOffSet = transform.up * SkillLaserOffScale;
-        GameObject SkillSpawn = Instantiate(SkillsType, transform.position + SkillOffSet, transform.rotation,transform);
-        _skillsisCooldown = true;
-        _skillCooldown = SkillsCooldown;
-        Destroy(SkillSpawn,1f);
-    }
-
-    private void SkillsCooldown()
-    {
-        if (_skillsCooldown01 > 0)
-        {
-            _skillsCooldown01 -= Time.deltaTime;
-        }
-        else
-        {
-            _skillsCooldown01 = Skill_1Cooldown;
-            _skillsisCooldown = false;
-        }
-    }
-
-
-    private void UsingSkillHandle()
-    {
-        if (!_skillsisCooldown)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SkillSpawn(Skill_1,_skillsCooldown01,Skill_1Cooldown);
-                Debug.Log("Skill 1");
-            }
-        }
-        
+        Vector3 skillOffSet = transform.up * skill1.skillOffset;
+        GameObject skillSpawn = Instantiate(skillsType, transform.position + skillOffSet, transform.rotation,transform);
+        StartCoroutine(SkillsCooldown(skill1));
+        Destroy(skillSpawn,1f);
     }
     
-
+    private void UsingSkillHandle()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !skill1.isCooldown)
+        {
+            SkillSpawn(skill1.skillType);
+            Debug.Log(skill1.name);
+        }
+    }
+    
     private void BulletShortGunPatternSpawn()
     {
-        Vector3 bulletOffSet = transform.up * offSetScale;
+        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
         float angle = 30;
 
         for (int i = 0; i < 3; i++)
@@ -89,18 +103,14 @@ public class CombatSystem : MonoBehaviour
             angle -= 30;
         }
     }
-
-private void PlayerRoatateOnMouseCursor()
+    
+    private void PlayerRotateOnMouseCursor()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         Vector2 direction = mousePosition - transform.position;
         transform.up = direction;
-        
     }
-    
-    
-    
-    
+    #endregion
 }

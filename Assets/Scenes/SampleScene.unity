@@ -172,10 +172,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}
   bulletSpeedAttack: 1
-  offSetScale: 1
-  Skill_1: {fileID: 684036731389297007, guid: 0b6850929d683454bac97da7bb10d0da, type: 3}
-  SkillLaserOffScale: 5
-  Skill_1Cooldown: 5
+  bulletOffSetScale: 2
+  skill1:
+    skillType: {fileID: 1993545881}
+    skillOffset: 5
+    skillSlot: 0
+    name: LaserBeem
+    cooldown: 5
+    isCooldown: 0
 --- !u!50 &135073076
 Rigidbody2D:
   serializedVersion: 4
@@ -969,3 +973,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1993545881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 684036731389297007, guid: 0b6850929d683454bac97da7bb10d0da, type: 3}
+  m_PrefabInstance: {fileID: 1486668834}
+  m_PrefabAsset: {fileID: 0}
