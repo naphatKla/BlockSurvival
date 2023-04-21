@@ -815,7 +815,7 @@ MonoBehaviour:
   playerCamera: {fileID: 519420031}
   cameraSmoothDamp: 0.25
   walkSpeed: 3
-  sprintSpeed: 0
+  sprintSpeed: 6
   dashSpeed: 15
   dashDuration: 0.3
 --- !u!1 &1974793574
