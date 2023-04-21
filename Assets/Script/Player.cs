@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    #region Declare Variable
     [Header("Component")] 
     [SerializeField] private Rigidbody2D playerRigidbody2D;
     [SerializeField] private TrailRenderer trailEffect;
@@ -36,35 +37,30 @@ public class Player : MonoBehaviour
     private float _dashTime;
     private bool _isDash;
     private bool _isSprint;
-    
+    #endregion
+    #region Unity Method
     void Start()
     {
         
     }
-    
     void Update()
     {
-        FollowCam();
-        
-        stamina = Mathf.Clamp(stamina, 0, maxStamina);
-        if (!_isDash && !_isSprint && stamina < maxStamina )
-        {
-            stamina += Time.deltaTime * staminaRegen;
-        }
-        
-        
-        _currentSpeed = walkSpeed;
-        if (Input.GetKey(KeyCode.LeftShift) && stamina >= sprintStaminaDrain )
-        {
-            stamina -= Time.deltaTime * sprintStaminaDrain;
-            _currentSpeed = sprintSpeed;
-            _isSprint = true;
-        }
-        else
-        {
-            _isSprint = false;
-        }
+        CameraFollowPlayer();
+        StaminaRegen();
+        PlayerMovementHandle();
+    }
+    #endregion
 
+    #region method
+    private void CameraFollowPlayer()
+    {
+        Vector2 cameraPosition = Vector2.SmoothDamp(playerCamera. transform.position, transform.position,
+            ref _velocity, cameraSmoothDamp);
+
+        playerCamera.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, -10);
+    }
+    private void DashHandle()
+    {
         if (Input.GetKeyDown(KeyCode.LeftControl) && !_isDash && stamina >= dashStaminaDrain)
         {
             _isDash = true;
@@ -83,22 +79,43 @@ public class Player : MonoBehaviour
             trailEffect.emitting = false;
             _isDash = false;
         }
-
+    }
+    private void StaminaRegen()
+    {
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        if (!_isDash && !_isSprint && stamina < maxStamina)
+        {
+            stamina += Time.deltaTime * staminaRegen;
+        }
+    }
+    private void SprintHandle()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && stamina >= sprintStaminaDrain)
+        {
+            stamina -= Time.deltaTime * sprintStaminaDrain;
+            _currentSpeed = sprintSpeed;
+            _isSprint = true;
+        }
+        else
+        {
+            _isSprint = false;
+        }
+    }
+    private void PlayerMovementHandle()
+    {
+        _currentSpeed = walkSpeed;
+        SprintHandle();
+        DashHandle();
+        PlayerBarUpdate();
+        Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _currentSpeed;
+        playerRigidbody2D.velocity = playerVelocity;
+    }
+    private void PlayerBarUpdate()
+    {
         staminaBar.size = stamina / maxStamina;
         staminaText.text = $"{stamina:F0} / {maxStamina}";
-        
-        Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")) * _currentSpeed;
-        playerRigidbody2D.velocity = playerVelocity;
-
-       
     }
-    private void FollowCam()
-    {
-        Vector2 cameraPosition = Vector2.SmoothDamp(playerCamera. transform.position, transform.position,
-            ref _velocity, cameraSmoothDamp);
-
-        playerCamera.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, -10);
-    }
+    #endregion
 }
 
 
