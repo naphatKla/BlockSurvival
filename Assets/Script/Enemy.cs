@@ -12,11 +12,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI enemyText;
     [SerializeField] private Player player;
-
-    [SerializeField] private GameObject enemy;
-
-
-
+    
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -37,7 +33,6 @@ public class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         player.playerLevel += enemyExpDrop;
-        GameObject enemySpawn = Instantiate(enemy, enemy.transform.position, enemy.transform.rotation);
         Debug.Log("enemyDeath");
     }
 }

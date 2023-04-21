@@ -22,13 +22,12 @@ public class Player : MonoBehaviour
     private float _currentSpeed;
     void Start()
     {
-        
+        StatusBottom.onClick.AddListener(() => PlayerStatus.SetActive(!PlayerStatus.activeSelf));
     }
 
     // Update is called once per frame
     void Update()
     {
-        StatusBottom.onClick.AddListener(() => PlayerStatus.SetActive(true));
         playerStatusText.text = $"Player Level {playerLevel}";
         _currentSpeed = playerSpeed;
         Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _currentSpeed;

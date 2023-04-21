@@ -15,6 +15,7 @@ public class EnemyRespawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.childCount > 0) return;
+        Instantiate(enemy,transform);
     }
 }
