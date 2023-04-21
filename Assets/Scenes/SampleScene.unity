@@ -345,7 +345,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -586,7 +586,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -813,7 +813,7 @@ MonoBehaviour:
   manaBar: {fileID: 2008088534}
   manaText: {fileID: 1094557468}
   followCam: {fileID: 519420031}
-  dampCam: 0.125
+  dampCam: 0.25
   walkSpeed: 3
   runSpeed: 6
   dashSpeed: 15

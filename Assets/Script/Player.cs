@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [Header("Camera")] 
     [SerializeField] private Camera followCam;
     [SerializeField] private float dampCam;
-    private Vector2 _velocity;
+    private Vector2 _velocity = Vector2.zero;
 
     [Header("Movement")] [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
