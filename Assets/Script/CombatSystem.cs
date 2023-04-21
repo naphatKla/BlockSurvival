@@ -43,7 +43,7 @@ public class CombatSystem : MonoBehaviour
     private void SkillSpawn(GameObject SkillsType,float _skillCooldown,float SkillsCooldown)
     {
         Vector3 SkillOffSet = transform.up * SkillLaserOffScale;
-        GameObject SkillSpawn = Instantiate(SkillsType, transform.position + SkillOffSet, transform.rotation);
+        GameObject SkillSpawn = Instantiate(SkillsType, transform.position + SkillOffSet, transform.rotation,transform);
         _skillsisCooldown = true;
         _skillCooldown = SkillsCooldown;
         Destroy(SkillSpawn,1f);
