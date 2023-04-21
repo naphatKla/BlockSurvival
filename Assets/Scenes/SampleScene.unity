@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidbody2D: {fileID: 1139581172}
-  trailEffect: {fileID: 0}
+  trailEffect: {fileID: 1139581176}
   maxStamina: 100
   stamina: 100
   staminaRegen: 10
