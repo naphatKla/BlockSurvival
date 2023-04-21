@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 1094557469}
   - component: {fileID: 1094557468}
   m_Layer: 5
-  m_Name: Mana Text
+  m_Name: StaminaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,18 +804,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidbody2D: {fileID: 1139581172}
-  trainEffect: {fileID: 1139581176}
-  maxMana: 100
-  mana: 100
-  reMana: 4
-  manaDash: 15
-  manaSprint: 2.5
-  manaBar: {fileID: 2008088534}
-  manaText: {fileID: 1094557468}
-  followCam: {fileID: 519420031}
-  dampCam: 0.25
+  trailEffect: {fileID: 0}
+  maxStamina: 100
+  stamina: 100
+  staminaRegen: 10
+  dashStaminaDrain: 20
+  sprintStaminaDrain: 5
+  staminaBar: {fileID: 2008088534}
+  staminaText: {fileID: 1094557468}
+  playerCamera: {fileID: 519420031}
+  cameraSmoothDamp: 0.25
   walkSpeed: 3
-  runSpeed: 6
+  sprintSpeed: 0
   dashSpeed: 15
   dashDuration: 0.3
 --- !u!1 &1974793574
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 2008088535}
   - component: {fileID: 2008088534}
   m_Layer: 5
-  m_Name: Scrollbar
+  m_Name: StaminaBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
