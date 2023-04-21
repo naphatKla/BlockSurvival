@@ -8,10 +8,13 @@ using UnityEngine;
 public class CombatSystem : MonoBehaviour
 {
     #region Declare Variables
+    
+    [SerializeField] private Player player;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
     [SerializeField] private Skill skill1;
+
     #endregion
 
     
@@ -69,13 +72,21 @@ public class CombatSystem : MonoBehaviour
     #region Method
     private void BulletSpawn()
     {
-        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
-        GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
-        Destroy(bulletSpawn,0.5f);
+        if (player.playerLevel == 0)
+        {
+            BulletDeafultGunPatternSpawn();
+        }
+
+        if (player.playerLevel >= 1)
+        {
+            BulletShotGunPatternSpawn();
+            
+        }
     }
     
     private void SkillSpawn(GameObject skillsType)
     {
+        
         Vector3 skillOffSet = transform.up * skill1.skillOffset;
         GameObject skillSpawn = Instantiate(skillsType, transform.position + skillOffSet, transform.rotation,transform);
         StartCoroutine(SkillsCooldown(skill1));
@@ -84,14 +95,21 @@ public class CombatSystem : MonoBehaviour
     
     private void UsingSkillHandle()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !skill1.isCooldown)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !skill1.isCooldown && player.playerLevel > 0)
         {
             SkillSpawn(skill1.skillType);
             Debug.Log(skill1.name);
         }
     }
-    
-    private void BulletShortGunPatternSpawn()
+
+    private void BulletDeafultGunPatternSpawn()
+    {
+        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
+        GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
+        Destroy(bulletSpawn,0.5f);
+    }
+
+    private void BulletShotGunPatternSpawn()
     {
         Vector3 bulletOffSet = transform.up * bulletOffSetScale;
         float angle = 30;
@@ -112,5 +130,7 @@ public class CombatSystem : MonoBehaviour
         Vector2 direction = mousePosition - transform.position;
         transform.up = direction;
     }
+    
+
     #endregion
 }
