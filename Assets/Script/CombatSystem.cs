@@ -11,6 +11,13 @@ public class CombatSystem : MonoBehaviour
 
     [SerializeField] private float offSetScale;
 
+    [SerializeField] private GameObject Skill_1;
+    [SerializeField] private float SkillLaserOffScale;
+
+    [SerializeField] private float Skill_1Cooldown;
+    private float _skillsCooldown01;
+    private bool _skillsisCooldown = false;
+
 
 
     void Start()
@@ -22,6 +29,8 @@ public class CombatSystem : MonoBehaviour
     void Update()
     {
         PlayerRoatateOnMouseCursor();
+        UsingSkillHandle();
+        SkillsCooldown();
     }
 
     private void BulletSpawn()
@@ -30,6 +39,43 @@ public class CombatSystem : MonoBehaviour
         GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
         Destroy(bulletSpawn,0.5f);
     }
+    
+    private void SkillSpawn(GameObject SkillsType,float _skillCooldown,float SkillsCooldown)
+    {
+        Vector3 SkillOffSet = transform.up * SkillLaserOffScale;
+        GameObject SkillSpawn = Instantiate(SkillsType, transform.position + SkillOffSet, transform.rotation);
+        _skillsisCooldown = true;
+        _skillCooldown = SkillsCooldown;
+        Destroy(SkillSpawn,1f);
+    }
+
+    private void SkillsCooldown()
+    {
+        if (_skillsCooldown01 > 0)
+        {
+            _skillsCooldown01 -= Time.deltaTime;
+        }
+        else
+        {
+            _skillsCooldown01 = Skill_1Cooldown;
+            _skillsisCooldown = false;
+        }
+    }
+
+
+    private void UsingSkillHandle()
+    {
+        if (!_skillsisCooldown)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SkillSpawn(Skill_1,_skillsCooldown01,Skill_1Cooldown);
+                Debug.Log("Skill 1");
+            }
+        }
+        
+    }
+    
 
     private void BulletShortGunPatternSpawn()
     {
