@@ -12,24 +12,29 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI enemyText;
     [SerializeField] private Player player;
+     private EnemyRespawn _enemyRespawnPoint;
     
     void Start()
     {
         player = FindObjectOfType<Player>();
         enemyText = GameObject.Find("EnemyHP").GetComponent<TextMeshProUGUI>();
+        enemyText.text = $"{enemyHP}";
+        _enemyRespawnPoint = GetComponentInParent<EnemyRespawn>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (enemyHP <= 0)
-        {
-            Destroy(gameObject);
-        }
-        enemyText.text = $"{enemyHP}";
         
     }
 
+    public void TakeDamage(float damage)
+    {
+        enemyHP -= damage;
+        enemyText.text = $"{enemyHP}";
+
+        if (enemyHP > 0) return;
+        Destroy(gameObject);
+    }
     private void OnDestroy()
     {
         player.playerLevel += enemyExpDrop;

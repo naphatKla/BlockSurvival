@@ -23,14 +23,7 @@ public class Skills : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            SkillHit(_enemy,skillDamage);
-            
+            _enemy.TakeDamage(skillDamage);
         }
     }
-
-    private void SkillHit(Enemy enemy,float SkillDamage)
-    {
-        enemy.enemyHP -= SkillDamage;
-    }
-    
 }

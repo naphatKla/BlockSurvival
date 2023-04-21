@@ -28,12 +28,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            BulletHit(_enemy,bulletDamage);
+            _enemy.TakeDamage(bulletDamage);
         }
-    }
-
-    private void BulletHit(Enemy enemy, float damage)
-    {
-        enemy.enemyHP -= damage;
     }
 }
