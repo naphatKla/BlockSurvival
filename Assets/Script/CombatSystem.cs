@@ -13,39 +13,9 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
-    [SerializeField] private Skill skill1;
+  
 
     #endregion
-
-    
-    #region Declare Struct
-    [Serializable] public struct Skill
-    {
-        [Header("Skill Type")]
-        public GameObject skillType;
-        public float skillOffset;
-        
-        [Header("Skill Data")]
-        public SkillSlot skillSlot;
-        public string name;
-        public float cooldown;
-        [HideInInspector] public bool isCooldown;
-    }
-    public enum SkillSlot
-    {
-        Skill1,
-        Skill2,
-        Skill3,
-        Skill4,
-        Skill5,
-        Skill6,
-        Skill7,
-        Skill8,
-        Skill9,
-        Skill10
-    }
-    #endregion
-
     
     #region Unity Method
     void Start()
@@ -55,16 +25,6 @@ public class CombatSystem : MonoBehaviour
     void Update()
     {
         PlayerRotateOnMouseCursor();
-        UsingSkillHandle();
-    }
-    private IEnumerator SkillsCooldown(Skill skill)
-    {
-        if (skill.skillType.Equals(skill1.skillType))
-        {
-            skill1.isCooldown = true;
-            yield return new WaitForSeconds(skill1.cooldown);
-            skill1.isCooldown = false;
-        }
     }
     #endregion
 
@@ -84,24 +44,6 @@ public class CombatSystem : MonoBehaviour
         }
     }
     
-    private void SkillSpawn(GameObject skillsType)
-    {
-        
-        Vector3 skillOffSet = transform.up * skill1.skillOffset;
-        GameObject skillSpawn = Instantiate(skillsType, transform.position + skillOffSet, transform.rotation,transform);
-        StartCoroutine(SkillsCooldown(skill1));
-        Destroy(skillSpawn,1f);
-    }
-    
-    private void UsingSkillHandle()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !skill1.isCooldown && player.playerLevel > 0)
-        {
-            SkillSpawn(skill1.skillType);
-            Debug.Log(skill1.name);
-        }
-    }
-
     private void BulletDeafultGunPatternSpawn()
     {
         Vector3 bulletOffSet = transform.up * bulletOffSetScale;
@@ -130,7 +72,5 @@ public class CombatSystem : MonoBehaviour
         Vector2 direction = mousePosition - transform.position;
         transform.up = direction;
     }
-    
-
     #endregion
 }
