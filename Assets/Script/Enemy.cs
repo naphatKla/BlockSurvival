@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     
     [Header("Other")]
     // Must change when player is done.
-    [SerializeField] private GameObject player;
+    [SerializeField] private Player player;
     private float _currentSpeed;
     private float _currentHp;
     
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _currentHp = maxHp;
-        player = GameObject.Find("PlayerTest");
+        player = FindObjectOfType<Player>();
         hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         hpBar.gameObject.SetActive(false);
     }
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     
     float _smoothDampVelocity;
-    private void FollowTargetHandle(GameObject target)
+    private void FollowTargetHandle(Player target)
     {
         Vector2 direction = target.transform.position - transform.position;
         transform.up = direction;
