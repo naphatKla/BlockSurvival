@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        enemyText = GameObject.Find("EnemyHP").GetComponent<TextMeshProUGUI>();
+        enemyText = GetComponentInChildren<TextMeshProUGUI>();
         enemyText.text = $"{enemyHP}";
         _enemyRespawnPoint = GetComponentInParent<EnemyRespawn>();
     }

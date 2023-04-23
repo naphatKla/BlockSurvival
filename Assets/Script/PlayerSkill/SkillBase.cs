@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class SkillBase : MonoBehaviour
@@ -8,17 +9,26 @@ public abstract class SkillBase : MonoBehaviour
     //[Header("Skill Type")]
     // public GameObject skillType;
     // public float skillOffset;
-        
-    public KeyCode skillKey;
     
+    public KeyCode skillKey;
+
     [Header("Skill Data")]
-    public string name;
-    public float skillDamage;
-    public float cooldown;
-    public float destroyTime;
-    public float skillOffset;
-    float _currentAttackCooldown;
-    public float cooldownPerHit;
+    [SerializeField] public string name;
+    [SerializeField] public float skillDamage;
+    [SerializeField] public float cooldown;
+    [SerializeField] public float destroyTime;
+    [SerializeField] public float skillOffset;
+    
+    [Header("Skill Hit Mode")]
+    [SerializeField] public HitMode hitMode;
+    [SerializeField] public float cooldownPerHit;
+     private float _currentAttackCooldown;
+    
+    public enum HitMode
+    {
+        Single,
+        Multiple
+    }
     
     [HideInInspector] public bool isCooldown;
     
@@ -31,21 +41,44 @@ public abstract class SkillBase : MonoBehaviour
     private void Update()
     {
         _currentAttackCooldown -= Time.deltaTime;
-        if (_currentAttackCooldown < 0)
-        {
-            _currentAttackCooldown = 0;
-        }
+        _currentAttackCooldown = Mathf.Clamp(_currentAttackCooldown, 0, cooldownPerHit);
+    }
+
+    private readonly List<Enemy> _enemiesInSkillArea = new List<Enemy>();
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.CompareTag("Enemy"))
+            _enemiesInSkillArea.Add(col.GetComponent<Enemy>());
+        
+        if(hitMode == HitMode.Multiple) return;
+
+        if (col.gameObject.CompareTag("Enemy"))
+            col.GetComponent<Enemy>().TakeDamage(skillDamage);
     }
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy") && _currentAttackCooldown == 0) 
+        if(hitMode == HitMode.Single) return;
+        
+        if (col.gameObject.CompareTag("Enemy") && _currentAttackCooldown <= 0) 
         {
-            Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            _enemy.TakeDamage(skillDamage);
-            _currentAttackCooldown += cooldownPerHit;
+            _enemiesInSkillArea.ForEach(target => target.TakeDamage(skillDamage));
+            _currentAttackCooldown = cooldownPerHit;
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+            StartCoroutine(RemoveTargetList(other.GetComponent<Enemy>()));
+    }
+
+    IEnumerator RemoveTargetList(Enemy enemy)
+    {
+        yield return new WaitForFixedUpdate();
+        _enemiesInSkillArea.Remove(enemy);
+    }
+    
     protected abstract void SkillAction();
 }
 
