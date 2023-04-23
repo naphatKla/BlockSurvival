@@ -148,11 +148,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 53
   name: ShootFast
-  skillDamage: 1
+  skillDamage: 0
   cooldown: 10
   destroyTime: 2
   skillOffset: 0
   hitMode: 0
   cooldownPerHit: 0
-  isCooldown: 1
+  isCooldown: 0
   bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}

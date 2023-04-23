@@ -22,7 +22,8 @@ public abstract class SkillBase : MonoBehaviour
     [Header("Skill Hit Mode")]
     [SerializeField] public HitMode hitMode;
     [SerializeField] public float cooldownPerHit;
-     private float _currentAttackCooldown;
+    private float _currentAttackCooldown;
+    [HideInInspector] public Player player;
     
     public enum HitMode
     {
@@ -34,6 +35,7 @@ public abstract class SkillBase : MonoBehaviour
     
     void Start()
     {
+        player = FindObjectOfType<Player>();
         SkillAction();
         Destroy(gameObject, destroyTime);
     }
