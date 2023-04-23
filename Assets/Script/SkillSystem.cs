@@ -27,7 +27,6 @@ public class SkillSystem : MonoBehaviour
     
     private bool CheckSkillCondition(SkillBase skill)
     {
-        Debug.Log(skill.isCooldown);
         if (skill.isCooldown) return false;
         if (Input.GetKeyDown(skill.skillKey)) return true;
         return false;
@@ -35,7 +34,6 @@ public class SkillSystem : MonoBehaviour
     
     private void PlaySkill(SkillBase skill) 
     {
-        Debug.Log("Player");
         Vector3 skillOffSet = transform.up * skill.skillOffset; 
         Instantiate(skill, transform.position + skillOffSet, transform.rotation); 
         StartCoroutine(SkillsCooldown(skill));

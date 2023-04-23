@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7133523603591073221}
   - component: {fileID: 3894577804931799099}
-  - component: {fileID: 4676682060816024802}
   - component: {fileID: 8920519049486811458}
   - component: {fileID: 5054128742638150933}
+  - component: {fileID: 8796720535302960442}
   m_Layer: 0
   m_Name: BeastBall
   m_TagString: Untagged
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4676682060816024802
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5994728957744103834}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &8920519049486811458
 Rigidbody2D:
   serializedVersion: 4
@@ -148,9 +122,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 50
   name: BeastBall
-  skillDamage: 5
+  skillDamage: 2
   cooldown: 5
   destroyTime: 3
   skillOffset: 3
-  isCooldown: 0
+  cooldownPerHit: 0.2
+  isCooldown: 1
   speed: 3
+--- !u!58 &8796720535302960442
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994728957744103834}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

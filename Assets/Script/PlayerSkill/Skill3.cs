@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill3 : MonoBehaviour
+public class Skill3 : SkillBase
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void SkillAction()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        transform.SetParent(FindObjectOfType<Player>().transform);
     }
 }

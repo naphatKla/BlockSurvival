@@ -17,6 +17,9 @@ public abstract class SkillBase : MonoBehaviour
     public float cooldown;
     public float destroyTime;
     public float skillOffset;
+    float _currentAttackCooldown;
+    public float cooldownPerHit;
+    
     [HideInInspector] public bool isCooldown;
     
     void Start()
@@ -24,13 +27,23 @@ public abstract class SkillBase : MonoBehaviour
         SkillAction();
         Destroy(gameObject, destroyTime);
     }
-    
-    private void OnTriggerEnter2D(Collider2D col)
+
+    private void Update()
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        _currentAttackCooldown -= Time.deltaTime;
+        if (_currentAttackCooldown < 0)
+        {
+            _currentAttackCooldown = 0;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy") && _currentAttackCooldown == 0) 
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             _enemy.TakeDamage(skillDamage);
+            _currentAttackCooldown += cooldownPerHit;
         }
     }
     protected abstract void SkillAction();
