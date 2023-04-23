@@ -6,6 +6,6 @@ public class Skill3 : SkillBase
 {
     protected override void SkillAction()
     {
-        transform.SetParent(FindObjectOfType<Player>().transform);
+        transform.SetParent(player.playerTransform);
     }
 }

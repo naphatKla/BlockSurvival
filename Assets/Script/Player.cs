@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float maxStamina;
     [SerializeField] private float staminaRegen;
+    [SerializeField] public float playerAttackSpeed;
+    [SerializeField] public float playerLevel;
+    [SerializeField] public float playerDamage;
     private float _health;
     private float _stamina;
     
@@ -42,9 +45,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float staminaRecoveryCooldown;
+    [HideInInspector] public Transform playerTransform;
     private float _currentSpeed;
     public PlayerStatus playerStatus;
-    
+
     public enum PlayerStatus
     {
         Clear,
@@ -61,6 +65,7 @@ public class Player : MonoBehaviour
     #region Unity Method
     void Start()
     {
+        playerTransform = transform.GetChild(0);
         _health = maxHealth;
         _stamina = maxStamina;
         _currentSpeed = walkSpeed;
@@ -191,10 +196,10 @@ public class Player : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = playerCamera.ScreenToWorldPoint(mousePosition);
-        float xAngle = mousePosition.x - transform.position.x;
-        float yAngle = mousePosition.y - transform.position.y;
+        float xAngle = mousePosition.x - playerTransform.position.x;
+        float yAngle = mousePosition.y - playerTransform.position.y;
         Vector2 direction = new Vector2(xAngle, yAngle);
-        transform.GetChild(0).up = direction;
+        playerTransform.up = direction;
     }
     #endregion
 }

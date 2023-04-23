@@ -7,7 +7,7 @@ public class Skill4 : SkillBase
     [SerializeField] private GameObject bullet;
     protected override void SkillAction()
     {
-        Vector3 bulletOffSet = transform.up;
+        Vector3 bulletOffSet = player.playerTransform.up;
         float angle = 30;
 
         for (int i = 0; i < 13; i++)

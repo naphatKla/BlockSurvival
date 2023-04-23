@@ -5,8 +5,11 @@ using UnityEngine;
 public class SkillSystem : MonoBehaviour
 {
     [SerializeField] private List<SkillBase> skills;
+    private Player _player;
     void Start()
     {
+        _player = GetComponent<Player>();
+        
         // I don't know why this doesn't work
          foreach (SkillBase skill in skills)
          {
@@ -34,8 +37,8 @@ public class SkillSystem : MonoBehaviour
     
     private void PlaySkill(SkillBase skill) 
     {
-        Vector3 skillOffSet = transform.up * skill.skillOffset; 
-        Instantiate(skill, transform.position + skillOffSet, transform.rotation); 
+        Vector3 skillOffSet = _player.playerTransform.up * skill.skillOffset; 
+        Instantiate(skill, _player.playerTransform.position + skillOffSet, _player.playerTransform.rotation); 
         StartCoroutine(SkillsCooldown(skill));
     }
     

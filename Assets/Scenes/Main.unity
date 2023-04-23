@@ -856,6 +856,8 @@ GameObject:
   - component: {fileID: 1832563865}
   - component: {fileID: 1832563864}
   - component: {fileID: 1832563863}
+  - component: {fileID: 1832563868}
+  - component: {fileID: 1832563869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1035,6 +1037,9 @@ MonoBehaviour:
   maxHealth: 100
   maxStamina: 100
   staminaRegen: 10
+  playerAttackSpeed: 1
+  playerLevel: 0
+  playerDamage: 1
   healthBar: {fileID: 1738933683}
   healthText: {fileID: 1975073829}
   staminaBar: {fileID: 1859839556}
@@ -1050,6 +1055,7 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 0.3
   staminaRecoveryCooldown: 5
+  playerTransform: {fileID: 0}
   playerStatus: 0
 --- !u!4 &1832563867
 Transform:
@@ -1067,6 +1073,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832563868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832563862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc00c1232b5349f4abf151e4c75f6ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}
+  bulletOffSetScale: 1
+--- !u!114 &1832563869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832563862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbde3cb789e10c4f9d074dc13f87735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 431636933315799264, guid: 0b6850929d683454bac97da7bb10d0da, type: 3}
+  - {fileID: 5054128742638150933, guid: 69059d715b9fc574ca43c30b0f2b212e, type: 3}
+  - {fileID: 7472774371509389036, guid: a423ca5f8cd613145b4bb592b7188fcb, type: 3}
+  - {fileID: 5222246726414712912, guid: e35857a2794a2bf478754df5e8f7f6fa, type: 3}
+  - {fileID: 6414207215539693747, guid: dc3f8637c531f1647bfa3dc26a025aec, type: 3}
 --- !u!1 &1859839554
 GameObject:
   m_ObjectHideFlags: 0

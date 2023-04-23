@@ -8,21 +8,20 @@ using UnityEngine;
 public class CombatSystem : MonoBehaviour
 {
     #region Declare Variables
-    [SerializeField] private Player player;
     [SerializeField] private GameObject bullet;
-    [SerializeField] public float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
+    private Player _player;
     #endregion
     
     #region Unity Method
     void Start()
     {
-        Invoke("BulletSpawn", player.playerAttackSpeed);
+        _player = GetComponent<Player>();
+        Invoke("BulletSpawn", _player.playerAttackSpeed);
     }
     void Update()
     {
-        // Must delete this later.
-        PlayerRotateOnMouseCursor();
+
     }
     #endregion
 
@@ -30,46 +29,37 @@ public class CombatSystem : MonoBehaviour
     #region Method
     private void BulletSpawn()
     {
-        if (player.playerLevel >= 0)
+        if (_player.playerLevel >= 0)
         {
             BulletDefaultGunPatternSpawn();
         }
 
-        if (player.playerLevel >= 5)
+        if (_player.playerLevel >= 5)
         {
             BulletShotGunPatternSpawn();
         }
         
-        Invoke("BulletSpawn", player.playerAttackSpeed);
+        Invoke("BulletSpawn", _player.playerAttackSpeed);
     }
     
     private void BulletDefaultGunPatternSpawn()
     {
-        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
-        GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);
+        Vector3 bulletOffSet = _player.playerTransform.up * bulletOffSetScale;
+        GameObject bulletSpawn = Instantiate(bullet, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
         Destroy(bulletSpawn,0.5f);
     }
 
     private void BulletShotGunPatternSpawn()
     {
-        Vector3 bulletOffSet = transform.up * bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * bulletOffSetScale;
         float angle = 30;
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation * Quaternion.Euler(0,0,angle));
+            GameObject bulletSpawn = Instantiate(bullet, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation * Quaternion.Euler(0,0,angle));
             Destroy(bulletSpawn,0.5f);
             angle -= 30;
         }
-    }
-    
-    private void PlayerRotateOnMouseCursor()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        Vector2 direction = mousePosition - transform.position;
-        transform.up = direction;
     }
     #endregion
 }
