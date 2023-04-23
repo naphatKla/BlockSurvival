@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float cameraSmoothDamp;
     private Vector3 _velocity = Vector3.zero;
+    private Vector3 _velocity2 = Vector3.zero;
 
     [Header("Player Movement")] 
     [SerializeField] private KeyCode sprintKey;
@@ -65,11 +67,12 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        RotatePlayerFollowMouseDirection();
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
     }
-
+    
     private IEnumerator Dash()
     {
         _stamina -= dashStaminaDrain;
@@ -182,6 +185,16 @@ public class Player : MonoBehaviour
     {
         if(status.Equals(playerStatus)) return;
         playerStatus = status;
+    }
+    
+    private void RotatePlayerFollowMouseDirection()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = playerCamera.ScreenToWorldPoint(mousePosition);
+        float xAngle = mousePosition.x - transform.position.x;
+        float yAngle = mousePosition.y - transform.position.y;
+        Vector2 direction = new Vector2(xAngle, yAngle);
+        transform.GetChild(0).up = direction;
     }
     #endregion
 }
