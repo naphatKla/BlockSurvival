@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
-    [SerializeField] private List<SkillBase> skills;
+    [SerializeField] public List<SkillBase> skills;
     private Player _player;
     void Start()
     {
@@ -44,8 +44,17 @@ public class SkillSystem : MonoBehaviour
     
     private IEnumerator SkillsCooldown(SkillBase skill) 
     {
-        skill.isCooldown = true; 
-        yield return new WaitForSeconds(skill.cooldown); 
+        skill.isCooldown = true;
+        skill.skillCurrentCooldown = skill.skillCooldown;
+        
+        while (skill.skillCurrentCooldown > 0)
+        {
+            Debug.Log($"{skill.name} cooldown : {skill.skillCurrentCooldown:F0}");
+            skill.skillCurrentCooldown -= Time.deltaTime;
+            skill.skillCurrentCooldown = Mathf.Clamp(skill.skillCurrentCooldown, 0, skill.skillCooldown);
+            yield return null;
+        }
+        
         skill.isCooldown = false;
     } 
 }

@@ -15,7 +15,8 @@ public abstract class SkillBase : MonoBehaviour
     [Header("Skill Data")]
     [SerializeField] public string name;
     [SerializeField] public float skillDamage;
-    [SerializeField] public float cooldown;
+    [SerializeField] public float skillCooldown;
+    [HideInInspector] public float skillCurrentCooldown;
     [SerializeField] public float destroyTime;
     [SerializeField] public float skillOffset;
     
@@ -35,6 +36,7 @@ public abstract class SkillBase : MonoBehaviour
     
     void Start()
     {
+        skillCurrentCooldown = 0;
         player = FindObjectOfType<Player>();
         SkillAction();
         Destroy(gameObject, destroyTime);

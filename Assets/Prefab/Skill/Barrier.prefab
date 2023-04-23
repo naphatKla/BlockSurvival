@@ -123,11 +123,13 @@ MonoBehaviour:
   skillKey: 51
   name: Barrier
   skillDamage: 2
-  cooldown: 10
+  skillCooldown: 5
+  skillCurrentCooldown: 0
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
   cooldownPerHit: 1
+  player: {fileID: 0}
   isCooldown: 0
 --- !u!58 &1779535253206123288
 CircleCollider2D:

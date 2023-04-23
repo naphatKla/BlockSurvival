@@ -149,9 +149,11 @@ MonoBehaviour:
   skillKey: 49
   name: LaserBean
   skillDamage: 1
-  cooldown: 5
+  skillCooldown: 5
+  skillCurrentCooldown: 0
   destroyTime: 1
   skillOffset: 5
   hitMode: 1
   cooldownPerHit: 0.5
+  player: {fileID: 0}
   isCooldown: 0

@@ -123,11 +123,13 @@ MonoBehaviour:
   skillKey: 50
   name: BeastBall
   skillDamage: 5
-  cooldown: 5
+  skillCooldown: 5
+  skillCurrentCooldown: 0
   destroyTime: 3
   skillOffset: 3
   hitMode: 0
   cooldownPerHit: 100
+  player: {fileID: 0}
   isCooldown: 1
   speed: 3
 --- !u!58 &8796720535302960442
