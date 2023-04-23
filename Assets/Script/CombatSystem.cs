@@ -11,20 +11,28 @@ public class CombatSystem : MonoBehaviour
     
     [SerializeField] private Player player;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private float bulletSpeedAttack;
+    [SerializeField] public float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
-  
+    private float _currentCooldown;
 
     #endregion
     
     #region Unity Method
-    void Start()
-    {
-        InvokeRepeating("BulletSpawn", 0, bulletSpeedAttack);
-    }
+    
     void Update()
     {
+        
+        if (_currentCooldown == 0)
+        {
+            BulletSpawn();
+            _currentCooldown += 1;
+        }
         PlayerRotateOnMouseCursor();
+        _currentCooldown -= Time.deltaTime * bulletSpeedAttack;
+        if (_currentCooldown < 0)
+        {
+            _currentCooldown = 0;
+        }
     }
     #endregion
 

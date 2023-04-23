@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill4 : MonoBehaviour
+public class Skill4 : SkillBase
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject bullet;
+    protected override void SkillAction()
     {
-        
-    }
+        Vector3 bulletOffSet = transform.up;
+        float angle = 30;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < 13; i++)
+        {
+            GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation * Quaternion.Euler(0,0,angle));
+            Destroy(bulletSpawn,3);
+            angle -= 30;
+        }
     }
+    
 }
