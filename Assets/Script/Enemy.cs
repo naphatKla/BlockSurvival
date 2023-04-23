@@ -31,12 +31,12 @@ public class Enemy : MonoBehaviour
         _currentHp = maxHp;
         player = GameObject.Find("PlayerTest");
         hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
+        hpBar.gameObject.SetActive(false);
     }
     
     void Update()
     {
         FollowTargetHandle(player);
-        EnemyBarFollowEnemy();
         EnemyBarUpdate();
     }
 
@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour
     float _smoothDampVelocity;
     private void FollowTargetHandle(GameObject target)
     {
+        Vector2 direction = target.transform.position - transform.position;
+        transform.up = direction;
         Vector2 enemyPosition = transform.position;
         Vector2 targetPosition = target.transform.position;
         float distanceToTarget = Vector2.Distance(enemyPosition, targetPosition);
@@ -58,16 +60,20 @@ public class Enemy : MonoBehaviour
             ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
             : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
     }
-
-    private void EnemyBarFollowEnemy()
-    {
-        Transform hpBarRecTransform = hpBar.GetComponent<RectTransform>();
-        hpBarRecTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3(0,0.7f,0));
-    }
-
+    
     private void EnemyBarUpdate()
     {
         hpBar.size = _currentHp / maxHp;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if(!hpBar.gameObject.activeSelf) hpBar.gameObject.SetActive(true);
+        
+        _currentHp -= damage;
+        
+        if (_currentHp <= 0)
+            Destroy(gameObject);
     }
 
 }
