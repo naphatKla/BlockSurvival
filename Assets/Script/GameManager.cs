@@ -19,102 +19,101 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Transform> enemySpawnPoints;
     
 
-    [Header("TimeCountForEnemySpawn1")] 
+    [Header("EnemySpawnerNo.1")] 
     [SerializeField] private float timeCount1;
-    [SerializeField] private float startEnemySpawnTime1;
-    [SerializeField] private float enemySpawnTime1;
-    [SerializeField] private float minEnemySpawnTime1;
-    [SerializeField] private float reduceEnemySpawnTime1;
-    [SerializeField] private float enemySpawnRate1;
+    [SerializeField] private float startSpawn1;
+    [SerializeField] private float spawnRate1;
+    [SerializeField] private float minSpawnRate1;
+    [SerializeField] private float reduceSpawnRate1;
+    [SerializeField] private float reduceSpawnTime1;
     
-    [Header("TimeCountForEnemySpawn2")] 
+    [Header("EnemySpawnerNo.2")] 
     [SerializeField] private float timeCount2;
-    [SerializeField] private float startEnemySpawnTime2;
-    [SerializeField] private float enemySpawnTime2;
-    [SerializeField] private float minEnemySpawnTime2;
-    [SerializeField] private float reduceEnemySpawnTime2;
-    [SerializeField] private float enemySpawnRate2;
+    [SerializeField] private float startSpawn2;
+    [SerializeField] private float spawnRate2;
+    [SerializeField] private float minSpawnRate2;
+    [SerializeField] private float reduceSpawnRate2;
+    [SerializeField] private float reduceSpawnTime2;
 
-    [Header("TimeCountForUi")] 
-    [SerializeField] private float timeCountForUi;
+    [Header("TimeCountUi")] 
+    [SerializeField] private float timeCountUi;
     [SerializeField] private TextMeshProUGUI timeCountText;
 
 
     void Start()
     {
-        Invoke("SpawnEnemy1",enemySpawnTime1);
-        Invoke("SpawnEnemy2",enemySpawnTime2);
+        Invoke("SpawnEnemy1",spawnRate1);
+        Invoke("SpawnEnemy2",spawnRate2);
     }
     
     void Update()
     {
-        if (timeCountForUi >= startEnemySpawnTime1)
+        TimeCountUi();
+        
+        if (timeCountUi >= startSpawn1)
         {
-            TimeCountForEnemySpawn1();
+            TimeCountSpawnerNo1();
         }
         
-        TimeCountForEnemySpawn1();
-        if (timeCountForUi >= startEnemySpawnTime2)
+        if (timeCountUi >= startSpawn2)
         {
-            TimeCountForEnemySpawn2();
+            TimeCountSpawnerNo2();
         }
-       
-        TimeCountForUi();
-        
+
     }
 
-    private void TimeCountForEnemySpawn1()
+    private void TimeCountSpawnerNo1()
     {
         timeCount1 += Time.deltaTime;
         
-        if (timeCount1 >= enemySpawnRate1)
+        if (timeCount1 >= reduceSpawnTime1)
         {
-            enemySpawnTime1 -= reduceEnemySpawnTime1;
-            if (enemySpawnTime1 < minEnemySpawnTime1)
+            spawnRate1 -= reduceSpawnRate1;
+            if (spawnRate1 < minSpawnRate1)
             {
-                enemySpawnTime1 = minEnemySpawnTime1;
+                spawnRate1 = minSpawnRate1;
             }
-            timeCount1 -= enemySpawnRate1;
+            timeCount1 -= reduceSpawnTime1;
         }
     }
     
-    private void TimeCountForEnemySpawn2()
+    private void TimeCountSpawnerNo2()
     {
         timeCount2 += Time.deltaTime;
         
-        if (timeCount2 >= enemySpawnRate2)
+        if (timeCount2 >= reduceSpawnTime2)
         {
-            enemySpawnTime2 -= reduceEnemySpawnTime2;
-            if (enemySpawnTime2 < minEnemySpawnTime2)
+            spawnRate2 -= reduceSpawnRate2;
+            if (spawnRate2 < minSpawnRate2)
             {
-                enemySpawnTime2 = minEnemySpawnTime2;
+                spawnRate2 = minSpawnRate2;
             }
-            timeCount2 -= enemySpawnRate2;
+            timeCount2 -= reduceSpawnTime2;
         }
     }
     
     private void SpawnEnemy1()
     {
-        if (timeCountForUi >= startEnemySpawnTime1)
+        if (timeCountUi >= startSpawn1)
         {
             GameObject enemyObject = Instantiate(enemy1, enemySpawnPoints[Random.Range(0,enemySpawnPoints.Count)].position, quaternion.identity);
         }
-        Invoke("SpawnEnemy1",enemySpawnTime1);
+        Invoke("SpawnEnemy1",spawnRate1);
     }
     
     private void SpawnEnemy2()
     {
-        if (timeCountForUi >= startEnemySpawnTime2)
+        if (timeCountUi >= startSpawn2)
         {
             GameObject enemyObject = Instantiate(enemy2, enemySpawnPoints[Random.Range(0,enemySpawnPoints.Count)].position, quaternion.identity);
         }
-        Invoke("SpawnEnemy2",enemySpawnTime2);
+        Invoke("SpawnEnemy2",spawnRate2);
     }
     
-    private void TimeCountForUi()
+    private void TimeCountUi()
     {
-        timeCountForUi += Time.deltaTime;
-        timeCountText.text = "" + Mathf.FloorToInt(timeCountForUi / 60) + ":" + Mathf.FloorToInt(timeCountForUi % 60).ToString("00");
+        timeCountUi += Time.deltaTime;
+        timeCountText.text = "" + Mathf.FloorToInt(timeCountUi / 60) + ":" + Mathf.FloorToInt(timeCountUi % 60).ToString("00");
     }
     
     private void OnDrawGizmos()
