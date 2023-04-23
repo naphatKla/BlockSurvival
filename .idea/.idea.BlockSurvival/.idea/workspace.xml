@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a56c88f-e858-428d-8123-05309f0c7b9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BlockSurvival/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BlockSurvival/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/BaseSkillPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/BaseSkillPrefab.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/BeastBall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/BeastBall.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/Laser.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/Laser.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerSkill/SkillBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerSkill/SkillBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
@@ -22,9 +19,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/54/2d455ce6/IEnumerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86acb61e0d2b4b36bc20af11093be9a5157e00/3e/3860d5ed/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86acb61e0d2b4b36bc20af11093be9a5157e00/aa/6b048327/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/CombatSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Level.cs" root0="FORCE_HIGHLIGHTING" />
@@ -80,7 +74,7 @@
       <method v="2" />
     </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.11f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Test\Unity\2021.3.11f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Test\Gitkraken\New folder\BlockSurvival&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Test\Gitkraken\New folder\BlockSurvival" />
       <option name="PASS_PARENT_ENVS" value="1" />

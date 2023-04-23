@@ -11,10 +11,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
     
+    private Player _player;
+    
     
     void Start()
     {
-        
+        _player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,8 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            _enemy.TakeDamage(bulletDamage);
+            
+            _enemy.TakeDamage(bulletDamage * _player.playerDamage);
         }
     }
 }

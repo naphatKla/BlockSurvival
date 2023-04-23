@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyText;
     [SerializeField] private Player player;
      private EnemyRespawn _enemyRespawnPoint;
+     private Player _player;
     
     void Start()
     {
@@ -37,7 +38,9 @@ public class Enemy : MonoBehaviour
     }
     private void OnDestroy()
     {
+        player.enemyKill += 1;
         player.playerLevel += enemyExpDrop;
+        player.playerLevelUpPoint += 1;
         Debug.Log("enemyDeath");
     }
 }

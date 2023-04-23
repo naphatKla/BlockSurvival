@@ -11,8 +11,10 @@ public class CombatSystem : MonoBehaviour
     
     [SerializeField] private Player player;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private float bulletSpeedAttack;
+    [SerializeField] public float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
+
+    
   
 
     #endregion
@@ -20,7 +22,7 @@ public class CombatSystem : MonoBehaviour
     #region Unity Method
     void Start()
     {
-        InvokeRepeating("BulletSpawn", 0, bulletSpeedAttack);
+        Invoke("BulletSpawn", bulletSpeedAttack - player.playerATK);
     }
     void Update()
     {
@@ -32,16 +34,17 @@ public class CombatSystem : MonoBehaviour
     #region Method
     private void BulletSpawn()
     {
-        if (player.playerLevel == 0)
+        if (player.playerLevel >= 0 && player.playerDamage < 5)
         {
             BulletDeafultGunPatternSpawn();
         }
 
-        if (player.playerLevel >= 1)
+        if (player.playerDamage >= 5)
         {
             BulletShotGunPatternSpawn();
-            
         }
+        
+        Invoke("BulletSpawn", bulletSpeedAttack);
     }
     
     private void BulletDeafultGunPatternSpawn()
