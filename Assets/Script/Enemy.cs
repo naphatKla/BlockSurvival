@@ -63,7 +63,9 @@ public class Enemy : MonoBehaviour
     
     private void EnemyBarUpdate()
     {
+        hpBar.transform.parent.rotation = Quaternion.identity;
         hpBar.size = _currentHp / maxHp;
+        
     }
 
     public void TakeDamage(float damage)
