@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHP: 10
   enemyDamage: 1
-  enemyExpDrop: 1
+  enemyExpDrop: 2
   enemyText: {fileID: 3692978740758618461, guid: 211858898e5c52546a6f2617f8a04b7f, type: 3}
   player: {fileID: 0}
 --- !u!1 &6328950836247327597

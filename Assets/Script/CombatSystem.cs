@@ -34,12 +34,12 @@ public class CombatSystem : MonoBehaviour
     #region Method
     private void BulletSpawn()
     {
-        if (player.playerLevel >= 0 && player.playerDamage < 5)
+        if (player.playerLevel >= 0)
         {
             BulletDeafultGunPatternSpawn();
         }
 
-        if (player.playerDamage >= 5)
+        if (player.playerLevel >= 5)
         {
             BulletShotGunPatternSpawn();
         }

@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a56c88f-e858-428d-8123-05309f0c7b9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/BaseSkillPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/BaseSkillPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/BeastBall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/BeastBall.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/Laser.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/Laser.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerSkill/SkillBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerSkill/SkillBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="3a56c88f-e858-428d-8123-05309f0c7b9e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

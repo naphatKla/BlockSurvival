@@ -39,8 +39,7 @@ public class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         player.enemyKill += 1;
-        player.playerLevel += enemyExpDrop;
-        player.playerLevelUpPoint += 1;
+        player.playerLevelUp += enemyExpDrop;
         Debug.Log("enemyDeath");
     }
 }
