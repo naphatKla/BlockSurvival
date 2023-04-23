@@ -8,22 +8,20 @@ using UnityEngine;
 public class CombatSystem : MonoBehaviour
 {
     #region Declare Variables
-    
     [SerializeField] private Player player;
     [SerializeField] private GameObject bullet;
     [SerializeField] public float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
-    
-
     #endregion
     
     #region Unity Method
     void Start()
     {
-        Invoke("BulletSpawn", bulletSpeedAttack);
+        Invoke("BulletSpawn", player.playerAttackSpeed);
     }
     void Update()
     {
+        // Must delete this later.
         PlayerRotateOnMouseCursor();
     }
     #endregion
@@ -34,7 +32,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (player.playerLevel >= 0)
         {
-            BulletDeafultGunPatternSpawn();
+            BulletDefaultGunPatternSpawn();
         }
 
         if (player.playerLevel >= 5)
@@ -42,10 +40,10 @@ public class CombatSystem : MonoBehaviour
             BulletShotGunPatternSpawn();
         }
         
-        Invoke("BulletSpawn", bulletSpeedAttack);
+        Invoke("BulletSpawn", player.playerAttackSpeed);
     }
     
-    private void BulletDeafultGunPatternSpawn()
+    private void BulletDefaultGunPatternSpawn()
     {
         Vector3 bulletOffSet = transform.up * bulletOffSetScale;
         GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation);

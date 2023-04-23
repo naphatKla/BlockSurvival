@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Delete this later.
 public class EnemyRespawn : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;

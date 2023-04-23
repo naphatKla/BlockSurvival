@@ -273,7 +273,6 @@ GameObject:
   - component: {fileID: 135073076}
   - component: {fileID: 135073075}
   - component: {fileID: 135073074}
-  - component: {fileID: 135073080}
   - component: {fileID: 135073081}
   m_Layer: 0
   m_Name: Player
@@ -299,25 +298,23 @@ MonoBehaviour:
   playerLevel: 0
   playerLevelUp: 0
   playerStatusText: {fileID: 744943935}
-  openStatusBottom: {fileID: 0}
-  buttomOpenStatusText: {fileID: 0}
-  PlayerStatus: {fileID: 1274703860}
-  StatusBottom: {fileID: 831731720}
+  playerStatus: {fileID: 1274703860}
+  statusBottom: {fileID: 831731720}
   playerStatusPointText: {fileID: 1304261684}
   playerNextLevelText: {fileID: 1149684476}
   playerDamageStatusText: {fileID: 21256376}
-  playerDamageLevelUpButtom: {fileID: 1142834140}
+  playerDamageLevelUpButton: {fileID: 1142834140}
   playerHealthStatusPointText: {fileID: 1458218555}
-  playerHealthLevelUpButtom: {fileID: 1825561374}
+  playerHealthLevelUpButton: {fileID: 1825561374}
   playerAttackSpeedStatusPointText: {fileID: 285867647}
-  playerAttackSpeedLevelUpButtom: {fileID: 1190952996}
+  playerAttackSpeedLevelUpButton: {fileID: 1190952996}
   playerSpeedStatusPointText: {fileID: 461591149}
-  playerSpeedLevelUpButtom: {fileID: 1687664919}
+  playerSpeedLevelUpButton: {fileID: 1687664919}
   enemyKillText: {fileID: 188608561}
   playerLevelUpPoint: 0
   playerDamage: 1
   playerHealth: 100
-  playerAttackSpeed: 0.2
+  playerAttackSpeed: 1
   enemyKill: 0
 --- !u!114 &135073075
 MonoBehaviour:
@@ -450,19 +447,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &135073080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135073073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61406d72488a94740980579f8f933201, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLevel: 1
 --- !u!114 &135073081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,7 +1834,7 @@ GameObject:
   - component: {fileID: 1142834138}
   - component: {fileID: 1142834140}
   m_Layer: 5
-  m_Name: LevelUpDamageButtom
+  m_Name: LevelUpDamageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2107,7 +2091,7 @@ GameObject:
   - component: {fileID: 1190952997}
   - component: {fileID: 1190952996}
   m_Layer: 5
-  m_Name: LevelUpATKButtom
+  m_Name: LevelUPAttackSpeedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2987,7 +2971,7 @@ GameObject:
   - component: {fileID: 1687664920}
   - component: {fileID: 1687664919}
   m_Layer: 5
-  m_Name: LevelUpSpeedButtom
+  m_Name: LevelUpSpeedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,7 +3098,7 @@ GameObject:
   - component: {fileID: 1825561372}
   - component: {fileID: 1825561374}
   m_Layer: 5
-  m_Name: LevelUpHealtheButtom
+  m_Name: LevelUpHealtheButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
