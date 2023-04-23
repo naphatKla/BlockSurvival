@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Button playerDamageLevelUpButtom;
     [SerializeField] private TextMeshProUGUI playerHealthStatusPointText;
     [SerializeField] private Button playerHealthLevelUpButtom;
-    [SerializeField] private TextMeshProUGUI playerATKStatusPointText;
-    [SerializeField] private Button playerATKLevelUpButtom;
+    [SerializeField] private TextMeshProUGUI playerAttackSpeedStatusPointText;
+    [SerializeField] private Button playerAttackSpeedLevelUpButtom;
     [SerializeField] private TextMeshProUGUI playerSpeedStatusPointText;
     [SerializeField] private Button playerSpeedLevelUpButtom;
     [SerializeField] private TextMeshProUGUI enemyKillText;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private CombatSystem _combatSystem;
     public float playerDamage = 1;
     public float playerHealth = 100;
-    public float playerATK;
+    public float playerAttackSpeed = 1;
     public float enemyKill;
     private float playerNextLevelUpExp = 10f;
 
@@ -43,12 +43,13 @@ public class Player : MonoBehaviour
     private float _currentSpeed;
     void Start()
     {
+
         StatusBottom.onClick.AddListener(() => 
         {
             PlayerStatus.SetActive(!PlayerStatus.activeSelf);
             StatusBottom.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PlayerStatus.activeSelf ? "Close" : "Open";
         });
-
+        
         playerDamageLevelUpButtom.onClick.AddListener(() =>
             {
                 if (playerLevelUpPoint > 0)
@@ -56,7 +57,6 @@ public class Player : MonoBehaviour
                     playerDamage += 1;
                     playerLevelUpPoint -= 1;
                 }
-                
             }
         );
         
@@ -69,11 +69,11 @@ public class Player : MonoBehaviour
             }
         });
         
-        playerATKLevelUpButtom.onClick.AddListener(() =>
+        playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
             if (playerLevelUpPoint > 0)
             {
-                playerATK -= 0.5f;
+                playerAttackSpeed -= 0.2f;
                 playerLevelUpPoint -= 1;
             }
         });
@@ -96,13 +96,13 @@ public class Player : MonoBehaviour
             LevelUp();
         }
         enemyKillText.text = $"Enemy Kill: {enemyKill}";
-        playerSpeedStatusPointText.text = $"Player Speed {_currentSpeed}";
-        playerATKStatusPointText.text = $"Player ATK {playerATK}";
-        playerHealthStatusPointText.text = $"Player Health {playerHealth}";
+        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed}";
+        playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed}";
+        playerHealthStatusPointText.text = $"Player Health: {playerHealth}";
         playerStatusPointText.text = $"Status point: {playerLevelUpPoint}";
-        playerDamageStatusText.text = $"Player Damage {playerDamage}";
+        playerDamageStatusText.text = $"Player Damage: {playerDamage}";
         playerNextLevelText.text = $"Next levelup {playerLevelUp}/{playerNextLevelUpExp}";
-        playerStatusText.text = $"Player Level {playerLevel}";
+        playerStatusText.text = $"Player Level: {playerLevel}";
         _currentSpeed = playerSpeed;
         Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _currentSpeed;
         playerRigidbody2D.velocity = playerVelocity;
@@ -120,7 +120,6 @@ public class Player : MonoBehaviour
         }
         
     }
-
 
 
 }

@@ -13,16 +13,14 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] public float bulletSpeedAttack;
     [SerializeField] private float bulletOffSetScale;
-
     
-  
 
     #endregion
     
     #region Unity Method
     void Start()
     {
-        Invoke("BulletSpawn", bulletSpeedAttack - player.playerATK);
+        Invoke("BulletSpawn", bulletSpeedAttack);
     }
     void Update()
     {
