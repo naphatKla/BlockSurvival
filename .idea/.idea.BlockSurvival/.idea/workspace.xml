@@ -12,6 +12,10 @@
       <change beforePath="$PROJECT_DIR$/Assets/Script/Level.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Level.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Skill/Barrier.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/CombatSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/CombatSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerSkill/Skill4.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerSkill/Skill4.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerSkill/Skill5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerSkill/Skill5.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
