@@ -14,6 +14,12 @@ public class SkillCooldownUI : MonoBehaviour
     private void Start()
     {
         _skillSystem = FindObjectOfType<SkillSystem>();
+        skillTextList.ForEach(skillText => skillText.text = _skillSystem.skills[skillTextList.IndexOf(skillText)].name);
+        foreach (Image skillImage in skillImageList)
+        {
+            _skillSystem.skills[skillImageList.IndexOf(skillImage)].skillCurrentCooldown = 0;
+            skillImage.fillAmount = 0;
+        }
     }
 
     private void Update()
