@@ -719,7 +719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 207735848}
-  enemy: {fileID: 5814385565367885377, guid: 88cf161669a6f944598171d35cc9d3e3, type: 3}
+  enemy1: {fileID: 5814385565367885377, guid: 88cf161669a6f944598171d35cc9d3e3, type: 3}
+  enemy2: {fileID: 8198274295576251236, guid: 2276e9424ce4e944085f40e52bd52a50, type: 3}
   enemySpawnPoints:
   - {fileID: 1604192994}
   - {fileID: 287500220}
@@ -729,12 +730,19 @@ MonoBehaviour:
   - {fileID: 1714009755}
   - {fileID: 2092740874}
   - {fileID: 1493873192}
-  enemySpawnTime: 5
-  timeCount: 0
-  minEnemySpawnTime: 0.2
-  reduceEnemySpawnTime: 0.2
-  enemySpawnRate: 5
-  timeCountForUi: 0
+  timeCount1: 0
+  startSpawn1: 3
+  spawnRate1: 1
+  minSpawnRate1: 0.2
+  reduceSpawnRate1: 0.1
+  reduceSpawnTime1: 60
+  timeCount2: 0
+  startSpawn2: 120
+  spawnRate2: 2
+  minSpawnRate2: 1
+  reduceSpawnRate2: 0.2
+  reduceSpawnTime2: 60
+  timeCountUi: 0
   timeCountText: {fileID: 1585364045}
 --- !u!4 &876652151
 Transform:
