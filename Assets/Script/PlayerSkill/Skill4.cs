@@ -8,13 +8,14 @@ public class Skill4 : SkillBase
     protected override void SkillAction()
     {
         Vector3 bulletOffSet = player.playerTransform.up;
-        float angle = 30;
+        float angle = 18;
 
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 20; i++)
         {
             GameObject bulletSpawn = Instantiate(bullet, transform.position + bulletOffSet, transform.rotation * Quaternion.Euler(0,0,angle));
-            Destroy(bulletSpawn,3);
-            angle -= 30;
+            bulletSpawn.GetComponent<Bullet>().bulletDamage = skillDamage;
+            Destroy(bulletSpawn,destroyTime);
+            angle -= 18;
         }
     }
     

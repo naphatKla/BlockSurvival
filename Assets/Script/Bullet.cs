@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     [Header("bulletInfo")]
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private float bulletDamage;
+    [SerializeField] public float bulletDamage;
     
     private Player _player;
     

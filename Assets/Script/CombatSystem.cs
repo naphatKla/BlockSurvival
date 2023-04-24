@@ -31,7 +31,8 @@ public class CombatSystem : MonoBehaviour
     {
         if (_player.playerLevel >= 0)
         {
-            BulletDefaultGunPatternSpawn();
+            BulletShotGunPatternSpawn();
+            //BulletDefaultGunPatternSpawn();
         }
 
         if (_player.playerLevel >= 5)

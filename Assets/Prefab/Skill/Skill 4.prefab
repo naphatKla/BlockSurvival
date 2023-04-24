@@ -148,10 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 52
   name: Skill 4
-  skillDamage: 0
+  skillDamage: 5
   skillCooldown: 5
-  skillCurrentCooldown: 0
-  destroyTime: 0
+  skillCurrentCooldown: 0.8157986
+  destroyTime: 3
   skillOffset: 0
   hitMode: 0
   cooldownPerHit: 0

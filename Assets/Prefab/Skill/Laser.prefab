@@ -148,12 +148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 49
   name: LaserBean
-  skillDamage: 1
+  skillDamage: 10
   skillCooldown: 5
   skillCurrentCooldown: 0
-  destroyTime: 1
+  destroyTime: 2
   skillOffset: 5
   hitMode: 1
-  cooldownPerHit: 0.5
+  cooldownPerHit: 0.15
   player: {fileID: 0}
   isCooldown: 0
