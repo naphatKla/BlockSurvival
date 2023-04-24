@@ -3,125 +3,89 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    
-    [Header("EnemySpawnPointManager")] 
-    [SerializeField] private GameObject enemy1;
-    [SerializeField] private GameObject enemy2;
-    [SerializeField] private List<Transform> spawnPointsLocation;
-    
-    [Header("EnemySpawnerNo.1")] 
-    [SerializeField] private float startSpawn1;
-    [SerializeField] private float spawnRate1;
-    [SerializeField] private float minSpawnRate1;
-    [SerializeField] private float reduceSpawnRate1;
-    [SerializeField] private float reduceSpawnTime1;
-    private float timeCount1;
+    #region Declare Variables
+    [Header("EnemySpawnPostion")]
+    [SerializeField] private List<Transform> spawnPositionList;
 
+    [Header("Enemy")] 
+    public GameObject enemy;
+    [Space] 
+    public float timeBeforeStart;
+    // Less spawn rate = more enemy spawn
+    public float spawnRate;
+    public float minSpawnRate;
+    public float reduceSpawnRate;
+    public float reduceDuration;
+    public int spawnAmount;
     
-    [Header("EnemySpawnerNo.2")] 
-    [SerializeField] private float startSpawn2;
-    [SerializeField] private float spawnRate2;
-    [SerializeField] private float minSpawnRate2;
-    [SerializeField] private float reduceSpawnRate2;
-    [SerializeField] private float reduceSpawnTime2;
-    private float timeCount2;
-
     [Header("TimeCountUi")] 
     [SerializeField] private TextMeshProUGUI timeCountText;
-    private float timeCountUi;
-    
+    private float _timeInGame;
+    #endregion
+
+    #region Unity Method
     void Start()
     {
-        Invoke("SpawnEnemy1",spawnRate1);
-        Invoke("SpawnEnemy1",spawnRate1);
-        Invoke("SpawnEnemy2",spawnRate2);
-        Invoke("SpawnEnemy2",spawnRate2);
+        _timeInGame = 0;
+        StartCoroutine(SpawnEnemyHandle());
     }
     
     void Update()
     {
-        TimeCountUi();
-        
-        if (timeCountUi >= startSpawn1)
-        {
-            TimeCountSpawnerNo1();
-        }
-        
-        if (timeCountUi >= startSpawn2)
-        {
-            TimeCountSpawnerNo2();
-        }
-
+        SetTimeInGameText();
     }
-
-    private void TimeCountSpawnerNo1()
+    
+    private IEnumerator SpawnEnemyHandle()
     {
-        timeCount1 += Time.deltaTime;
+        yield return new WaitForSeconds(timeBeforeStart);
+        StartCoroutine(ReduceSpawnRateHandle());
         
-        if (timeCount1 >= reduceSpawnTime1)
+        while (true)
         {
-            spawnRate1 -= reduceSpawnRate1;
-            if (spawnRate1 < minSpawnRate1)
-            {
-                spawnRate1 = minSpawnRate1;
-            }
-            timeCount1 -= reduceSpawnTime1;
+            SpawnEnemy(spawnAmount);
+           yield return new WaitForSeconds(spawnRate);
         }
     }
     
-    private void TimeCountSpawnerNo2()
+    private IEnumerator ReduceSpawnRateHandle()
     {
-        timeCount2 += Time.deltaTime;
-        
-        if (timeCount2 >= reduceSpawnTime2)
-        {
-            spawnRate2 -= reduceSpawnRate2;
-            if (spawnRate2 < minSpawnRate2)
-            {
-                spawnRate2 = minSpawnRate2;
-            }
-            timeCount2 -= reduceSpawnTime2;
+        while (true)
+        { 
+            yield return new WaitForSeconds(reduceDuration);
+            spawnRate -= reduceSpawnRate;
+            spawnRate = Mathf.Clamp(spawnRate, minSpawnRate, 100);
         }
-    }
-    
-    private void SpawnEnemy1()
-    {
-        if (timeCountUi >= startSpawn1)
-        {
-            GameObject enemyObject = Instantiate(enemy1, spawnPointsLocation[Random.Range(0,spawnPointsLocation.Count)].position, quaternion.identity);
-        }
-        Invoke("SpawnEnemy1",spawnRate1);
-    }
-    
-    private void SpawnEnemy2()
-    {
-        if (timeCountUi >= startSpawn2)
-        {
-            GameObject enemyObject = Instantiate(enemy2, spawnPointsLocation[Random.Range(0,spawnPointsLocation.Count)].position, quaternion.identity);
-        }
-        Invoke("SpawnEnemy2",spawnRate2);
-    }
-    
-    private void TimeCountUi()
-    {
-        timeCountUi += Time.deltaTime;
-        timeCountText.text = "" + Mathf.FloorToInt(timeCountUi / 60) + ":" + Mathf.FloorToInt(timeCountUi % 60).ToString("00");
     }
     
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
 
-        foreach (Transform spawnPoint in spawnPointsLocation)
+        foreach (Transform spawnPoint in spawnPositionList)
         {
             Gizmos.DrawWireSphere(spawnPoint.position,0.5f);
         }
     }
+    #endregion
+
+    #region Method
+    private void SpawnEnemy(int amount)
+    { 
+        for(int i = 0; i < amount; i++)
+            Instantiate(enemy, spawnPositionList[Random.Range(0,spawnPositionList.Count)].position, quaternion.identity);
+    }
     
+    private void SetTimeInGameText()
+    {
+        _timeInGame += Time.deltaTime;
+        timeCountText.text = "" + Mathf.FloorToInt(_timeInGame / 60) + ":" + Mathf.FloorToInt(_timeInGame % 60).ToString("00");
+    }
+    #endregion
 }

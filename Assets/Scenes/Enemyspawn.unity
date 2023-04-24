@@ -718,9 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b8995e2292ea54c9548a21e903793d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy1: {fileID: 5814385565367885377, guid: 88cf161669a6f944598171d35cc9d3e3, type: 3}
-  enemy2: {fileID: 8198274295576251236, guid: 2276e9424ce4e944085f40e52bd52a50, type: 3}
-  spawnPointsLocation:
+  spawnPositionList:
   - {fileID: 1604192994}
   - {fileID: 287500220}
   - {fileID: 333103806}
@@ -729,18 +727,13 @@ MonoBehaviour:
   - {fileID: 1714009755}
   - {fileID: 2092740874}
   - {fileID: 1493873192}
-  startSpawn1: 3
-  spawnRate1: 1.5
-  minSpawnRate1: 0.2
-  reduceSpawnRate1: 0.1
-  reduceSpawnTime1: 30
-  timeCount1: 0
-  startSpawn2: 120
-  spawnRate2: 2
-  minSpawnRate2: 1
-  reduceSpawnRate2: 0.2
-  reduceSpawnTime2: 60
-  timeCount2: 0
+  enemy: {fileID: 5814385565367885377, guid: 88cf161669a6f944598171d35cc9d3e3, type: 3}
+  timeBeforeStart: 3
+  spawnRate: 1.5
+  minSpawnRate: 0.2
+  reduceSpawnRate: 0.5
+  reduceDuration: 5
+  spawnAmount: 1
   timeCountText: {fileID: 1585364045}
 --- !u!4 &876652151
 Transform:
