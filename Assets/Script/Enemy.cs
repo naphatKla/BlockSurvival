@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     private float _currentSpeed;
     private float _currentHp;
     
+    [Header("Particle Effect")]
+    [SerializeField] private ParticleSystem _deadParticleSystem;
+    
     [Header("Bar")]
     [SerializeField] private Scrollbar hpBar;
     void Start()
@@ -73,9 +76,13 @@ public class Enemy : MonoBehaviour
         if(!hpBar.gameObject.activeSelf) hpBar.gameObject.SetActive(true);
         
         _currentHp -= damage;
-        
+
         if (_currentHp <= 0)
+        {
+            ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
             Destroy(gameObject);
+        }
+ 
     }
 
 }
