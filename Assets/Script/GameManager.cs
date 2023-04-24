@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Transform spawnPoint in spawnPointsLocation)
         {
-            Gizmos.DrawWireSphere(spawnPointsLocation[0].position,0.5f);
+            Gizmos.DrawWireSphere(spawnPoint.position,0.5f);
         }
     }
     
