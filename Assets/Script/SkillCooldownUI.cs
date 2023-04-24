@@ -14,12 +14,11 @@ public class SkillCooldownUI : MonoBehaviour
     private void Start()
     {
         _skillSystem = FindObjectOfType<SkillSystem>();
-        
-        skillTextList.ForEach(skillText => skillText.text = _skillSystem.skills[skillTextList.IndexOf(skillText)].name);
         foreach (Image skillImage in skillImageList)
         {
             skillImage.fillAmount = 0;
         }
+        skillTextList.ForEach(skillText => skillText.text = _skillSystem.skills[skillTextList.IndexOf(skillText)].name);
     }
 
     private void Update()

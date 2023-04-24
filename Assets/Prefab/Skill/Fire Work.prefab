@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2373380980767370774
+--- !u!1 &8350921838701902444
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6935565865430089809}
-  - component: {fileID: 5977099192913020506}
-  - component: {fileID: 2655287584478441151}
-  - component: {fileID: 2594280184659728089}
-  - component: {fileID: 6414207215539693747}
+  - component: {fileID: 4767830959617488435}
+  - component: {fileID: 1646541692626641869}
+  - component: {fileID: 6931893723728232212}
+  - component: {fileID: 6564539353797851828}
+  - component: {fileID: 5222246726414712912}
   m_Layer: 0
-  m_Name: Shoot boost
+  m_Name: Fire Work
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6935565865430089809
+--- !u!4 &4767830959617488435
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373380980767370774}
+  m_GameObject: {fileID: 8350921838701902444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.46, y: -4.435405, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.841565, y: -3.5161455, z: 0}
+  m_LocalScale: {x: 0.015722657, y: 0.009375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5977099192913020506
+--- !u!212 &1646541692626641869
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373380980767370774}
+  m_GameObject: {fileID: 8350921838701902444}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -87,13 +87,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2655287584478441151
+--- !u!61 &6931893723728232212
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373380980767370774}
+  m_GameObject: {fileID: 8350921838701902444}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -113,14 +113,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &2594280184659728089
+--- !u!50 &6564539353797851828
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373380980767370774}
+  m_GameObject: {fileID: 8350921838701902444}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -134,26 +134,27 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6414207215539693747
+--- !u!114 &5222246726414712912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373380980767370774}
+  m_GameObject: {fileID: 8350921838701902444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1c15239260e26499c1a7732b9f8b49, type: 3}
+  m_Script: {fileID: 11500000, guid: 849173bb40e607141b94e3bad73f4e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillKey: 53
-  name: ShootFast
-  skillDamage: 0
+  skillKey: 52
+  name: Fire Work
+  skillDamage: 5
   skillCooldown: 5
   skillCurrentCooldown: 0
-  destroyTime: 2
+  destroyTime: 3
   skillOffset: 0
   hitMode: 0
   cooldownPerHit: 0
   player: {fileID: 0}
   isCooldown: 0
+  bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}

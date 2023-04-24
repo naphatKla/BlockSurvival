@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5054128742638150933}
   - component: {fileID: 8796720535302960442}
   m_Layer: 0
-  m_Name: BeastBall
+  m_Name: Beast Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
