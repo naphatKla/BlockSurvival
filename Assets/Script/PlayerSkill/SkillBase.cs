@@ -33,10 +33,14 @@ public abstract class SkillBase : MonoBehaviour
     }
     
     [HideInInspector] public bool isCooldown;
-    
-    void Start()
+
+    private void Awake()
     {
         skillCurrentCooldown = 0;
+    }
+
+    void Start()
+    {
         player = FindObjectOfType<Player>();
         SkillAction();
         Destroy(gameObject, destroyTime);

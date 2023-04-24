@@ -3197,7 +3197,7 @@ MonoBehaviour:
   staminaRegen: 10
   playerAttackSpeed: 0.25
   playerLevel: 0
-  playerDamage: 1
+  playerDamage: 2
   healthBar: {fileID: 1738933683}
   healthText: {fileID: 1975073829}
   staminaBar: {fileID: 1859839556}
@@ -3208,7 +3208,7 @@ MonoBehaviour:
   dashKey: 306
   walkSpeed: 3
   sprintSpeed: 6
-  dashStaminaDrain: 10
+  dashStaminaDrain: 15
   sprintStaminaDrain: 5
   dashSpeed: 20
   dashDuration: 0.3
