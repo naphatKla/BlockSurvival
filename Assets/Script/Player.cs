@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TrailRenderer trailEffect;
 
     [Header("Player Stats")] 
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] private float maxStamina;
     [SerializeField] private float staminaRegen;
     [SerializeField] public float playerAttackSpeed;
@@ -38,15 +38,15 @@ public class Player : MonoBehaviour
     [Header("Player Movement")] 
     [SerializeField] private KeyCode sprintKey;
     [SerializeField] private KeyCode dashKey;
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintSpeed;
+    [SerializeField] public float walkSpeed;
+    [SerializeField] public float sprintSpeed;
     [SerializeField] private float dashStaminaDrain;
     [SerializeField] private float sprintStaminaDrain;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float staminaRecoveryCooldown;
     [HideInInspector] public Transform playerTransform;
-    private float _currentSpeed;
+    public float _currentSpeed;
     public PlayerStatus playerStatus;
 
     public enum PlayerStatus
@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
+        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, 0.01f, 5f);
     }
     
     private IEnumerator Dash()

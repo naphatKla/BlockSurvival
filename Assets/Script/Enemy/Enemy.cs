@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     private float _currentSpeed;
     private float _currentHp;
     public Rigidbody2D rigidbody2D;
+    private Level _level;
+    private bool _isEnemyDead;
     
     [Header("Particle Effect")]
     [SerializeField] private ParticleSystem _deadParticleSystem;
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
         _currentHp = maxHp;
         _canMove = true;
         player = FindObjectOfType<Player>();
+        _level = FindObjectOfType<Level>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         hpBar.gameObject.SetActive(false);
@@ -90,8 +93,15 @@ public class Enemy : MonoBehaviour
             ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
             Destroy(gameObject);
         }
+        
     }
-    
+
+    private void OnDestroy()
+    {
+        _level.enemyKill += 1;
+        _level.playerLevelUp += 2f;
+    }
+
     private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
     {
         float timeCount = 0;
