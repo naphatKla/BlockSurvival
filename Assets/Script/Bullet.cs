@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             
+            if(_enemy == null) return;
             _enemy.TakeDamage(bulletDamage * _player.playerDamage);
         }
     }
