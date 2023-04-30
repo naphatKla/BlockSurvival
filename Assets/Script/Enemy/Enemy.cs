@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minSpeed;
+    private bool _canMove;
     
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Player player;
     private float _currentSpeed;
     private float _currentHp;
+    public Rigidbody2D rigidbody2D;
     
     [Header("Particle Effect")]
     [SerializeField] private ParticleSystem _deadParticleSystem;
@@ -31,7 +33,9 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _currentHp = maxHp;
+        _canMove = true;
         player = FindObjectOfType<Player>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         hpBar.gameObject.SetActive(false);
     }
@@ -46,6 +50,8 @@ public class Enemy : MonoBehaviour
     float _smoothDampVelocity;
     private void FollowTargetHandle(Player target)
     {
+        if(!_canMove) return;
+        
         Vector2 direction = target.transform.position - transform.position;
         transform.up = direction;
         Vector2 enemyPosition = transform.position;
@@ -70,18 +76,36 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isBounce = false, float bounceForce = 5, float bounceDuration = 0.1f)
     {
         if(!hpBar.gameObject.activeSelf) hpBar.gameObject.SetActive(true);
         
         _currentHp -= damage;
-
+        
+        if (isBounce)
+            StartCoroutine(BounceOff(bounceForce,bounceDuration));
+        
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
             Destroy(gameObject);
         }
- 
+    }
+    
+    private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
+    {
+        float timeCount = 0;
+
+        while (timeCount < bounceDuration)
+        {
+            _canMove = false;
+            rigidbody2D.velocity = -transform.up * 5;
+            timeCount += Time.deltaTime;
+            yield return null;
+        }
+        rigidbody2D.velocity = Vector2.zero;
+
+        _canMove = true;
     }
 
 }
