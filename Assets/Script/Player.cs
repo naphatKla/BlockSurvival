@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
-        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, 0.01f, 5f);
+        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, 0.05f, 5f);
     }
     
     private IEnumerator Dash()

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 public class Level : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class Level : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerSpeedStatusPointText;
     [SerializeField] private Button playerSpeedLevelUpButtom;
     [SerializeField] private TextMeshProUGUI enemyKillText;
+    [SerializeField] private Image levelUpPauseUi;
+    [SerializeField] private TextMeshProUGUI levelUpPauseText;
     
     
     [SerializeField] public float playerLevelUpPoint;
@@ -70,7 +73,7 @@ public class Level : MonoBehaviour
         
         playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != 0.01f)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != 0.05f)
             {
                 _player.playerAttackSpeed -= 0.02f;
                 playerLevelUpPoint -= 1;
@@ -95,9 +98,9 @@ public class Level : MonoBehaviour
         {
             LevelUp();
         }
-        LevelUpUi();
+        LevelUpPauseUi();
         enemyKillText.text = $"Enemy Kill: {enemyKill}";
-        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed:F0}";
+        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed}";
         playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed}";
         playerHealthStatusPointText.text = $"Player Health: {playerHealth}";
         playerStatusPointText.text = $"Status point: {playerLevelUpPoint}";
@@ -123,14 +126,16 @@ public class Level : MonoBehaviour
         
     }
 
-    private void LevelUpUi()
+    private void LevelUpPauseUi()
     {
         if (playerLevelUpPoint > 0) 
         {
+            levelUpPauseUi.gameObject.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
+            levelUpPauseUi.gameObject.SetActive(false);
             Time.timeScale = 1;
         }
     }
