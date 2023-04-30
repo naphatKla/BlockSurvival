@@ -89,6 +89,11 @@ public class Player : MonoBehaviour
             SetPlayerStatus(PlayerStatus.Dash);
             dashTimeCount += Time.deltaTime;
             _currentSpeed = dashSpeed;
+
+            if (playerRigidbody2D.velocity.magnitude < dashSpeed)
+                playerRigidbody2D.velocity = playerRigidbody2D.velocity.normalized * dashSpeed;
+            
+            playerRigidbody2D.velocity = Vector2.ClampMagnitude(playerRigidbody2D.velocity, dashSpeed);
             yield return null;
         }
         
@@ -152,7 +157,7 @@ public class Player : MonoBehaviour
         
         if(playerStatus.Equals(PlayerStatus.StaminaRecoveryCooldown)) return;
         
-        if (playerCamera.velocity == Vector3.zero)
+        if (Input.GetAxisRaw("Horizontal").Equals(0) && Input.GetAxisRaw("Vertical").Equals(0))
         {
             playerStatus = PlayerStatus.Idle;
             return;
