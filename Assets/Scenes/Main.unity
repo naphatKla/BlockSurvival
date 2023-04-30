@@ -3210,7 +3210,7 @@ MonoBehaviour:
   sprintSpeed: 6
   dashStaminaDrain: 15
   sprintStaminaDrain: 5
-  dashSpeed: 20
+  dashSpeed: 25
   dashDuration: 0.3
   staminaRecoveryCooldown: 5
   playerTransform: {fileID: 0}
