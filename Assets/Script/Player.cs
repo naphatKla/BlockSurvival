@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
         
         if(playerStatus.Equals(PlayerStatus.StaminaRecoveryCooldown)) return;
         
-        if (playerCamera.velocity == Vector3.zero)
+        if (Input.GetAxisRaw("Horizontal").Equals(0) && Input.GetAxisRaw("Vertical").Equals(0))
         {
             playerStatus = PlayerStatus.Idle;
             return;
