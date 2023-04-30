@@ -3744,9 +3744,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2733868332792877802, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2733868332792877813, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7769902523338400733, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
       propertyPath: m_AnchorMax.x
