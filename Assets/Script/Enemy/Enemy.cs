@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
         while (timeCount < bounceDuration)
         {
             _canMove = false;
-            rigidbody2D.velocity = -transform.up * 5;
+            rigidbody2D.velocity = -transform.up * bounceForce;
             timeCount += Time.deltaTime;
             yield return null;
         }
