@@ -155,6 +155,9 @@ MonoBehaviour:
   skillOffset: 0
   hitMode: 0
   cooldownPerHit: 0
+  isKnockBack: 0
+  knockBackForce: 5
+  knockBackDuration: 0.2
   player: {fileID: 0}
   isCooldown: 0
   bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}

@@ -76,14 +76,14 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void TakeDamage(float damage, bool isBounce = false, float bounceForce = 5, float bounceDuration = 0.1f)
+    public void TakeDamage(float damage, bool isKnockBack = false, float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
         if(!hpBar.gameObject.activeSelf) hpBar.gameObject.SetActive(true);
         
         _currentHp -= damage;
         
-        if (isBounce)
-            StartCoroutine(BounceOff(bounceForce,bounceDuration));
+        if (isKnockBack)
+            StartCoroutine(KnockBack(knockBackForce,knockBackDuration));
         
         if (_currentHp <= 0)
         {
@@ -92,14 +92,14 @@ public class Enemy : MonoBehaviour
         }
     }
     
-    private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
+    private IEnumerator KnockBack(float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
         float timeCount = 0;
 
-        while (timeCount < bounceDuration)
+        while (timeCount < knockBackDuration)
         {
             _canMove = false;
-            rigidbody2D.velocity = -transform.up * bounceForce;
+            rigidbody2D.velocity = -transform.up * knockBackForce;
             timeCount += Time.deltaTime;
             yield return null;
         }

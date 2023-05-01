@@ -150,10 +150,13 @@ MonoBehaviour:
   name: Rapid Fire
   skillDamage: 0
   skillCooldown: 5
-  skillCurrentCooldown: 1.2583807
+  skillCurrentCooldown: 0
   destroyTime: 2
   skillOffset: 0
   hitMode: 0
   cooldownPerHit: 0
+  isKnockBack: 0
+  knockBackForce: 5
+  knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 1
+  isCooldown: 0

@@ -122,13 +122,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 50
   name: BeastBall
-  skillDamage: 20
+  skillDamage: 1
   skillCooldown: 5
-  skillCurrentCooldown: 2.5078373
+  skillCurrentCooldown: 1.8833674
   destroyTime: 3
   skillOffset: 3
   hitMode: 0
   cooldownPerHit: 100
+  isKnockBack: 0
+  knockBackForce: 5
+  knockBackDuration: 0.2
   player: {fileID: 0}
   isCooldown: 1
   speed: 3

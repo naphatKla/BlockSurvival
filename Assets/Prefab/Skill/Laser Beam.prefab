@@ -155,5 +155,8 @@ MonoBehaviour:
   skillOffset: 5
   hitMode: 1
   cooldownPerHit: 0.15
+  isKnockBack: 0
+  knockBackForce: 5
+  knockBackDuration: 0.2
   player: {fileID: 0}
   isCooldown: 0
