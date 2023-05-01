@@ -2496,8 +2496,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2125866581
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.41037738, g: 1, b: 0.414523, a: 1}
@@ -3062,9 +3062,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingLayerID: -638902819
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_Time: 0.25
   m_Parameters:
     serializedVersion: 3
@@ -3744,29 +3744,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2733868332792877802, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2733868332792877813, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
-      propertyPath: m_UseAutoMass
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605406371314842393, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7769902523338400733, guid: a6b768dc6eaec0c419099995c1c5dc4e, type: 3}
       propertyPath: m_AnchorMax.x

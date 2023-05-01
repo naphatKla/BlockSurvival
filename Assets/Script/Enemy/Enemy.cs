@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Enemy Stats")]
+    [SerializeField] private EnemyType enemyType;
+    
+    [Space] [Header("Enemy Stats")]
     [SerializeField] private float maxHp;
     [SerializeField] private float attackDamage;
     
@@ -14,35 +19,48 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minSpeed;
     private bool _canMove;
+    private EnemyMovement _enemyMovement;
     
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
     
     [Header("Other")]
-    // Must change when player is done.
-    [SerializeField] private Player player;
+    [HideInInspector] public Rigidbody2D rigidbody2D;
+    private Player _player;
     private float _currentSpeed;
     private float _currentHp;
-    public Rigidbody2D rigidbody2D;
-    
+
     [Header("Particle Effect")]
-    [SerializeField] private ParticleSystem _deadParticleSystem;
+    [SerializeField] private ParticleSystem deadParticleSystem;
     
     [Header("Bar")]
-    [SerializeField] private Scrollbar hpBar;
+    private Scrollbar _hpBar;
+    
+    public enum EnemyType
+    {
+        Melee,
+        Range
+    }
+    
+    public enum EnemyMovement
+    {
+        Clear,
+        MoveToTarget,
+        MoveAwayFromTarget
+    }
     void Start()
     {
         _currentHp = maxHp;
         _canMove = true;
-        player = FindObjectOfType<Player>();
+        _player = FindObjectOfType<Player>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
-        hpBar.gameObject.SetActive(false);
+        _hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
+        _hpBar.gameObject.SetActive(false);
     }
     
     void Update()
     {
-        FollowTargetHandle(player);
+        FollowTargetHandle(_player);
         EnemyBarUpdate();
     }
 
@@ -54,31 +72,56 @@ public class Enemy : MonoBehaviour
         
         Vector2 direction = target.transform.position - transform.position;
         transform.up = direction;
-        Vector2 enemyPosition = transform.position;
         Vector2 targetPosition = target.transform.position;
-        float distanceToTarget = Vector2.Distance(enemyPosition, targetPosition);
+        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+
+        // Melee Enemy
+        if (enemyType == EnemyType.Melee)
+        {
+            if (distanceToTarget <= 0.5f)
+            {
+                rigidbody2D.velocity = Vector2.zero;
+                return;
+            }
+            
+            rigidbody2D.velocity = transform.up.normalized * _currentSpeed;
         
-        if (distanceToTarget <= 0) return;
+            _currentSpeed = distanceToTarget > distanceThreshold
+                ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
+                : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
+            return;
+        }
         
-        enemyPosition =
-            Vector2.MoveTowards(enemyPosition, targetPosition, _currentSpeed * Time.deltaTime);
-        transform.position = enemyPosition;
+        // Range Enemy
+        if (distanceToTarget < distanceThreshold)
+        {
+            _enemyMovement = EnemyMovement.MoveAwayFromTarget;
+        }
+        else if (distanceToTarget > distanceThreshold * 2)
+        {
+            _enemyMovement = EnemyMovement.MoveToTarget;
+        }
         
-        _currentSpeed = distanceToTarget > distanceThreshold
+        transform.up = _enemyMovement == EnemyMovement.MoveToTarget ? direction : -direction;
+        
+        rigidbody2D.velocity = transform.up.normalized * _currentSpeed;
+        
+        _currentSpeed = distanceToTarget < distanceThreshold
             ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
             : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
+        
     }
     
     private void EnemyBarUpdate()
     {
-        hpBar.transform.parent.rotation = Quaternion.identity;
-        hpBar.size = _currentHp / maxHp;
+        _hpBar.transform.parent.rotation = Quaternion.identity;
+        _hpBar.size = _currentHp / maxHp;
         
     }
-
+    
     public void TakeDamage(float damage, bool isKnockBack = false, float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
-        if(!hpBar.gameObject.activeSelf) hpBar.gameObject.SetActive(true);
+        if(!_hpBar.gameObject.activeSelf) _hpBar.gameObject.SetActive(true);
         
         _currentHp -= damage;
         
@@ -87,7 +130,7 @@ public class Enemy : MonoBehaviour
         
         if (_currentHp <= 0)
         {
-            ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
+            ParticleEffectManager.Instance.PlayParticleEffect(deadParticleSystem,transform.position);
             Destroy(gameObject);
         }
     }

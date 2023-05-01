@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 341671377
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
@@ -100,14 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0b3a49f6344849b7cb3c40fa03da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 1
   maxHp: 10
   attackDamage: 0
   maxSpeed: 5
   minSpeed: 2
   distanceThreshold: 5
-  player: {fileID: 0}
-  _deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
-  hpBar: {fileID: 5745265826851273885, guid: d3820d155c9edb54696c0d2f318b8438, type: 3}
+  rigidbody2D: {fileID: 0}
+  deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
 --- !u!61 &-942918470507707783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,10 +151,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &3218428830917250902
 GameObject:
   m_ObjectHideFlags: 0
