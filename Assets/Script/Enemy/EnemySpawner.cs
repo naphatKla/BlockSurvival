@@ -78,7 +78,6 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Debug.Log("spawn");
             Instantiate(enemy, spawnPositionList[Random.Range(0,spawnPositionList.Count)].position, quaternion.identity);
         }
     }

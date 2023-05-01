@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     [Header("bulletInfo")]
     [SerializeField] public float bulletSpeed;
     [SerializeField] public float bulletDamage;
-    
+    [SerializeField] public float explodeDamage;
     private Player _player;
     private CombatSystem _combatSystem;
     
@@ -41,8 +41,11 @@ public class Bullet : MonoBehaviour
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             
             if(_enemy == null) return;
+            _enemy.TakeDamage(bulletDamage * _player.playerDamage);
             GameObject explodeSpawn = Instantiate(_combatSystem.explode, transform.position, transform.rotation);
-            Destroy(explodeSpawn,0.1f);
+            _enemy.TakeDamage(explodeDamage * _player.playerDamage);
+            Destroy(explodeSpawn,0.2f);
+            Destroy(gameObject);
         }
     }
 }

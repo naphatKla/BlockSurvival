@@ -149,3 +149,4 @@ MonoBehaviour:
   Rigidbody2D: {fileID: 4639005615368539328}
   bulletSpeed: 10
   bulletDamage: 1
+  explodeDamage: 10

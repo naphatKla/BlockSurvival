@@ -14,7 +14,7 @@ public class CombatSystem : MonoBehaviour
     [Header("Bullet Type")]
     [SerializeField] public GameObject bullet;
     [SerializeField] private GameObject smallBullet;
-    [SerializeField] private GameObject bigBullet;
+    [SerializeField] public GameObject bigBullet;
     [SerializeField] public GameObject veryBigBullet;
     [SerializeField] public GameObject explode;
     [SerializeField] private float bulletOffSetScale;
@@ -25,6 +25,7 @@ public class CombatSystem : MonoBehaviour
     private Player _player;
     private Level _level;
     public float bulletSpeed;
+    public float missileDamage;
 
     #endregion
     
@@ -32,6 +33,7 @@ public class CombatSystem : MonoBehaviour
     void Start()
     {
         bulletSpeed = bullet.GetComponent<Bullet>().bulletSpeed;
+        missileDamage = explode.GetComponent<Explode>().explodeDamage;
         _player = GetComponent<Player>();
         _level = GetComponent<Level>();
         Invoke("BulletSpawn", _player.playerAttackSpeed);

@@ -106,6 +106,7 @@ MonoBehaviour:
   minSpeed: 2
   distanceThreshold: 5
   player: {fileID: 0}
+  rigidbody2D: {fileID: 0}
   _deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
   hpBar: {fileID: 5745265826851273885, guid: d3820d155c9edb54696c0d2f318b8438, type: 3}
 --- !u!61 &-942918470507707783

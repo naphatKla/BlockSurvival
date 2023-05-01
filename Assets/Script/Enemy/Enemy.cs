@@ -98,7 +98,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("kill");
         _level.enemyKill += 1;
         _level.playerLevelUp += 2f;
     }

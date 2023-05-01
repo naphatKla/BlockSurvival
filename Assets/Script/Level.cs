@@ -39,6 +39,8 @@ public class Level : MonoBehaviour
     [SerializeField] private Button gunTypeShotGunButton;
     [Header("Sniper")]
     [SerializeField] private Button gunTypeSniperButton;
+    [Header("Missile")]
+    [SerializeField] private Button gunTypeMissileButton;
 
     [Header("GunType Stats Upgrade Damage")] 
     private bool _isHighDamage;
@@ -91,6 +93,7 @@ public class Level : MonoBehaviour
                 if (playerLevelUpPoint > 0 && _isVeryHighDamage)
                 {
                     _player.playerDamage += 4f;
+                    _combatSystem.missileDamage += 4f;
                     playerLevelUpPoint -= 1;
                 }
             }
@@ -163,6 +166,17 @@ public class Level : MonoBehaviour
                 _player.playerAttackSpeed += 1f;
                 _combatSystem.bulletSpeed += 10f;
                 _combatSystem.isGunTypeSniper = true;
+                gunTypeSelectPoint -= 1;
+            }
+        });
+        
+        gunTypeMissileButton.onClick.AddListener(() =>
+        {
+            if (gunTypeSelectPoint > 0)
+            {
+                _player._playerMaxAttackSpeed = 0.5f;
+                _player.playerAttackSpeed += 1f;
+                _combatSystem.isGunTypeMissile = true;
                 gunTypeSelectPoint -= 1;
             }
         });
@@ -252,6 +266,11 @@ public class Level : MonoBehaviour
         }
         
         if (_combatSystem.isGunTypeSniper)
+        {
+            _isVeryHighDamage = true;
+        }
+
+        if (_combatSystem.isGunTypeMissile)
         {
             _isVeryHighDamage = true;
         }
