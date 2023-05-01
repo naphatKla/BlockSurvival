@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -9,8 +10,13 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
+    #region Declare Variable
     [SerializeField] private EnemyType enemyType;
-    
+    // For range enemy
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float fireRate;
+    [SerializeField] private float attackRange;
+
     [Space] [Header("Enemy Stats")]
     [SerializeField] private float maxHp;
     [SerializeField] private float attackDamage;
@@ -19,8 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minSpeed;
     private bool _canMove;
-    private EnemyMovement _enemyMovement;
-    
+    private float _smoothDampVelocity;
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
     
@@ -41,13 +46,9 @@ public class Enemy : MonoBehaviour
         Melee,
         Range
     }
-    
-    public enum EnemyMovement
-    {
-        Clear,
-        MoveToTarget,
-        MoveAwayFromTarget
-    }
+    #endregion
+
+    #region Unity Method
     void Start()
     {
         _currentHp = maxHp;
@@ -56,6 +57,11 @@ public class Enemy : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         _hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         _hpBar.gameObject.SetActive(false);
+        attackRange = Random.Range(attackRange - 2f, attackRange + 2f);
+        attackRange = Mathf.Round(attackRange);
+        
+        if (enemyType != EnemyType.Range) return;
+        Invoke(nameof(ShootBullet), fireRate);
     }
     
     void Update()
@@ -63,17 +69,33 @@ public class Enemy : MonoBehaviour
         FollowTargetHandle(_player);
         EnemyBarUpdate();
     }
-
     
-    float _smoothDampVelocity;
+    private IEnumerator KnockBack(float knockBackForce = 5, float knockBackDuration = 0.1f)
+    {
+        float timeCount = 0;
+
+        while (timeCount < knockBackDuration)
+        {
+            _canMove = false;
+            rigidbody2D.velocity = -transform.up * knockBackForce;
+            timeCount += Time.deltaTime;
+            yield return null;
+        }
+        rigidbody2D.velocity = Vector2.zero;
+
+        _canMove = true;
+    }
+    #endregion
+
+    #region Method
     private void FollowTargetHandle(Player target)
     {
-        if(!_canMove) return;
-        
+        if (!_canMove) return;
+
         Vector2 direction = target.transform.position - transform.position;
-        transform.up = direction;
         Vector2 targetPosition = target.transform.position;
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+        transform.up = direction;
 
         // Melee Enemy
         if (enemyType == EnemyType.Melee)
@@ -83,33 +105,29 @@ public class Enemy : MonoBehaviour
                 rigidbody2D.velocity = Vector2.zero;
                 return;
             }
-            
+
             rigidbody2D.velocity = transform.up.normalized * _currentSpeed;
-        
+
             _currentSpeed = distanceToTarget > distanceThreshold
                 ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
                 : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
             return;
         }
-        
+
         // Range Enemy
-        if (distanceToTarget < distanceThreshold)
+        if (Math.Round(distanceToTarget).Equals(attackRange))
         {
-            _enemyMovement = EnemyMovement.MoveAwayFromTarget;
+            rigidbody2D.velocity = Vector2.zero;
+            return;
         }
-        else if (distanceToTarget > distanceThreshold * 2)
-        {
-            _enemyMovement = EnemyMovement.MoveToTarget;
-        }
-        
-        transform.up = _enemyMovement == EnemyMovement.MoveToTarget ? direction : -direction;
-        
-        rigidbody2D.velocity = transform.up.normalized * _currentSpeed;
-        
-        _currentSpeed = distanceToTarget < distanceThreshold
+
+        rigidbody2D.velocity = distanceToTarget > attackRange
+            ? transform.up.normalized * _currentSpeed
+            : -transform.up.normalized * _currentSpeed;
+
+        _currentSpeed = Math.Round(distanceToTarget) < distanceThreshold
             ? Mathf.SmoothDamp(_currentSpeed, maxSpeed, ref _smoothDampVelocity, 0.3f)
             : Mathf.SmoothDamp(_currentSpeed, minSpeed, ref _smoothDampVelocity, 0.3f);
-        
     }
     
     private void EnemyBarUpdate()
@@ -134,21 +152,12 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    private IEnumerator KnockBack(float knockBackForce = 5, float knockBackDuration = 0.1f)
+
+    private void ShootBullet()
     {
-        float timeCount = 0;
-
-        while (timeCount < knockBackDuration)
-        {
-            _canMove = false;
-            rigidbody2D.velocity = -transform.up * knockBackForce;
-            timeCount += Time.deltaTime;
-            yield return null;
-        }
-        rigidbody2D.velocity = Vector2.zero;
-
-        _canMove = true;
+        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Invoke(nameof(ShootBullet), fireRate);
     }
-
+    
+    #endregion
 }
