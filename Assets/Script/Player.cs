@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float playerDamage;
     private float _health;
     private float _stamina;
+    public float _playerMaxAttackSpeed = 0.1f;
     
     [Header("UI Bar")] 
     [SerializeField] private Scrollbar healthBar;
@@ -76,7 +77,7 @@ public class Player : MonoBehaviour
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
-        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, 0.05f, 5f);
+        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, _playerMaxAttackSpeed, 5f);
     }
     
     private IEnumerator Dash()

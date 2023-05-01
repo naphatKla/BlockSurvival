@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
@@ -11,6 +12,7 @@ public class Level : MonoBehaviour
     [SerializeField] public float playerLevel;
     [SerializeField] public float playerLevelUp;
 
+    [Header("PlayerStatus Ui")]
     [SerializeField] private TextMeshProUGUI playerStatusText;
     [SerializeField] private GameObject PlayerStatus;
     [SerializeField] private Button StatusBottom;
@@ -28,7 +30,12 @@ public class Level : MonoBehaviour
     [SerializeField] private Image levelUpPauseUi;
     [SerializeField] private TextMeshProUGUI levelUpPauseText;
     
+    [Header("GunType Ui")]
+    [SerializeField] private Image gunTypeUi;
+    [SerializeField] private TextMeshProUGUI gunTypeText;
+    [SerializeField] private Button gunTypeButton;
     
+    [Header("Player Status")]
     [SerializeField] public float playerLevelUpPoint;
     private Bullet _bullet;
     private CombatSystem _combatSystem;
@@ -39,12 +46,14 @@ public class Level : MonoBehaviour
     public float enemyKill;
     private float playerNextLevelUpExp = 20f;
     private float playerSpeed;
+    public float gunTypeSelectPoint;
 
 
     private float _currentSpeed;
     void Start()
     {
         _player = GetComponent<Player>();
+        _combatSystem = GetComponent<CombatSystem>();
 
         StatusBottom.onClick.AddListener(() => 
         {
@@ -73,7 +82,7 @@ public class Level : MonoBehaviour
         
         playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != 0.05f)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != 0.1f)
             {
                 _player.playerAttackSpeed -= 0.02f;
                 playerLevelUpPoint -= 1;
@@ -89,6 +98,12 @@ public class Level : MonoBehaviour
                 playerLevelUpPoint -= 1;
             }
         });
+        
+        gunTypeButton.onClick.AddListener(() =>
+        {
+            _combatSystem.isGunTypeAssaultRifle = true;
+            gunTypeSelectPoint -= 1;
+        });
     }
 
     // Update is called once per frame
@@ -99,6 +114,7 @@ public class Level : MonoBehaviour
             LevelUp();
         }
         LevelUpPauseUi();
+        GunTypePauseUi();
         enemyKillText.text = $"Enemy Kill: {enemyKill}";
         playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed}";
         playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed}";
@@ -123,12 +139,17 @@ public class Level : MonoBehaviour
             playerLevelUp = 0;
             playerNextLevelUpExp += playerNextLevelUpExp / 2 ;
         }
+        if (playerLevel == 5)
+        {
+            gunTypeSelectPoint += 1;
+        }
+        
         
     }
 
     private void LevelUpPauseUi()
     {
-        if (playerLevelUpPoint > 0) 
+        if (playerLevelUpPoint > 0 || gunTypeSelectPoint > 0) 
         {
             levelUpPauseUi.gameObject.SetActive(true);
             Time.timeScale = 0;
@@ -138,7 +159,22 @@ public class Level : MonoBehaviour
             levelUpPauseUi.gameObject.SetActive(false);
             Time.timeScale = 1;
         }
+
+        
     }
+
+    private void GunTypePauseUi()
+    {
+        if (gunTypeSelectPoint >= 1)
+        {
+            gunTypeUi.gameObject.SetActive(true);
+        }
+        else
+        {
+            gunTypeUi.gameObject.SetActive(false);
+        }
+    }
+
 
 
 }
