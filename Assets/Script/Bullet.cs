@@ -8,15 +8,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody2D Rigidbody2D;
 
     [Header("bulletInfo")]
-    [SerializeField] private float bulletSpeed;
+    [SerializeField] public float bulletSpeed;
     [SerializeField] public float bulletDamage;
     
     private Player _player;
-    
+    private CombatSystem _combatSystem;
     
     void Start()
     {
         _player = FindObjectOfType<Player>();
+        _combatSystem = FindObjectOfType<CombatSystem>();
     }
 
     // Update is called once per frame
@@ -27,12 +28,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy") && !_combatSystem.isGunTypeMissile)
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             
             if(_enemy == null) return;
             _enemy.TakeDamage(bulletDamage * _player.playerDamage);
+        }
+        
+        if (col.gameObject.CompareTag("Enemy") && _combatSystem.isGunTypeMissile)
+        {
+            Enemy _enemy = col.gameObject.GetComponent<Enemy>();
+            
+            if(_enemy == null) return;
+            GameObject explodeSpawn = Instantiate(_combatSystem.explode, transform.position, transform.rotation);
+            Destroy(explodeSpawn,0.1f);
         }
     }
 }

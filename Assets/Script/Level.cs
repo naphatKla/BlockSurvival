@@ -37,6 +37,16 @@ public class Level : MonoBehaviour
     [SerializeField] private Button gunTypeAssaultRifleButton;
     [Header("Shot Gun")]
     [SerializeField] private Button gunTypeShotGunButton;
+    [Header("Sniper")]
+    [SerializeField] private Button gunTypeSniperButton;
+
+    [Header("GunType Stats Upgrade Damage")] 
+    private bool _isHighDamage;
+    private bool _isVeryHighDamage;
+
+    [Header("GunType Stats Upgrade Attack Speed")]
+    private bool isVeryHighAttackSpeed;
+    
     
     [Header("Player Status")]
     [SerializeField] public float playerLevelUpPoint;
@@ -66,9 +76,21 @@ public class Level : MonoBehaviour
         
         playerDamageLevelUpButtom.onClick.AddListener(() =>
             {
-                if (playerLevelUpPoint > 0)
+                if (playerLevelUpPoint > 0 && !_isHighDamage && !_isVeryHighDamage)
                 {
                     _player.playerDamage += 1f;
+                    playerLevelUpPoint -= 1;
+                }
+
+                if (playerLevelUpPoint > 0 && _isHighDamage)
+                {
+                    _player.playerDamage += 2f;
+                    playerLevelUpPoint -= 1;
+                }
+                
+                if (playerLevelUpPoint > 0 && _isVeryHighDamage)
+                {
+                    _player.playerDamage += 4f;
                     playerLevelUpPoint -= 1;
                 }
             }
@@ -85,9 +107,15 @@ public class Level : MonoBehaviour
         
         playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != 0.1f)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && !isVeryHighAttackSpeed)
             {
-                _player.playerAttackSpeed -= 0.02f;
+                _player.playerAttackSpeed -= 0.03f;
+                playerLevelUpPoint -= 1;
+            }
+            
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && isVeryHighAttackSpeed)
+            {
+                _player.playerAttackSpeed -= 0.07f;
                 playerLevelUpPoint -= 1;
             }
         });
@@ -104,14 +132,39 @@ public class Level : MonoBehaviour
         
         gunTypeAssaultRifleButton.onClick.AddListener(() =>
         {
-            //_combatSystem.isGunTypeAssaultRifle = true;
-            gunTypeSelectPoint -= 1;
+            if (gunTypeSelectPoint > 0)
+            {
+                _player._playerMaxAttackSpeed = 0.05f;
+                _player.playerAttackSpeed -= 0.2f;
+                _bullet.bulletSpeed += 10f;
+                _combatSystem.isGunTypeAssaultRifle = true;
+                gunTypeSelectPoint -= 1;
+            }
+            
         });
         
         gunTypeShotGunButton.onClick.AddListener(() =>
         {
-            //_combatSystem.isGunTypeShotGun = true;
-            gunTypeSelectPoint -= 1;
+            if (gunTypeSelectPoint > 0)
+            {
+                _player._playerMaxAttackSpeed = 0.3f;
+                _player.playerAttackSpeed += 0.5f;
+                _combatSystem.isGunTypeShotgun = true;
+                gunTypeSelectPoint -= 1;
+            }
+            
+        });
+        
+        gunTypeSniperButton.onClick.AddListener(() =>
+        {
+            if (gunTypeSelectPoint > 0)
+            {
+                _player._playerMaxAttackSpeed = 0.5f;
+                _player.playerAttackSpeed += 1f;
+                _combatSystem.bulletSpeed += 10f;
+                _combatSystem.isGunTypeSniper = true;
+                gunTypeSelectPoint -= 1;
+            }
         });
     }
 
@@ -124,12 +177,13 @@ public class Level : MonoBehaviour
         }
         LevelUpPauseUi();
         GunTypePauseUi();
+        GunTypeCheck();
         enemyKillText.text = $"Enemy Kill: {enemyKill}";
-        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed}";
-        playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed}";
-        playerHealthStatusPointText.text = $"Player Health: {playerHealth}";
+        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed:F2}";
+        playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed:F2}";
+        playerHealthStatusPointText.text = $"Player Health: {playerHealth:F2}";
         playerStatusPointText.text = $"Status point: {playerLevelUpPoint}";
-        playerDamageStatusText.text = $"Player Damage: {playerDamage}";
+        playerDamageStatusText.text = $"Player Damage: {playerDamage:F2}";
         playerNextLevelText.text = $"Next levelup {playerLevelUp}/{playerNextLevelUpExp:f0}";
         playerStatusText.text = $"Player Level: {playerLevel}";
         _currentSpeed = _player.walkSpeed;
@@ -182,6 +236,24 @@ public class Level : MonoBehaviour
         else
         {
             GunTypeUi.gameObject.SetActive(false);
+        }
+    }
+
+    public void GunTypeCheck()
+    {
+        if (_combatSystem.isGunTypeAssaultRifle)
+        {
+            isVeryHighAttackSpeed = true;
+        }
+        
+        if (_combatSystem.isGunTypeShotgun)
+        {
+            _isHighDamage = true;
+        }
+        
+        if (_combatSystem.isGunTypeSniper)
+        {
+            _isVeryHighDamage = true;
         }
     }
 
