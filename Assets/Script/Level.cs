@@ -29,9 +29,10 @@ public class Level : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyKillText;
     [SerializeField] private Image levelUpPauseUi;
     [SerializeField] private TextMeshProUGUI levelUpPauseText;
-    
-    [Header("GunType Ui")]
-    [SerializeField] private TextMeshProUGUI gunTypeUi;
+
+    [Header("GunType Ui")] 
+    [SerializeField] private Image GunTypeUi;
+    [SerializeField] private TextMeshProUGUI gunTypeText;
     [Header("Assault Rifle")]
     [SerializeField] private Button gunTypeAssaultRifleButton;
     [Header("Shot Gun")]
@@ -175,12 +176,12 @@ public class Level : MonoBehaviour
     {
         if (gunTypeSelectPoint >= 1)
         {
-            gunTypeUi.text = $"Gun Type Point: {gunTypeSelectPoint}";
-            gunTypeUi.gameObject.SetActive(true);
+            gunTypeText.text = $"Gun Type Point: {gunTypeSelectPoint}";
+            GunTypeUi.gameObject.SetActive(true);
         }
         else
         {
-            gunTypeUi.gameObject.SetActive(false);
+            GunTypeUi.gameObject.SetActive(false);
         }
     }
 
