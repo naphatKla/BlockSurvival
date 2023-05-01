@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -29,10 +30,17 @@ public class Bullet : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy"))
         {
-            Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            
-            if(_enemy == null) return;
-            _enemy.TakeDamage(bulletDamage * _player.playerDamage);
+            try
+            {
+                if(col == null) return;
+                Enemy _enemy = col.gameObject.GetComponent<Enemy>();
+                if(_enemy == null) return;
+                _enemy.TakeDamage(bulletDamage * _player.playerDamage);
+            }
+            catch (Exception e)
+            {
+                //Debug.Log(e);
+            }
         }
     }
 }
