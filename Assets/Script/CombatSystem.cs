@@ -23,11 +23,11 @@ public class CombatSystem : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        
+        Invoke("BulletSpawn", _player.playerAttackSpeed);
     }
     void Update()
     {
-        InvokeRepeating("BulletSpawn",0f,_player.playerAttackSpeed);
+        
     }
     #endregion
 
@@ -58,7 +58,6 @@ public class CombatSystem : MonoBehaviour
     {
         Vector3 bulletOffSet = _player.playerTransform.up * bulletOffSetScale;
         GameObject bulletSpawn = Instantiate(bullet, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
-        Debug.Log("DefaultGun");
         Destroy(bulletSpawn,0.5f);
     }
 
@@ -84,6 +83,7 @@ public class CombatSystem : MonoBehaviour
         Destroy(bulletSpawn,0.5f);
     }
     
-    
+
+
     #endregion
 }
