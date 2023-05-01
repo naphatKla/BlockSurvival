@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minSpeed;
+    [SerializeField] private float turnDirectionDamp;
     private bool _canMove;
     private float _smoothDampVelocity;
     // The condition of distance for change enemy speed depend on target distance
@@ -88,12 +89,14 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Method
+
+    private Vector2 _directionDamp = Vector2.zero;
     private void FollowTargetHandle(Player target)
     {
         if (!_canMove) return;
-
-        Vector2 direction = target.transform.position - transform.position;
+        
         Vector2 targetPosition = target.transform.position;
+        Vector2 direction = Vector2.SmoothDamp(transform.up,targetPosition - (Vector2)transform.position, ref _directionDamp, turnDirectionDamp) ;
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         transform.up = direction;
 
@@ -155,7 +158,7 @@ public class Enemy : MonoBehaviour
 
     private void ShootBullet()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Destroy(Instantiate(bulletPrefab, transform.position, transform.rotation),2f);
         Invoke(nameof(ShootBullet), fireRate);
     }
     

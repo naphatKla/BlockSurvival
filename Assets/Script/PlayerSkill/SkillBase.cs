@@ -53,7 +53,7 @@ public abstract class SkillBase : MonoBehaviour
     }
 
     private readonly List<Enemy> _enemiesInSkillArea = new List<Enemy>();
-    private void OnTriggerEnter2D(Collider2D col)
+    protected virtual void OnTriggerEnter2D(Collider2D col)
     {
         if(col.CompareTag("Enemy"))
             _enemiesInSkillArea.Add(col.GetComponent<Enemy>());
@@ -64,7 +64,7 @@ public abstract class SkillBase : MonoBehaviour
             col.GetComponent<Enemy>().TakeDamage(skillDamage, isKnockBack, knockBackForce, knockBackDuration);
     }
 
-    private void OnTriggerStay2D(Collider2D col)
+    protected virtual void OnTriggerStay2D(Collider2D col)
     {
         if(hitMode == HitMode.Single) return;
         
@@ -75,7 +75,7 @@ public abstract class SkillBase : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
             StartCoroutine(RemoveTargetList(other.GetComponent<Enemy>()));

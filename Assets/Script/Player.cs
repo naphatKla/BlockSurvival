@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 {
     #region Declare Variable
     [Header("Component")] 
-    [SerializeField] private Rigidbody2D playerRigidbody2D;
+    [SerializeField] public Rigidbody2D playerRigidbody2D;
     [SerializeField] private TrailRenderer trailEffect;
 
     [Header("Player Stats")] 
@@ -112,6 +112,22 @@ public class Player : MonoBehaviour
         }
         SetPlayerStatus(PlayerStatus.Clear);
     }
+    
+    private IEnumerator KnockBack(float knockBackForce = 5, float knockBackDuration = 0.1f)
+    {
+        float timeCount = 0;
+
+        while (timeCount < knockBackDuration)
+        {
+            SetPlayerStatus(PlayerStatus.Stun);
+            playerRigidbody2D.velocity = -transform.up * knockBackForce;
+            timeCount += Time.deltaTime;
+            yield return null;
+        }
+        playerRigidbody2D.velocity = Vector2.zero;
+
+        SetPlayerStatus(PlayerStatus.Clear);
+    }
     #endregion
 
     #region method
@@ -150,6 +166,7 @@ public class Player : MonoBehaviour
     }
     private void PlayerMovementHandle()
     {
+        if(playerStatus.Equals(PlayerStatus.Stun)) return;
         StaminaRegenHandle();
         
         Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _currentSpeed;
@@ -191,7 +208,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void SetPlayerStatus(PlayerStatus status)
+    public void SetPlayerStatus(PlayerStatus status)
     {
         if(status.Equals(playerStatus)) return;
         playerStatus = status;
@@ -205,6 +222,21 @@ public class Player : MonoBehaviour
         float yAngle = mousePosition.y - playerTransform.position.y;
         Vector2 direction = new Vector2(xAngle, yAngle);
         playerTransform.up = direction;
+    }
+    
+    public void TakeDamage(float damage, bool isKnockBack = false, float knockBackForce = 5, float knockBackDuration = 0.1f)
+    {
+        _health -= damage;
+
+        if (isKnockBack)
+        {
+            StartCoroutine(KnockBack(knockBackForce, knockBackDuration));
+        }
+
+        if (_health <= 0)
+        {
+            // Die
+        }
     }
     #endregion
 }

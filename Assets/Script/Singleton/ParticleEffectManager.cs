@@ -13,6 +13,6 @@ public class ParticleEffectManager : Singleton<ParticleEffectManager>
 
     public void PlayParticleEffect(ParticleSystem particleEffect, Vector3 position)
     {
-        Destroy(Instantiate(particleEffect, position, Quaternion.identity), particleEffect.main.startLifetime.constantMax);
+        Destroy(Instantiate(particleEffect, position, Quaternion.identity).gameObject, particleEffect.main.startLifetime.constantMax);
     }
 }

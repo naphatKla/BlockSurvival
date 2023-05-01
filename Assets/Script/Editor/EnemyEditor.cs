@@ -8,18 +8,19 @@ using UnityEngine.UI;
 [CustomEditor(typeof(Enemy))]
 public class EnemyEditor : Editor
 {
-    SerializedProperty enemyType;
-    SerializedProperty bulletPrefab;
-    SerializedProperty fireRate;
-    SerializedProperty attackRange;
-    SerializedProperty maxHp;
-    SerializedProperty attackDamage;
-    SerializedProperty maxSpeed;
-    SerializedProperty minSpeed;
-    SerializedProperty distanceThreshold;
-    SerializedProperty deadParticleSystem;
+    protected SerializedProperty enemyType;
+    protected SerializedProperty bulletPrefab;
+    protected SerializedProperty fireRate;
+    protected SerializedProperty attackRange;
+    protected SerializedProperty maxHp;
+    protected SerializedProperty attackDamage;
+    protected SerializedProperty maxSpeed;
+    protected SerializedProperty minSpeed;
+    protected SerializedProperty turnDirectionDamp;
+    protected SerializedProperty distanceThreshold;
+    protected SerializedProperty deadParticleSystem;
     
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         enemyType = serializedObject.FindProperty("enemyType");
         maxHp = serializedObject.FindProperty("maxHp");
@@ -29,6 +30,7 @@ public class EnemyEditor : Editor
         attackDamage = serializedObject.FindProperty("attackDamage");
         maxSpeed = serializedObject.FindProperty("maxSpeed");
         minSpeed = serializedObject.FindProperty("minSpeed");
+        turnDirectionDamp = serializedObject.FindProperty("turnDirectionDamp");
         distanceThreshold = serializedObject.FindProperty("distanceThreshold");
         deadParticleSystem = serializedObject.FindProperty("deadParticleSystem");
     }
@@ -50,6 +52,7 @@ public class EnemyEditor : Editor
         EditorGUILayout.PropertyField(attackDamage);
         EditorGUILayout.PropertyField(maxSpeed);
         EditorGUILayout.PropertyField(minSpeed);
+        EditorGUILayout.PropertyField(turnDirectionDamp);
         EditorGUILayout.PropertyField(distanceThreshold);
         EditorGUILayout.PropertyField(deadParticleSystem);
         

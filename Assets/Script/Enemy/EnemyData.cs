@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData", order = 1)]
 public class EnemyData : ScriptableObject
 {
-    [Header("Enemy Stats")]
-    [SerializeField] private float maxHp;
-    [SerializeField] private float attackDamage;
+    public Sprite sprite;
+    [Space]
+    public Enemy.EnemyType enemyType;
+    public GameObject bulletPrefab;
+    public float fireRate;
+    public float attackRange;
+
+    [Space] [Header("Enemy Stats")]
+    public float maxHp;
+    public float attackDamage;
     
     [Header("Movement")]
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float minSpeed;
-    // The condition of distance for change enemy speed depend on target distance
-    [SerializeField] private float distanceThreshold;
+    public float maxSpeed;
+    public  float minSpeed;
+    public float distanceThreshold;
     
     [Header("Particle Effect")]
-    [SerializeField] private ParticleSystem _deadParticleSystem;
+    public ParticleSystem deadParticleSystem;
 }

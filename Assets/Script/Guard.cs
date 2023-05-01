@@ -1,0 +1,59 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Guard : MonoBehaviour
+{
+    [SerializeField] private float guardMaxHp;
+    [SerializeField] private float _guardHp;
+    [SerializeField] private ParticleSystem guardHitEffect;
+    [SerializeField] private ParticleSystem guardBreakEffect;
+    private Vector3 _startScale;
+
+    void Start()
+    {
+        _guardHp = guardMaxHp;
+        _startScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+    void FixedUpdate()
+    {
+        if (_guardHp < guardMaxHp / 4)
+        {
+            transform.localScale = new Vector3(_startScale.x / 1.5f, _startScale.y / 3, _startScale.z);
+        }
+        else if (_guardHp < guardMaxHp / 2f)
+        {
+            transform.localScale = new Vector3(_startScale.x / 1.25f, _startScale.y / 2, _startScale.z);
+        }
+        else if (_guardHp < guardMaxHp / 1.5f)
+        {
+            transform.localScale = new Vector3(_startScale.x / 1.1f, _startScale.y / 1.5f , _startScale.z);
+        }
+
+
+    }
+    
+    public void TakeDamage(float damage)
+    {
+        _guardHp -= damage;
+        ParticleEffectManager.Instance.PlayParticleEffect(guardHitEffect,transform.position);
+        if (_guardHp <= 0)
+        {
+            Destroy(gameObject);
+            ParticleEffectManager.Instance.PlayParticleEffect(guardBreakEffect,transform.position);
+        }
+      
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Guard Hit Player");
+            Vector2 direction = transform.position - other.transform.position;
+            Player player = other.gameObject.GetComponent<Player>();
+            player.TakeDamage(0,true,10F,0.5f);
+        }
+    }
+}
