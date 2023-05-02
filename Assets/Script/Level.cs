@@ -69,7 +69,15 @@ public class Level : MonoBehaviour
     private float playerNextLevelUpExp = 20f;
     private float playerSpeed;
     public float gunTypeSelectPoint;
-
+    
+    [Header("Loot Chest")]
+    [SerializeField] private Image lootChestUi;
+    [SerializeField] private Button healthButton;
+    [SerializeField] private Button damageButton;
+    [SerializeField] private Button attackSpeedButton;
+    [SerializeField] private Button speedButton;
+    private LootChest _lootChest;
+    public bool _isPickedLootChest;
 
     private float _currentSpeed;
     void Start()
@@ -219,6 +227,38 @@ public class Level : MonoBehaviour
                 gunTypeSelectPoint -= 1;
             }
         });
+        
+        healthButton.onClick.AddListener(() =>
+        {
+            if (_isPickedLootChest)
+            {
+                _isPickedLootChest = false;
+            }
+        });
+        
+        damageButton.onClick.AddListener(() =>
+        {
+            if (_isPickedLootChest)
+            {
+                _isPickedLootChest = false;
+            }
+        });
+        
+        attackSpeedButton.onClick.AddListener(() =>
+        {
+            if (_isPickedLootChest)
+            {
+                _isPickedLootChest = false;
+            }
+        });
+        
+        speedButton.onClick.AddListener(() =>
+        {
+            if (_isPickedLootChest)
+            {
+                _isPickedLootChest = false;
+            }
+        });
     }
 
     // Update is called once per frame
@@ -231,6 +271,8 @@ public class Level : MonoBehaviour
         LevelUpPauseUi();
         GunTypePauseUi();
         GunTypeCheck();
+        LootChest();
+        Debug.Log(_isPickedLootChest);
         enemyKillText.text = $"Enemy Kill: {enemyKill}";
         playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed:F2}";
         playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed:F2}";
@@ -265,7 +307,7 @@ public class Level : MonoBehaviour
 
     private void LevelUpPauseUi()
     {
-        if (playerLevelUpPoint > 0 || gunTypeSelectPoint > 0) 
+        if (playerLevelUpPoint > 0 || gunTypeSelectPoint > 0 || _isPickedLootChest) 
         {
             levelUpPauseUi.gameObject.SetActive(true);
             Time.timeScale = 0;
@@ -322,6 +364,18 @@ public class Level : MonoBehaviour
             _isHighDamage = true;
             _isHighAttackSpeed = true;
             _isUnDecentSpeed = true;
+        }
+    }
+
+    private void LootChest()
+    {
+        if (_isPickedLootChest)
+        {
+            lootChestUi.gameObject.SetActive(true);
+        }
+        else
+        {
+            lootChestUi.gameObject.SetActive(false);
         }
     }
 

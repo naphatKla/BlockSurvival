@@ -146,4 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320ce199ed479504c85450d308e5990b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChest: {fileID: 1069015346814206378}
+  _rigidbody2D: {fileID: 1069015346814206372}
