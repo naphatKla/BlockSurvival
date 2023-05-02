@@ -11,9 +11,11 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
     #region Declare Variable
+    [SerializeField] private string enemyName;
     [SerializeField] private EnemyType enemyType;
     // For range enemy
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletOffset;
     [SerializeField] private float fireRate;
     [SerializeField] private float attackRange;
 
@@ -86,6 +88,15 @@ public class Enemy : MonoBehaviour
 
         _canMove = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.gameObject.CompareTag("Player")) return;
+        Player player = col.gameObject.GetComponent<Player>();    
+        Vector2 direction = (player.transform.position - transform.position).normalized;
+        player.TakeDamage(attackDamage,true,direction,10f);
+    }
+
     #endregion
 
     #region Method
@@ -158,7 +169,7 @@ public class Enemy : MonoBehaviour
 
     private void ShootBullet()
     {
-        Destroy(Instantiate(bulletPrefab, transform.position, transform.rotation),2f);
+        Destroy(Instantiate(bulletPrefab, transform.position + (transform.up * bulletOffset), transform.rotation),2f);
         Invoke(nameof(ShootBullet), fireRate);
     }
     

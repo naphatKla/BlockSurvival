@@ -8,8 +8,10 @@ using UnityEngine.UI;
 [CustomEditor(typeof(Enemy))]
 public class EnemyEditor : Editor
 {
+    protected SerializedProperty enemyName;
     protected SerializedProperty enemyType;
     protected SerializedProperty bulletPrefab;
+    protected SerializedProperty bulletOffset;
     protected SerializedProperty fireRate;
     protected SerializedProperty attackRange;
     protected SerializedProperty maxHp;
@@ -22,9 +24,11 @@ public class EnemyEditor : Editor
     
     protected virtual void OnEnable()
     {
+        enemyName = serializedObject.FindProperty("enemyName");
         enemyType = serializedObject.FindProperty("enemyType");
         maxHp = serializedObject.FindProperty("maxHp");
         bulletPrefab = serializedObject.FindProperty("bulletPrefab");
+        bulletOffset = serializedObject.FindProperty("bulletOffset");
         fireRate = serializedObject.FindProperty("fireRate");
         attackRange = serializedObject.FindProperty("attackRange");
         attackDamage = serializedObject.FindProperty("attackDamage");
@@ -39,11 +43,13 @@ public class EnemyEditor : Editor
     {
         serializedObject.Update();
         
+        EditorGUILayout.PropertyField(enemyName);
         EditorGUILayout.PropertyField(enemyType);  
         
         if (enemyType.enumValueIndex == (int)Enemy.EnemyType.Range)
         {
            EditorGUILayout.PropertyField(bulletPrefab);
+           EditorGUILayout.PropertyField(bulletOffset);
            EditorGUILayout.PropertyField(fireRate);
            EditorGUILayout.PropertyField(attackRange);
         }

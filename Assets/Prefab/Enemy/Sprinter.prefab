@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7886776231948768610}
   - component: {fileID: 4256610357884610056}
   - component: {fileID: 3955613255885308678}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 2991819485536474598}
   - component: {fileID: 1721471209162347706}
   - component: {fileID: 38339118863900570}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 5270647478227354050}
   - component: {fileID: 6956505100600161587}
   - component: {fileID: 7980553486967939047}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,8 +316,8 @@ GameObject:
   - component: {fileID: 7467399288303019216}
   - component: {fileID: 7467399288303019217}
   - component: {fileID: 3160113076237749538}
-  - component: {fileID: 7049700257584644853}
-  m_Layer: 0
+  - component: {fileID: 5453148597757173859}
+  m_Layer: 7
   m_Name: Sprinter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -380,8 +380,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 341671377
   m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.4575472, g: 1, b: 0.9365644, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -404,14 +404,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0b3a49f6344849b7cb3c40fa03da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Sprinter
   enemyType: 0
   bulletPrefab: {fileID: 7611213443645355, guid: b179953a72e33944a97671f5adde3292, type: 3}
+  bulletOffset: 0
   fireRate: 1.5
   attackRange: 7
   maxHp: 5
-  attackDamage: 0
+  attackDamage: 1
   maxSpeed: 10
-  minSpeed: 5
+  minSpeed: 7
   turnDirectionDamp: 0.25
   distanceThreshold: 5
   rigidbody2D: {fileID: 0}
@@ -437,8 +439,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &7049700257584644853
-BoxCollider2D:
+--- !u!60 &5453148597757173859
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -453,16 +455,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.28866667}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5773587}
+      - {x: -0.5, y: -0.28866667}
+      - {x: 0.5, y: -0.28866667}
 --- !u!1 &7996995653818628461
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6322964691851956176}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

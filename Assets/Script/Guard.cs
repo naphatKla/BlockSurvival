@@ -30,8 +30,6 @@ public class Guard : MonoBehaviour
         {
             transform.localScale = new Vector3(_startScale.x / 1.1f, _startScale.y / 1.5f , _startScale.z);
         }
-
-
     }
     
     public void TakeDamage(float damage)
@@ -46,14 +44,14 @@ public class Guard : MonoBehaviour
       
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Guard Hit Player");
-            Vector2 direction = transform.position - other.transform.position;
+            Vector2 pushDirection = other.transform.position - transform.position;
             Player player = other.gameObject.GetComponent<Player>();
-            player.TakeDamage(0,true,10F,0.5f);
+            player.TakeDamage(0,true, pushDirection ,5f ,0.5f);
         }
     }
 }

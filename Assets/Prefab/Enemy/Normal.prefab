@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7512332456126078563}
   - component: {fileID: 4476819037446302985}
   - component: {fileID: 3735585184856819719}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 3222128016045563623}
   - component: {fileID: 1356070926955552699}
   - component: {fileID: 412759529049478299}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 5482928414015376067}
   - component: {fileID: 7329651460477795890}
   - component: {fileID: 7778491430845945062}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,8 +316,8 @@ GameObject:
   - component: {fileID: 7103258213390938065}
   - component: {fileID: 7103258213390938064}
   - component: {fileID: 3380133742473594403}
-  - component: {fileID: 7271007361007127028}
-  m_Layer: 0
+  - component: {fileID: -2886785578209685682}
+  m_Layer: 6
   m_Name: Normal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -404,12 +404,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0b3a49f6344849b7cb3c40fa03da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Normal
   enemyType: 0
   bulletPrefab: {fileID: 7611213443645355, guid: b179953a72e33944a97671f5adde3292, type: 3}
+  bulletOffset: 0
   fireRate: 1.5
   attackRange: 7
   maxHp: 10
-  attackDamage: 0
+  attackDamage: 3
   maxSpeed: 5
   minSpeed: 2
   turnDirectionDamp: 0.5
@@ -437,8 +439,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &7271007361007127028
-BoxCollider2D:
+--- !u!60 &-2886785578209685682
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -460,9 +462,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
 --- !u!1 &7766834200438059628
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5948675941808522449}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

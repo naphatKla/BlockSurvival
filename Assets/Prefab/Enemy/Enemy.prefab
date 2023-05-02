@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2733868332792877803}
   - component: {fileID: 2733868332792877802}
   - component: {fileID: 7605406371314842393}
-  - component: {fileID: 2559381447044592846}
-  m_Layer: 0
+  - component: {fileID: 2816669362259983341}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -100,14 +100,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0b3a49f6344849b7cb3c40fa03da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Enemy
   enemyType: 0
   bulletPrefab: {fileID: 7611213443645355, guid: b179953a72e33944a97671f5adde3292, type: 3}
+  bulletOffset: 0
   fireRate: 1.5
   attackRange: 7
   maxHp: 10
-  attackDamage: 0
+  attackDamage: 1
   maxSpeed: 5
   minSpeed: 2
+  turnDirectionDamp: 0
   distanceThreshold: 5
   rigidbody2D: {fileID: 0}
   deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
@@ -132,8 +135,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2559381447044592846
-BoxCollider2D:
+--- !u!60 &2816669362259983341
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,9 +158,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
 --- !u!1 &3218428830917250902
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580341489218435563}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +213,7 @@ GameObject:
   - component: {fileID: 3396378118058779481}
   - component: {fileID: 8738014912295768115}
   - component: {fileID: 8409354759133181245}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +339,7 @@ GameObject:
   - component: {fileID: 7769902523338400733}
   - component: {fileID: 6175220297339134593}
   - component: {fileID: 4816911979449100705}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +416,7 @@ GameObject:
   - component: {fileID: 825345250708797433}
   - component: {fileID: 2511696174737933064}
   - component: {fileID: 3211543482719791580}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

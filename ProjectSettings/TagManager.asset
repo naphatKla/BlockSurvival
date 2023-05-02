@@ -14,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Enemy 1
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2125866581
+    locked: 0
+  - name: PaticleEffect
+    uniqueID: 3646211385
     locked: 0

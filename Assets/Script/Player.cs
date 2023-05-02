@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [Header("Component")] 
     [SerializeField] public Rigidbody2D playerRigidbody2D;
     [SerializeField] private TrailRenderer trailEffect;
+    private SpriteRenderer _spriteRenderer;
+    private Color _defaultSpriteColor;
 
     [Header("Player Stats")] 
     [SerializeField] private float maxHealth;
@@ -65,6 +67,8 @@ public class Player : MonoBehaviour
     #region Unity Method
     void Start()
     {
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _defaultSpriteColor = _spriteRenderer.color;
         playerTransform = transform.GetChild(0);
         _health = maxHealth;
         _stamina = maxStamina;
@@ -82,6 +86,7 @@ public class Player : MonoBehaviour
     {
         _stamina -= dashStaminaDrain;
         trailEffect.emitting = true;
+        _spriteRenderer.color = new Color( _spriteRenderer.color.r,  _spriteRenderer.color.g,  _spriteRenderer.color.b, 0.5f);
         
         float dashTimeCount = 0;
         while (dashTimeCount < dashDuration)
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour
         }
         
         trailEffect.emitting = false;
+        ResetSpriteColor();
     }
     private IEnumerator StaminaRecoveryCooldown()
     {
@@ -113,14 +119,14 @@ public class Player : MonoBehaviour
         SetPlayerStatus(PlayerStatus.Clear);
     }
     
-    private IEnumerator KnockBack(float knockBackForce = 5, float knockBackDuration = 0.1f)
+    private IEnumerator KnockBack(Vector2 knockDirection, float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
         float timeCount = 0;
 
         while (timeCount < knockBackDuration)
         {
-            SetPlayerStatus(PlayerStatus.Stun);
-            playerRigidbody2D.velocity = -transform.up * knockBackForce;
+            //SetPlayerStatus(PlayerStatus.Stun);
+            playerRigidbody2D.velocity = knockDirection.normalized * knockBackForce;
             timeCount += Time.deltaTime;
             yield return null;
         }
@@ -224,19 +230,44 @@ public class Player : MonoBehaviour
         playerTransform.up = direction;
     }
     
-    public void TakeDamage(float damage, bool isKnockBack = false, float knockBackForce = 5, float knockBackDuration = 0.1f)
+    public void TakeDamage(float damage)
     {
+        if(playerStatus.Equals(PlayerStatus.Dash)) return;
         _health -= damage;
-
+        _spriteRenderer.color = Color.red - new Color(0,0,0,0.5f);
+        Invoke(nameof(ResetSpriteColor),0.1f);
+        
+        if (_health <= 0)
+        {
+            // Die
+        }
+    }
+    
+    public void TakeDamage(float damage, bool isKnockBack,Vector2 knockDirection ,  float knockBackForce = 5, float knockBackDuration = 0.1f)
+    {
+        if(playerStatus.Equals(PlayerStatus.Dash)) return;
+        
+        if (damage > 0)
+        {
+            _health -= damage;
+            _spriteRenderer.color = new Color(1, 0.16f, 0, 0.5f);
+            Invoke(nameof(ResetSpriteColor),0.1f);
+        }
+        
         if (isKnockBack)
         {
-            StartCoroutine(KnockBack(knockBackForce, knockBackDuration));
+            StartCoroutine(KnockBack(knockDirection, knockBackForce, knockBackDuration));
         }
 
         if (_health <= 0)
         {
             // Die
         }
+    }
+
+    private void ResetSpriteColor()
+    {
+        _spriteRenderer.color = _defaultSpriteColor;
     }
     #endregion
 }

@@ -100,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   name: Laser Beam
   skillDamage: 10
   skillCooldown: 5
-  skillCurrentCooldown: 1.8102183
+  skillCurrentCooldown: 1.1329082
   destroyTime: 2
   skillOffset: 1
   hitMode: 1
