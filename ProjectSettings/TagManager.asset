@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Box
+  - Guard
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Enemy 1
   - 
   - 
   - 
@@ -42,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effect
+    uniqueID: 3656064477
+    locked: 0
+  - name: Enemy
+    uniqueID: 341671377
+    locked: 0
+  - name: Player
+    uniqueID: 2125866581
+    locked: 0
+  - name: PaticleEffect
+    uniqueID: 3646211385
     locked: 0
