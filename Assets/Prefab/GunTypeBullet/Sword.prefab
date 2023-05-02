@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8486068408752589956}
   - component: {fileID: 8486068408752589957}
   - component: {fileID: 8840960993339082880}
-  - component: {fileID: -157897288197483168}
+  - component: {fileID: -1731694055139415694}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8486068408752589963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.6431, y: 0.6123, z: 0}
-  m_LocalScale: {x: 1.7537999, y: 2.1345434, z: 1}
+  m_LocalScale: {x: 2.5, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-157897288197483168
+--- !u!114 &-1731694055139415694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,17 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8486068408752589963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b1562035fac9c49a787ed3a0bf82cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 744d7d6e7a6656f43a1cbcaf64a688b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillKey: 0
-  name: 
-  skillDamage: 0
-  skillCooldown: 0
-  skillCurrentCooldown: 0
-  destroyTime: 0
-  skillOffset: 0
-  hitMode: 0
-  cooldownPerHit: 0
-  player: {fileID: 0}
-  isCooldown: 0
+  Rigidbody2D: {fileID: 8486068408752589957}
+  bulletSpeed: 10
+  bulletDamage: 1
+  explodeDamage: 0

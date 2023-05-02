@@ -41,15 +41,22 @@ public class Level : MonoBehaviour
     [SerializeField] private Button gunTypeSniperButton;
     [Header("Missile")]
     [SerializeField] private Button gunTypeMissileButton;
+    [Header("Sword")]
+    [SerializeField] private Button gunTypeSwordButton;
 
     [Header("GunType Stats Upgrade Damage")] 
     private bool _isHighDamage;
     private bool _isVeryHighDamage;
 
     [Header("GunType Stats Upgrade Attack Speed")]
-    private bool isVeryHighAttackSpeed;
+    private bool _isHighAttackSpeed;
+    private bool _isVeryHighAttackSpeed;
+    private bool _isLowAttackSpeed;
     
-    
+    [Header("GunType Stats Upgrade Speed")] 
+    private bool _isUnDecentSpeed;
+
+
     [Header("Player Status")]
     [SerializeField] public float playerLevelUpPoint;
     private Bullet _bullet;
@@ -80,20 +87,20 @@ public class Level : MonoBehaviour
             {
                 if (playerLevelUpPoint > 0 && !_isHighDamage && !_isVeryHighDamage)
                 {
-                    _player.playerDamage += 1f;
+                    _player.playerDamage += 2f;
                     playerLevelUpPoint -= 1;
                 }
 
                 if (playerLevelUpPoint > 0 && _isHighDamage)
                 {
-                    _player.playerDamage += 2f;
+                    _player.playerDamage += 4f;
                     playerLevelUpPoint -= 1;
                 }
                 
                 if (playerLevelUpPoint > 0 && _isVeryHighDamage)
                 {
-                    _player.playerDamage += 4f;
-                    _combatSystem.missileDamage += 4f;
+                    _player.playerDamage += 5f;
+                    _combatSystem.missileDamage += 5f;
                     playerLevelUpPoint -= 1;
                 }
             }
@@ -110,25 +117,44 @@ public class Level : MonoBehaviour
         
         playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && !isVeryHighAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isLowAttackSpeed)
             {
                 _player.playerAttackSpeed -= 0.03f;
                 playerLevelUpPoint -= 1;
             }
             
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && isVeryHighAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && !_isVeryHighAttackSpeed && !_isHighAttackSpeed && !_isLowAttackSpeed)
             {
-                _player.playerAttackSpeed -= 0.07f;
+                _player.playerAttackSpeed -= 0.04f;
+                playerLevelUpPoint -= 1;
+            }
+            
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isHighAttackSpeed)
+            {
+                _player.playerAttackSpeed -= 0.05f;
+                playerLevelUpPoint -= 1;
+            }
+            
+            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isVeryHighAttackSpeed)
+            {
+                _player.playerAttackSpeed -= 0.06f;
                 playerLevelUpPoint -= 1;
             }
         });
         
         playerSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0)
+            if (playerLevelUpPoint > 0 && !_isUnDecentSpeed)
             {
                 _player.walkSpeed += 0.4f;
                 _player.sprintSpeed += 0.5f;
+                playerLevelUpPoint -= 1;
+            }
+            
+            if (playerLevelUpPoint > 0 && _isUnDecentSpeed)
+            {
+                _player.walkSpeed += 0.5f;
+                _player.sprintSpeed += 0.6f;
                 playerLevelUpPoint -= 1;
             }
         });
@@ -138,7 +164,7 @@ public class Level : MonoBehaviour
             if (gunTypeSelectPoint > 0)
             {
                 _player._playerMaxAttackSpeed = 0.05f;
-                _player.playerAttackSpeed -= 0.2f;
+                _player.playerAttackSpeed -= 0.5f;
                 _bullet.bulletSpeed += 10f;
                 _combatSystem.isGunTypeAssaultRifle = true;
                 gunTypeSelectPoint -= 1;
@@ -163,7 +189,7 @@ public class Level : MonoBehaviour
             if (gunTypeSelectPoint > 0)
             {
                 _player._playerMaxAttackSpeed = 0.5f;
-                _player.playerAttackSpeed += 1f;
+                _player.playerAttackSpeed += 0.5f;
                 _combatSystem.bulletSpeed += 10f;
                 _combatSystem.isGunTypeSniper = true;
                 gunTypeSelectPoint -= 1;
@@ -177,6 +203,19 @@ public class Level : MonoBehaviour
                 _player._playerMaxAttackSpeed = 0.5f;
                 _player.playerAttackSpeed += 1f;
                 _combatSystem.isGunTypeMissile = true;
+                gunTypeSelectPoint -= 1;
+            }
+        });
+        
+        gunTypeSwordButton.onClick.AddListener(() =>
+        {
+            if (gunTypeSelectPoint > 0)
+            {
+                _player._playerMaxAttackSpeed = 0.05f;
+                _player.playerAttackSpeed -= 0.4f;
+                _player.walkSpeed += 1f;
+                _player.sprintSpeed += 1.5f;
+                _combatSystem.isGunTypeSword = true;
                 gunTypeSelectPoint -= 1;
             }
         });
@@ -244,7 +283,7 @@ public class Level : MonoBehaviour
     {
         if (gunTypeSelectPoint >= 1)
         {
-            gunTypeText.text = $"Gun Type Point: {gunTypeSelectPoint}";
+            gunTypeText.text = $"Select Gun Type";
             GunTypeUi.gameObject.SetActive(true);
         }
         else
@@ -257,22 +296,32 @@ public class Level : MonoBehaviour
     {
         if (_combatSystem.isGunTypeAssaultRifle)
         {
-            isVeryHighAttackSpeed = true;
+            _isVeryHighAttackSpeed = true;
         }
         
         if (_combatSystem.isGunTypeShotgun)
         {
+            _isLowAttackSpeed = true;
             _isHighDamage = true;
         }
         
         if (_combatSystem.isGunTypeSniper)
         {
+            _isLowAttackSpeed = true;
             _isVeryHighDamage = true;
         }
 
         if (_combatSystem.isGunTypeMissile)
         {
+            _isLowAttackSpeed = true;
             _isVeryHighDamage = true;
+        }
+        
+        if (_combatSystem.isGunTypeSword)
+        {
+            _isHighDamage = true;
+            _isHighAttackSpeed = true;
+            _isUnDecentSpeed = true;
         }
     }
 

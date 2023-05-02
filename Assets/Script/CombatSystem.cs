@@ -17,14 +17,18 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] public GameObject bigBullet;
     [SerializeField] public GameObject veryBigBullet;
     [SerializeField] public GameObject explode;
+    [SerializeField] public GameObject sword;
     [SerializeField] private float bulletOffSetScale;
+    [SerializeField] private float swordOffSetScale;
     public bool isGunTypeAssaultRifle;
     public bool isGunTypeShotgun;
     public bool isGunTypeSniper;
     public bool isGunTypeMissile;
+    public bool isGunTypeSword;
     private Player _player;
     private Level _level;
     public float bulletSpeed;
+    public Vector3 explodeScale;
     public float missileDamage;
 
     #endregion
@@ -33,6 +37,7 @@ public class CombatSystem : MonoBehaviour
     void Start()
     {
         bulletSpeed = bullet.GetComponent<Bullet>().bulletSpeed;
+        explodeScale = explode.GetComponent<Explode>().transform.localScale;
         missileDamage = explode.GetComponent<Explode>().explodeDamage;
         _player = GetComponent<Player>();
         _level = GetComponent<Level>();
@@ -48,7 +53,7 @@ public class CombatSystem : MonoBehaviour
     #region Method
     private void BulletSpawn()
     {
-        if (_player.playerLevel >= 0 && !isGunTypeShotgun && !isGunTypeAssaultRifle && !isGunTypeSniper && !isGunTypeMissile)
+        if (_player.playerLevel >= 0 && !isGunTypeShotgun && !isGunTypeAssaultRifle && !isGunTypeSniper && !isGunTypeMissile && !isGunTypeSword)
         {
             BulletDefaultGunPatternSpawn();
             //BulletDefaultGunPatternSpawn();
@@ -72,6 +77,11 @@ public class CombatSystem : MonoBehaviour
         if (_level.playerLevel >= 5 && isGunTypeMissile)
         {
             BulletMissileGunPatternSpawn();
+        }
+        
+        if (_level.playerLevel >= 5 && isGunTypeSword)
+        {
+            BulletSwordPatternSpawn();
         }
         
         Invoke("BulletSpawn", _player.playerAttackSpeed);
@@ -119,6 +129,21 @@ public class CombatSystem : MonoBehaviour
         bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
         Destroy(bulletSpawn,1f);
     }
+    
+    private void BulletSwordPatternSpawn()
+    {
+        Vector3 bulletOffSet = _player.playerTransform.up * swordOffSetScale;
+        float angle = 75;
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject bulletSpawn = Instantiate(sword, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation * Quaternion.Euler(0,0,angle));
+            Destroy(bulletSpawn,0.2f);
+            angle -= 75;
+        }
+    }
+    
+    
     
 
     #endregion
