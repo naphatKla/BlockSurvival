@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 49
   name: Laser Beam
-  skillDamage: 10
+  skillDamage: 2
   skillCooldown: 5
-  skillCurrentCooldown: 1.1329082
+  skillCurrentCooldown: 1.8394526
   destroyTime: 2
   skillOffset: 1
   hitMode: 1

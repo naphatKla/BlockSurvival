@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 52
   name: Fire Work
-  skillDamage: 5
+  skillDamage: 10
   skillCooldown: 5
-  skillCurrentCooldown: 0
+  skillCurrentCooldown: 4.1577578
   destroyTime: 3
   skillOffset: 0
   hitMode: 0
@@ -159,5 +159,5 @@ MonoBehaviour:
   knockBackForce: 5
   knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 0
+  isCooldown: 1
   bullet: {fileID: 4639005615368539342, guid: 688faeec68a81784b82434f3a617eb85, type: 3}

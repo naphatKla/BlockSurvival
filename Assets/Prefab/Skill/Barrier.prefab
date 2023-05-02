@@ -122,18 +122,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 51
   name: Barrier
-  skillDamage: 5
+  skillDamage: 2
   skillCooldown: 5
-  skillCurrentCooldown: 0
+  skillCurrentCooldown: 3.98968
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
-  cooldownPerHit: 0.5
+  cooldownPerHit: 0.15
   isKnockBack: 0
   knockBackForce: 5
   knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 0
+  isCooldown: 1
 --- !u!58 &1779535253206123288
 CircleCollider2D:
   m_ObjectHideFlags: 0
