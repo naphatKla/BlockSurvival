@@ -17,8 +17,11 @@ public class Enemy : MonoBehaviour
     
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
-    
-    [Header("Other")]
+
+    [Header("Loot Chest")] 
+    [SerializeField] private GameObject lootChest;
+
+        [Header("Other")]
     // Must change when player is done.
     [SerializeField] private Player player;
     private float _currentSpeed;
@@ -26,7 +29,7 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     private Level _level;
     private bool _isEnemyDead;
-    
+
     [Header("Particle Effect")]
     [SerializeField] private ParticleSystem _deadParticleSystem;
     
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour
     {
         _level.enemyKill += 1;
         _level.playerLevelUp += 2f;
+        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
     }
 
     private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)

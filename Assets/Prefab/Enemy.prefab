@@ -105,6 +105,7 @@ MonoBehaviour:
   maxSpeed: 5
   minSpeed: 2
   distanceThreshold: 5
+  lootChest: {fileID: 1069015346814206378, guid: 78dd40350f5a052439a36a344c5aa670, type: 3}
   player: {fileID: 0}
   rigidbody2D: {fileID: 0}
   _deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}

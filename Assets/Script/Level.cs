@@ -165,7 +165,7 @@ public class Level : MonoBehaviour
             {
                 _player._playerMaxAttackSpeed = 0.05f;
                 _player.playerAttackSpeed -= 0.5f;
-                _bullet.bulletSpeed += 10f;
+                _combatSystem.bulletSpeed += 10f;
                 _combatSystem.isGunTypeAssaultRifle = true;
                 gunTypeSelectPoint -= 1;
             }
