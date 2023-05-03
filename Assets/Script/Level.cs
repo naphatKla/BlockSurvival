@@ -76,6 +76,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Button damageButton;
     [SerializeField] private Button attackSpeedButton;
     [SerializeField] private Button speedButton;
+    [SerializeField] private Button dashButton;
     private LootChest _lootChest;
     public bool _isPickedLootChest;
 
@@ -119,31 +120,32 @@ public class Level : MonoBehaviour
             if (playerLevelUpPoint > 0)
             {
                 _player.maxHealth += 10;
+                _player._health += 10f;
                 playerLevelUpPoint -= 1;
             }
         });
         
         playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
         {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isLowAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isLowAttackSpeed)
             {
                 _player.playerAttackSpeed -= 0.03f;
                 playerLevelUpPoint -= 1;
             }
             
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && !_isVeryHighAttackSpeed && !_isHighAttackSpeed && !_isLowAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && !_isVeryHighAttackSpeed && !_isHighAttackSpeed && !_isLowAttackSpeed)
             {
                 _player.playerAttackSpeed -= 0.04f;
                 playerLevelUpPoint -= 1;
             }
             
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isHighAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isHighAttackSpeed)
             {
                 _player.playerAttackSpeed -= 0.05f;
                 playerLevelUpPoint -= 1;
             }
             
-            if (playerLevelUpPoint > 0 && playerAttackSpeed != _player._playerMaxAttackSpeed && _isVeryHighAttackSpeed)
+            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isVeryHighAttackSpeed)
             {
                 _player.playerAttackSpeed -= 0.06f;
                 playerLevelUpPoint -= 1;
@@ -173,7 +175,7 @@ public class Level : MonoBehaviour
             {
                 _player._playerMaxAttackSpeed = 0.05f;
                 _player.playerAttackSpeed -= 0.5f;
-                _combatSystem.bulletSpeed += 10f;
+                _combatSystem.bulletSpeed += 20f;
                 _combatSystem.isGunTypeAssaultRifle = true;
                 gunTypeSelectPoint -= 1;
             }
@@ -232,6 +234,8 @@ public class Level : MonoBehaviour
         {
             if (_isPickedLootChest)
             {
+                _player.maxHealth += 150f;
+                _player._health += 150f;
                 _isPickedLootChest = false;
             }
         });
@@ -240,14 +244,16 @@ public class Level : MonoBehaviour
         {
             if (_isPickedLootChest)
             {
+                _player.playerDamage += 20f;
                 _isPickedLootChest = false;
             }
         });
         
         attackSpeedButton.onClick.AddListener(() =>
         {
-            if (_isPickedLootChest)
+            if (_isPickedLootChest && playerAttackSpeed !> _player._playerMaxAttackSpeed)
             {
+                _player.playerAttackSpeed -= 0.3f;
                 _isPickedLootChest = false;
             }
         });
@@ -256,6 +262,19 @@ public class Level : MonoBehaviour
         {
             if (_isPickedLootChest)
             {
+                _player.walkSpeed += 3;
+                _player.sprintSpeed += 4;
+                _player.sprintStaminaDrain -= 1f;
+                _isPickedLootChest = false;
+            }
+        });
+        
+        dashButton.onClick.AddListener(() =>
+        {
+            if (_isPickedLootChest)
+            {
+                _player.dashSpeed += 4;
+                _player.dashStaminaDrain -= 1f;
                 _isPickedLootChest = false;
             }
         });

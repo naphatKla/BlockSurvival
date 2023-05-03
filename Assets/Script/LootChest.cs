@@ -28,4 +28,5 @@ public class LootChest : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }

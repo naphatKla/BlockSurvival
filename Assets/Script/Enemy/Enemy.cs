@@ -103,8 +103,8 @@ public class Enemy : MonoBehaviour
     {
         _level.enemyKill += 1;
         _level.playerLevelUp += 2f;
-        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
-        Destroy(lootChestSpawn, 5f);
+        player._health += 1;
+        LootChestSpawn();
     }
 
     private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
@@ -121,6 +121,12 @@ public class Enemy : MonoBehaviour
         rigidbody2D.velocity = Vector2.zero;
 
         _canMove = true;
+    }
+
+    private void LootChestSpawn()
+    {
+        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
+        Destroy(lootChestSpawn, 5f);
     }
 
 }

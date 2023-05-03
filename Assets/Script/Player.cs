@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float playerAttackSpeed;
     [SerializeField] public float playerLevel;
     [SerializeField] public float playerDamage;
-    private float _health;
+    public float _health;
     private float _stamina;
     public float _playerMaxAttackSpeed = 0.1f;
     
@@ -41,9 +41,9 @@ public class Player : MonoBehaviour
     [SerializeField] private KeyCode dashKey;
     [SerializeField] public float walkSpeed;
     [SerializeField] public float sprintSpeed;
-    [SerializeField] private float dashStaminaDrain;
-    [SerializeField] private float sprintStaminaDrain;
-    [SerializeField] private float dashSpeed;
+    [SerializeField] public float dashStaminaDrain;
+    [SerializeField] public float sprintStaminaDrain;
+    [SerializeField] public float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float staminaRecoveryCooldown;
     [HideInInspector] public Transform playerTransform;
@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         PlayerMovementHandle();
         PlayerBarUpdate();
         playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, _playerMaxAttackSpeed, 5f);
+        _health = Mathf.Clamp(_health, 0, maxHealth);
     }
     
     private IEnumerator Dash()
