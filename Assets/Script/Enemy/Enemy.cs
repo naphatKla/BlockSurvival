@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     [Header("Loot Chest")] 
     [SerializeField] private GameObject lootChest;
 
-        [Header("Other")]
+    [Header("Other")]
     // Must change when player is done.
     [SerializeField] private Player player;
     private float _currentSpeed;
@@ -94,6 +94,7 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
+            LootChestSpawn();
             Destroy(gameObject);
         }
         
@@ -104,7 +105,6 @@ public class Enemy : MonoBehaviour
         _level.enemyKill += 1;
         _level.playerLevelUp += 2f;
         player._health += 1;
-        LootChestSpawn();
     }
 
     private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
     private void LootChestSpawn()
     {
         GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
-        Destroy(lootChestSpawn, 5f);
+        Destroy(lootChestSpawn, 3f);
     }
 
 }
