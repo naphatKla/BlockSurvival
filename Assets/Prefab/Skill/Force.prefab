@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -648755911
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 1, b: 0.86387444, a: 0.5882353}
@@ -129,6 +129,9 @@ MonoBehaviour:
   skillOffset: 0
   hitMode: 1
   cooldownPerHit: 1
+  isKnockBack: 0
+  knockBackForce: 0
+  knockBackDuration: 0
   player: {fileID: 0}
   isCooldown: 0
   speed: 5
