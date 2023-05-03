@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float playerAttackSpeed;
     [SerializeField] public float playerLevel;
     [SerializeField] public float playerDamage;
-    private float _health;
+    public float _health;
     private float _stamina;
     
     [Header("UI Bar")] 
