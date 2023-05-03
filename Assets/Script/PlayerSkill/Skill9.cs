@@ -7,14 +7,16 @@ public class Skill9 : SkillBase
 {
     protected override void SkillAction()
     {
-        
+        transform.rotation = Quaternion.identity;
     }
 
-    private void OnCollisionStay(Collision collision)
+    protected override void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player playerComponent))
+        base.OnTriggerStay2D(collision);
+        
+        if (collision.gameObject.CompareTag("Player"))
         {
-            player._health += 10;
+            player._health += Time.deltaTime * 10;
             Debug.Log(player._health);
         }
     }

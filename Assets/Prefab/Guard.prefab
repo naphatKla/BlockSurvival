@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2180886857331969300}
   - component: {fileID: 2180886857331969298}
   - component: {fileID: 2180886857331969301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Guard
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2180886857331969384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.55, z: 0}
-  m_LocalScale: {x: 2.6998124, y: 0.6193694, z: 1}
+  m_LocalScale: {x: 2.69981, y: 0.77344, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

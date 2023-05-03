@@ -41,12 +41,13 @@ public abstract class SkillBase : MonoBehaviour
     void Start()
     {
         skillCurrentCooldown = 0;
+        _currentAttackCooldown = 0;
         player = FindObjectOfType<Player>();
         SkillAction();
         Destroy(gameObject, destroyTime);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         _currentAttackCooldown -= Time.deltaTime;
         _currentAttackCooldown = Mathf.Clamp(_currentAttackCooldown, 0, cooldownPerHit);

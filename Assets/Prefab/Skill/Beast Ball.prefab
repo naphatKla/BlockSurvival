@@ -124,16 +124,16 @@ MonoBehaviour:
   name: BeastBall
   skillDamage: 20
   skillCooldown: 5
-  skillCurrentCooldown: 3.6708298
+  skillCurrentCooldown: 0
   destroyTime: 3
   skillOffset: 3
   hitMode: 0
   cooldownPerHit: 100
-  isKnockBack: 0
+  isKnockBack: 1
   knockBackForce: 5
   knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 1
+  isCooldown: 0
   speed: 3
 --- !u!58 &8796720535302960442
 CircleCollider2D:

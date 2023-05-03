@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float playerDamage;
     public float _health;
     private float _stamina;
+    public bool isImmune;
     
     [Header("UI Bar")] 
     [SerializeField] private Scrollbar healthBar;
@@ -49,9 +50,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float staminaRecoveryCooldown;
     [HideInInspector] public Transform playerTransform;
     private float _currentSpeed;
-    public PlayerStatus playerStatus;
+    public PlayerMovementStatus playerMovementStatus;
 
-    public enum PlayerStatus
+    public enum PlayerMovementStatus
     {
         Clear,
         Idle,
@@ -59,7 +60,6 @@ public class Player : MonoBehaviour
         Sprint,
         Dash,
         Stun,
-        Dead,
         StaminaRecoveryCooldown
     }
     #endregion
@@ -91,7 +91,8 @@ public class Player : MonoBehaviour
         float dashTimeCount = 0;
         while (dashTimeCount < dashDuration)
         {
-            SetPlayerStatus(PlayerStatus.Dash);
+            SetPlayerStatus(PlayerMovementStatus.Dash);
+            isImmune = true;
             dashTimeCount += Time.deltaTime;
             _currentSpeed = dashSpeed;
 
@@ -103,6 +104,7 @@ public class Player : MonoBehaviour
         }
         
         trailEffect.emitting = false;
+        isImmune = false;
         ResetSpriteColor();
     }
     private IEnumerator StaminaRecoveryCooldown()
@@ -111,12 +113,12 @@ public class Player : MonoBehaviour
 
         while(timeCount < staminaRecoveryCooldown)
         {
-            SetPlayerStatus(PlayerStatus.StaminaRecoveryCooldown);
+            SetPlayerStatus(PlayerMovementStatus.StaminaRecoveryCooldown);
             timeCount += Time.deltaTime;
             _currentSpeed = walkSpeed / 2;
             yield return null;
         }
-        SetPlayerStatus(PlayerStatus.Clear);
+        SetPlayerStatus(PlayerMovementStatus.Clear);
     }
     
     private IEnumerator KnockBack(Vector2 knockDirection, float knockBackForce = 5, float knockBackDuration = 0.1f)
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
         }
         playerRigidbody2D.velocity = Vector2.zero;
 
-        SetPlayerStatus(PlayerStatus.Clear);
+        SetPlayerStatus(PlayerMovementStatus.Clear);
     }
     #endregion
 
@@ -150,45 +152,45 @@ public class Player : MonoBehaviour
     }
     private void DashHandle()
     {
-        if (!MovementConditionCheck(PlayerStatus.Dash)) return;
+        if (!MovementConditionCheck(PlayerMovementStatus.Dash)) return;
         StartCoroutine(Dash());
     }
     private void StaminaRegenHandle()
     {
         _stamina = Mathf.Clamp(_stamina, 0, maxStamina);
         bool staminaRegenConditionCheck =
-            (!playerStatus.Equals(PlayerStatus.Sprint) && !playerStatus.Equals(PlayerStatus.Dash)) && _stamina < maxStamina;
+            (!playerMovementStatus.Equals(PlayerMovementStatus.Sprint) && !playerMovementStatus.Equals(PlayerMovementStatus.Dash)) && _stamina < maxStamina;
             
         if (!staminaRegenConditionCheck) return;
         _stamina += Time.deltaTime * staminaRegen;
     }
     private void SprintHandle()
     {
-        if (!MovementConditionCheck(PlayerStatus.Sprint)) return;
+        if (!MovementConditionCheck(PlayerMovementStatus.Sprint)) return;
         
-        SetPlayerStatus(PlayerStatus.Sprint);
+        SetPlayerStatus(PlayerMovementStatus.Sprint);
         _stamina -= Time.deltaTime * sprintStaminaDrain;
         _currentSpeed = sprintSpeed;
     }
     private void PlayerMovementHandle()
     {
-        if(playerStatus.Equals(PlayerStatus.Stun)) return;
+        if(playerMovementStatus.Equals(PlayerMovementStatus.Stun)) return;
         StaminaRegenHandle();
         
         Vector2 playerVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _currentSpeed;
         playerRigidbody2D.velocity = playerVelocity;
         
-        if(playerStatus.Equals(PlayerStatus.StaminaRecoveryCooldown)) return;
+        if(playerMovementStatus.Equals(PlayerMovementStatus.StaminaRecoveryCooldown)) return;
         
         if (Input.GetAxisRaw("Horizontal").Equals(0) && Input.GetAxisRaw("Vertical").Equals(0))
         {
-            playerStatus = PlayerStatus.Idle;
+            playerMovementStatus = PlayerMovementStatus.Idle;
             return;
         }
 
         if (_stamina <= 0) StartCoroutine(StaminaRecoveryCooldown());
         
-        SetPlayerStatus(PlayerStatus.Walk);
+        SetPlayerStatus(PlayerMovementStatus.Walk);
         _currentSpeed = walkSpeed;
         
         SprintHandle();
@@ -202,22 +204,22 @@ public class Player : MonoBehaviour
         healthText.text = $"{_health:F0} / {maxHealth}";
     }
     
-    private bool MovementConditionCheck(PlayerStatus status)
+    private bool MovementConditionCheck(PlayerMovementStatus movementStatus)
     {
-        switch (status)
+        switch (movementStatus)
         {
-            case PlayerStatus.Sprint:
+            case PlayerMovementStatus.Sprint:
                 return Input.GetKey(sprintKey) && _stamina > 0;
-            case PlayerStatus.Dash:
-                return Input.GetKeyDown(dashKey) && !playerStatus.Equals( PlayerStatus.Dash) && _stamina >= dashStaminaDrain;
+            case PlayerMovementStatus.Dash:
+                return Input.GetKeyDown(dashKey) && !playerMovementStatus.Equals( PlayerMovementStatus.Dash) && _stamina >= dashStaminaDrain;
             default: return false;
         }
     }
 
-    public void SetPlayerStatus(PlayerStatus status)
+    public void SetPlayerStatus(PlayerMovementStatus movementStatus)
     {
-        if(status.Equals(playerStatus)) return;
-        playerStatus = status;
+        if(movementStatus.Equals(playerMovementStatus)) return;
+        playerMovementStatus = movementStatus;
     }
     
     private void RotatePlayerFollowMouseDirection()
@@ -232,7 +234,8 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        if(playerStatus.Equals(PlayerStatus.Dash)) return;
+        if(isImmune) return;
+        
         _health -= damage;
         _spriteRenderer.color = Color.red - new Color(0,0,0,0.5f);
         Invoke(nameof(ResetSpriteColor),0.1f);
@@ -245,7 +248,7 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(float damage, bool isKnockBack,Vector2 knockDirection ,  float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
-        if(playerStatus.Equals(PlayerStatus.Dash)) return;
+        if(isImmune) return;
         
         if (damage > 0)
         {
