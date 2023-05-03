@@ -6,8 +6,8 @@ using UnityEngine;
 public class Skill5 : SkillBase
 {
     private float _firstBulletSpeedAttack;
-
-
+    
+    
     protected override void SkillAction()
     {
         _firstBulletSpeedAttack = player.playerAttackSpeed;

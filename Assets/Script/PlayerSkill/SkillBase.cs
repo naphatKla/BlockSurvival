@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public abstract class SkillBase : MonoBehaviour
@@ -23,6 +24,9 @@ public abstract class SkillBase : MonoBehaviour
     [Header("Skill Hit Mode")]
     [SerializeField] public HitMode hitMode;
     [SerializeField] public float cooldownPerHit;
+    [SerializeField] private bool isKnockBack;
+    [SerializeField] private float knockBackForce;
+    [SerializeField] private float knockBackDuration;
     private float _currentAttackCooldown;
     [HideInInspector] public Player player;
     
@@ -49,7 +53,7 @@ public abstract class SkillBase : MonoBehaviour
     }
 
     private readonly List<Enemy> _enemiesInSkillArea = new List<Enemy>();
-    private void OnTriggerEnter2D(Collider2D col)
+    protected virtual void OnTriggerEnter2D(Collider2D col)
     {
         if(col.CompareTag("Enemy"))
             _enemiesInSkillArea.Add(col.GetComponent<Enemy>());
@@ -57,21 +61,21 @@ public abstract class SkillBase : MonoBehaviour
         if(hitMode == HitMode.Multiple) return;
 
         if (col.gameObject.CompareTag("Enemy"))
-            col.GetComponent<Enemy>().TakeDamage(skillDamage);
+            col.GetComponent<Enemy>().TakeDamage(skillDamage, isKnockBack, knockBackForce, knockBackDuration);
     }
 
-    private void OnTriggerStay2D(Collider2D col)
+    protected virtual void OnTriggerStay2D(Collider2D col)
     {
         if(hitMode == HitMode.Single) return;
         
         if (col.gameObject.CompareTag("Enemy") && _currentAttackCooldown <= 0) 
         {
-            _enemiesInSkillArea.ForEach(target => target.TakeDamage(skillDamage));
+            _enemiesInSkillArea.ForEach(target => target.TakeDamage(skillDamage, isKnockBack, knockBackForce, knockBackDuration));
             _currentAttackCooldown = cooldownPerHit;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
             StartCoroutine(RemoveTargetList(other.GetComponent<Enemy>()));
