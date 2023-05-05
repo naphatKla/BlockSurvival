@@ -5,47 +5,42 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D Rigidbody2D;
+    [SerializeField] private GunTypeData gunTypeData;
+    [HideInInspector] public float bulletSpeed;
+    [HideInInspector] public float bulletDamage;
+    [HideInInspector] public float bulletOffSetScale;
+    [HideInInspector] public float destroyTime;
 
-    [Header("bulletInfo")]
-    [SerializeField] public float bulletSpeed;
-    [SerializeField] public float bulletDamage;
-    [SerializeField] public float explodeDamage;
     private Player _player;
-    private CombatSystem _combatSystem;
-    
+    private Rigidbody2D _rigidbody2D;
+
     void Start()
     {
+        AssignBulletData();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _player = FindObjectOfType<Player>();
-        _combatSystem = FindObjectOfType<CombatSystem>();
+        Destroy(gameObject, destroyTime);
     }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Rigidbody2D.velocity = transform.up * bulletSpeed;
+        _rigidbody2D.velocity = transform.up * bulletSpeed;
     }
-
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy") && !_combatSystem.isGunTypeMissile)
+        if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             
             if(_enemy == null) return;
             _enemy.TakeDamage(bulletDamage * _player.playerDamage);
         }
-        
-        if (col.gameObject.CompareTag("Enemy") && _combatSystem.isGunTypeMissile)
-        {
-            Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            
-            if(_enemy == null) return;
-            _enemy.TakeDamage(bulletDamage * _player.playerDamage);
-            GameObject explodeSpawn = Instantiate(_combatSystem.explode, transform.position, transform.rotation);
-            _enemy.TakeDamage(explodeDamage * _player.playerDamage);
-            Destroy(explodeSpawn,0.2f);
-            Destroy(gameObject);
-        }
+    }
+
+    private void AssignBulletData()
+    {
+        bulletDamage = gunTypeData.damage;
+        bulletSpeed = gunTypeData.bulletSpeed;
+        bulletOffSetScale = gunTypeData.bulletOffSetScale;
+        destroyTime = gunTypeData.destroyTime;
     }
 }

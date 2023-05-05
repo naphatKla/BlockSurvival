@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6132090512656733085}
   - component: {fileID: 297013707539451747}
   m_Layer: 0
-  m_Name: SmallBullet
+  m_Name: AssualtRifleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744d7d6e7a6656f43a1cbcaf64a688b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody2D: {fileID: 6515717700904408984}
+  gunTypeData: {fileID: 11400000, guid: a262b77c16ec9c943adebd11eb72b5f2, type: 2}
   bulletSpeed: 10
   bulletDamage: 1
+  bulletOffSetScale: 0.5
+  destroyTime: 0.5

@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 10
   attackDamage: 0
+  expDrop: 1
   maxSpeed: 5
   minSpeed: 2
   distanceThreshold: 5

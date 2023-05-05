@@ -24,7 +24,7 @@ public class LootChest : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            _level._isPickedLootChest = true;
+            _level.isPickedLootChest = true;
             Destroy(gameObject);
         }
     }

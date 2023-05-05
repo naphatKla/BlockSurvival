@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     [SerializeField] private float maxHp;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float expDrop;
     
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
@@ -102,8 +103,8 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        _level.enemyKill += 1;
-        _level.playerLevelUp += 2f;
+        _level.enemyKill += expDrop;
+        _level.LevelGain(expDrop);
         player._health += 1;
     }
 

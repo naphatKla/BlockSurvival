@@ -19,6 +19,7 @@ public class SkillSystem : MonoBehaviour
     
     void Update()
     {
+        if (Time.timeScale.Equals(0)) return;
         foreach (SkillBase skill in skills)
         {
             if (CheckSkillCondition(skill))

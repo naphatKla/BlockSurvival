@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxStamina;
     [SerializeField] private float staminaRegen;
     [SerializeField] public float playerAttackSpeed;
-    [SerializeField] public float playerLevel;
     [SerializeField] public float playerDamage;
     public float _health;
     private float _stamina;
@@ -73,6 +72,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if(Time.timeScale.Equals(0)) return;
         RotatePlayerFollowMouseDirection();
         CameraFollowPlayer();
         PlayerMovementHandle();

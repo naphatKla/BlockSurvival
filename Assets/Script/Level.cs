@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,67 +10,24 @@ using Image = UnityEngine.UI.Image;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] public float playerLevel;
-    [SerializeField] public float playerLevelUp;
-
-    [Header("PlayerStatus Ui")]
-    [SerializeField] private TextMeshProUGUI playerStatusText;
-    [SerializeField] private GameObject PlayerStatus;
-    [SerializeField] private Button StatusBottom;
-    [SerializeField] private TextMeshProUGUI playerStatusPointText;
-    [SerializeField] private TextMeshProUGUI playerNextLevelText;
-    [SerializeField] private TextMeshProUGUI playerDamageStatusText;
-    [SerializeField] private Button playerDamageLevelUpButtom;
-    [SerializeField] private TextMeshProUGUI playerHealthStatusPointText;
-    [SerializeField] private Button playerHealthLevelUpButtom;
-    [SerializeField] private TextMeshProUGUI playerAttackSpeedStatusPointText;
-    [SerializeField] private Button playerAttackSpeedLevelUpButtom;
-    [SerializeField] private TextMeshProUGUI playerSpeedStatusPointText;
-    [SerializeField] private Button playerSpeedLevelUpButtom;
-    [SerializeField] private TextMeshProUGUI enemyKillText;
-    [SerializeField] private Image levelUpPauseUi;
-    [SerializeField] private TextMeshProUGUI levelUpPauseText;
-
-    [Header("GunType Ui")] 
-    [SerializeField] private Image GunTypeUi;
-    [SerializeField] private TextMeshProUGUI gunTypeText;
-    [Header("Assault Rifle")]
-    [SerializeField] private Button gunTypeAssaultRifleButton;
-    [Header("Shot Gun")]
-    [SerializeField] private Button gunTypeShotGunButton;
-    [Header("Sniper")]
-    [SerializeField] private Button gunTypeSniperButton;
-    [Header("Missile")]
-    [SerializeField] private Button gunTypeMissileButton;
-    [Header("Sword")]
-    [SerializeField] private Button gunTypeSwordButton;
-
-    [Header("GunType Stats Upgrade Damage")] 
-    private bool _isHighDamage;
-    private bool _isVeryHighDamage;
-
-    [Header("GunType Stats Upgrade Attack Speed")]
-    private bool _isHighAttackSpeed;
-    private bool _isVeryHighAttackSpeed;
-    private bool _isLowAttackSpeed;
+    #region Declare Variables
+    public float playerLevel;
+    public float playerExp;
     
-    [Header("GunType Stats Upgrade Speed")] 
-    private bool _isUnDecentSpeed;
-
-
+    [Space]
+    [SerializeField] private PlayerStatus playerStatus;
+    [SerializeField] private PlayerLevelUp playerLevelUp;
+    [SerializeField] private ClassTypeSelect classTypeSelect;
+    [SerializeField] private Block blockImage;
+    
     [Header("Player Status")]
     [SerializeField] public float playerLevelUpPoint;
-    private Bullet _bullet;
     private CombatSystem _combatSystem;
     private Player _player;
-    public float playerDamage = 1;
-    public float playerHealth = 100;
     public float playerAttackSpeed = 1;
     public float enemyKill;
-    private float playerNextLevelUpExp = 20f;
-    private float playerSpeed;
-    public float gunTypeSelectPoint;
-    
+    private float _playerNextLevelUpExp = 20f;
+
     [Header("Loot Chest")]
     [SerializeField] private Image lootChestUi;
     [SerializeField] private Button healthButton;
@@ -78,318 +36,141 @@ public class Level : MonoBehaviour
     [SerializeField] private Button speedButton;
     [SerializeField] private Button dashButton;
     private LootChest _lootChest;
-    public bool _isPickedLootChest;
-
+    public bool isPickedLootChest;
     private float _currentSpeed;
+    
+    [Serializable] public struct PlayerStatus
+    {
+        public Image playerStatusUI;
+        public Button statusButton;
+        public TextMeshProUGUI statusText;
+        public TextMeshProUGUI enemyKillText;
+    }
+    [Serializable] public struct PlayerLevelUp
+    {
+        [Header("Player Data")]
+        public PlayerData playerData;
+        
+        [Header("UI")]
+        public Image levelUpUI;
+        public Button healthButton;
+        public Button damageButton;
+        public Button attackSpeedButton;
+        public Button speedButton;
+        public Button continueButton;
+        [Space]
+        public TextMeshProUGUI levelUpPointText;
+        public TextMeshProUGUI healthText;
+        public TextMeshProUGUI damageText;
+        public TextMeshProUGUI attackSpeedText;
+        public TextMeshProUGUI speedText;
+    }
+    [Serializable] public struct ClassTypeSelect
+    {
+        [Header("Gun Data")]
+        public GunTypeData defaultData;
+        public GunTypeData assaultRifleData;
+        public GunTypeData shotgunData;
+        public GunTypeData sniperData;
+        public GunTypeData missileData;
+        public GunTypeData swordData;
+        
+        [Header("UI")]
+        public Image classSelectUI;
+        public Button assaultRifleButton;
+        public Button shotGunButton;
+        public Button sniperButton;
+        public Button missileButton;
+        public Button swordButton;
+    }
+    [Serializable] public struct Block
+    {
+        public List<Image> hpBlockImages;
+        public List<Image> damageBlockImages;
+        public List<Image> attackSpeedBlockImages;
+        public List<Image> speedBlockImages;
+        public List<Image> dashBlockImages;
+    }
+    #endregion
+
+    #region Unity Method
     void Start()
     {
         _player = GetComponent<Player>();
         _combatSystem = GetComponent<CombatSystem>();
 
-        StatusBottom.onClick.AddListener(() => 
+        playerStatus.statusButton.onClick.AddListener(() =>
         {
-            PlayerStatus.SetActive(!PlayerStatus.activeSelf);
-            StatusBottom.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PlayerStatus.activeSelf ? "Close" : "Open";
+            GameObject status = playerStatus.playerStatusUI.gameObject;
+            status.SetActive(!status.activeSelf);
+            playerStatus.statusButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = status.activeSelf ? "Close" : "Open";
         });
         
-        playerDamageLevelUpButtom.onClick.AddListener(() =>
-            {
-                if (playerLevelUpPoint > 0 && !_isHighDamage && !_isVeryHighDamage)
-                {
-                    _player.playerDamage += 2f;
-                    playerLevelUpPoint -= 1;
-                }
-
-                if (playerLevelUpPoint > 0 && _isHighDamage)
-                {
-                    _player.playerDamage += 4f;
-                    playerLevelUpPoint -= 1;
-                }
-                
-                if (playerLevelUpPoint > 0 && _isVeryHighDamage)
-                {
-                    _player.playerDamage += 5f;
-                    _combatSystem.missileDamage += 5f;
-                    playerLevelUpPoint -= 1;
-                }
-            }
-        );
-        
-        playerHealthLevelUpButtom.onClick.AddListener(() =>
-        {
-            if (playerLevelUpPoint > 0)
-            {
-                _player.maxHealth += 10;
-                _player._health += 10f;
-                playerLevelUpPoint -= 1;
-            }
-        });
-        
-        playerAttackSpeedLevelUpButtom.onClick.AddListener(() =>
-        {
-            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isLowAttackSpeed)
-            {
-                _player.playerAttackSpeed -= 0.03f;
-                playerLevelUpPoint -= 1;
-            }
-            
-            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && !_isVeryHighAttackSpeed && !_isHighAttackSpeed && !_isLowAttackSpeed)
-            {
-                _player.playerAttackSpeed -= 0.04f;
-                playerLevelUpPoint -= 1;
-            }
-            
-            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isHighAttackSpeed)
-            {
-                _player.playerAttackSpeed -= 0.05f;
-                playerLevelUpPoint -= 1;
-            }
-            
-            if (playerLevelUpPoint > 0 && playerAttackSpeed !> _player._playerMaxAttackSpeed && _isVeryHighAttackSpeed)
-            {
-                _player.playerAttackSpeed -= 0.06f;
-                playerLevelUpPoint -= 1;
-            }
-        });
-        
-        playerSpeedLevelUpButtom.onClick.AddListener(() =>
-        {
-            if (playerLevelUpPoint > 0 && !_isUnDecentSpeed)
-            {
-                _player.walkSpeed += 0.4f;
-                _player.sprintSpeed += 0.5f;
-                playerLevelUpPoint -= 1;
-            }
-            
-            if (playerLevelUpPoint > 0 && _isUnDecentSpeed)
-            {
-                _player.walkSpeed += 0.5f;
-                _player.sprintSpeed += 0.6f;
-                playerLevelUpPoint -= 1;
-            }
-        });
-        
-        gunTypeAssaultRifleButton.onClick.AddListener(() =>
-        {
-            if (gunTypeSelectPoint > 0)
-            {
-                _player._playerMaxAttackSpeed = 0.05f;
-                _player.playerAttackSpeed -= 0.5f;
-                _combatSystem.bulletSpeed += 20f;
-                _combatSystem.isGunTypeAssaultRifle = true;
-                gunTypeSelectPoint -= 1;
-            }
-            
-        });
-        
-        gunTypeShotGunButton.onClick.AddListener(() =>
-        {
-            if (gunTypeSelectPoint > 0)
-            {
-                _player._playerMaxAttackSpeed = 0.3f;
-                _player.playerAttackSpeed += 0.5f;
-                _combatSystem.isGunTypeShotgun = true;
-                gunTypeSelectPoint -= 1;
-            }
-            
-        });
-        
-        gunTypeSniperButton.onClick.AddListener(() =>
-        {
-            if (gunTypeSelectPoint > 0)
-            {
-                _player._playerMaxAttackSpeed = 0.5f;
-                _player.playerAttackSpeed += 0.5f;
-                _combatSystem.bulletSpeed += 10f;
-                _combatSystem.isGunTypeSniper = true;
-                gunTypeSelectPoint -= 1;
-            }
-        });
-        
-        gunTypeMissileButton.onClick.AddListener(() =>
-        {
-            if (gunTypeSelectPoint > 0)
-            {
-                _player._playerMaxAttackSpeed = 0.5f;
-                _player.playerAttackSpeed += 1f;
-                _combatSystem.isGunTypeMissile = true;
-                gunTypeSelectPoint -= 1;
-            }
-        });
-        
-        gunTypeSwordButton.onClick.AddListener(() =>
-        {
-            if (gunTypeSelectPoint > 0)
-            {
-                _player._playerMaxAttackSpeed = 0.05f;
-                _player.playerAttackSpeed -= 0.4f;
-                _player.walkSpeed += 1f;
-                _player.sprintSpeed += 1.5f;
-                _combatSystem.isGunTypeSword = true;
-                gunTypeSelectPoint -= 1;
-            }
-        });
-        
-        healthButton.onClick.AddListener(() =>
-        {
-            if (_isPickedLootChest)
-            {
-                _player.maxHealth += 150f;
-                _player._health += 150f;
-                _isPickedLootChest = false;
-            }
-        });
-        
-        damageButton.onClick.AddListener(() =>
-        {
-            if (_isPickedLootChest)
-            {
-                _player.playerDamage += 20f;
-                _isPickedLootChest = false;
-            }
-        });
-        
-        attackSpeedButton.onClick.AddListener(() =>
-        {
-            if (_isPickedLootChest && playerAttackSpeed !> _player._playerMaxAttackSpeed)
-            {
-                _player.playerAttackSpeed -= 0.3f;
-                _isPickedLootChest = false;
-            }
-        });
-        
-        speedButton.onClick.AddListener(() =>
-        {
-            if (_isPickedLootChest)
-            {
-                _player.walkSpeed += 3;
-                _player.sprintSpeed += 4;
-                _player.sprintStaminaDrain -= 1f;
-                _isPickedLootChest = false;
-            }
-        });
-        
-        dashButton.onClick.AddListener(() =>
-        {
-            if (_isPickedLootChest)
-            {
-                _player.dashSpeed += 4;
-                _player.dashStaminaDrain -= 1f;
-                _isPickedLootChest = false;
-            }
-        });
+        ClassSelectButtonAssign();
+        PlayerLevelUpButtonAssign();
+        LootChestButtonAssign();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (playerLevelUp >= playerNextLevelUpExp)
-        {
-            LevelUp();
-        }
-        LevelUpPauseUi();
-        GunTypePauseUi();
-        GunTypeCheck();
+        
         LootChest();
-        Debug.Log(_isPickedLootChest);
-        enemyKillText.text = $"Enemy Kill: {enemyKill}";
-        playerSpeedStatusPointText.text = $"Player Speed: {_currentSpeed:F2}";
-        playerAttackSpeedStatusPointText.text = $"Player Attack Speed: {playerAttackSpeed:F2}";
-        playerHealthStatusPointText.text = $"Player Health: {playerHealth:F2}";
-        playerStatusPointText.text = $"Status point: {playerLevelUpPoint}";
-        playerDamageStatusText.text = $"Player Damage: {playerDamage:F2}";
-        playerNextLevelText.text = $"Next levelup {playerLevelUp}/{playerNextLevelUpExp:f0}";
-        playerStatusText.text = $"Player Level: {playerLevel}";
-        _currentSpeed = _player.walkSpeed;
-        playerAttackSpeed = _player.playerAttackSpeed;
-        playerHealth = _player.maxHealth;
-        playerDamage = _player.playerDamage;
-
     }
+    
+        private IEnumerator LevelUpUI()
+    {
+        yield return new WaitUntil(() => classTypeSelect.classSelectUI.IsActive() == false);
+        
+        while (playerLevelUpPoint > 0)
+        {
+            CheckPlayerStats();
+            playerLevelUp.levelUpUI.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            yield return null;
+        }
+        
+        playerLevelUp.levelUpUI.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    private IEnumerator ClassSelectUI()
+    {
+        classTypeSelect.classSelectUI.gameObject.SetActive(true);
+
+        while (classTypeSelect.classSelectUI.IsActive())
+        {
+            Time.timeScale = 0;
+            yield return null;
+        }
+        
+        Time.timeScale = 1;
+    }
+    #endregion
+    
 
     public void LevelUp()
     {
-        if (playerLevelUp >= playerNextLevelUpExp)
+        if (playerExp >= _playerNextLevelUpExp)
         {
             playerLevel += 1;
             playerLevelUpPoint += 1;
-            playerLevelUp = 0;
-            playerNextLevelUpExp += playerNextLevelUpExp / 2 ;
+            playerExp = 0;
+            _playerNextLevelUpExp += _playerNextLevelUpExp / 2 ;
         }
-        if (playerLevel == 5)
-        {
-            gunTypeSelectPoint += 1;
-        }
+
+        if (playerLevel.Equals(5))
+            StartCoroutine(ClassSelectUI());
         
         
+        if(playerLevelUpPoint > 0)
+            StartCoroutine(LevelUpUI());
     }
-
-    private void LevelUpPauseUi()
-    {
-        if (playerLevelUpPoint > 0 || gunTypeSelectPoint > 0 || _isPickedLootChest) 
-        {
-            levelUpPauseUi.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            levelUpPauseUi.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
-
-        
-    }
-
-    private void GunTypePauseUi()
-    {
-        if (gunTypeSelectPoint >= 1)
-        {
-            gunTypeText.text = $"Select Gun Type";
-            GunTypeUi.gameObject.SetActive(true);
-        }
-        else
-        {
-            GunTypeUi.gameObject.SetActive(false);
-        }
-    }
-
-    public void GunTypeCheck()
-    {
-        if (_combatSystem.isGunTypeAssaultRifle)
-        {
-            _isVeryHighAttackSpeed = true;
-        }
-        
-        if (_combatSystem.isGunTypeShotgun)
-        {
-            _isLowAttackSpeed = true;
-            _isHighDamage = true;
-        }
-        
-        if (_combatSystem.isGunTypeSniper)
-        {
-            _isLowAttackSpeed = true;
-            _isVeryHighDamage = true;
-        }
-
-        if (_combatSystem.isGunTypeMissile)
-        {
-            _isLowAttackSpeed = true;
-            _isVeryHighDamage = true;
-        }
-        
-        if (_combatSystem.isGunTypeSword)
-        {
-            _isHighDamage = true;
-            _isHighAttackSpeed = true;
-            _isUnDecentSpeed = true;
-        }
-    }
-
+    
     private void LootChest()
     {
-        if (_isPickedLootChest)
+        if (isPickedLootChest)
         {
+            CheckPlayerStats();
             lootChestUi.gameObject.SetActive(true);
         }
         else
@@ -397,8 +178,200 @@ public class Level : MonoBehaviour
             lootChestUi.gameObject.SetActive(false);
         }
     }
+    
+    public void LevelGain(float exp)
+    {
+        playerExp += exp;
+        
+        if (playerExp >= _playerNextLevelUpExp)
+            LevelUp();
+    }
 
+    private void CheckPlayerStats()
+    {
+        if (_player._health > playerLevelUp.playerData.maxHpLimit && !blockImage.hpBlockImages[0].IsActive())
+        {
+            foreach (var blockImage in blockImage.hpBlockImages)
+                blockImage.gameObject.SetActive(true);
+        }
+        
+        if(_player.playerDamage > GetGunTypeData(_combatSystem.playerClass).maxDamage && !blockImage.damageBlockImages[0].IsActive())
+        {
+            foreach (var blockImage in blockImage.damageBlockImages)
+                blockImage.gameObject.SetActive(true);
+        }
+        
+        if(_player.playerAttackSpeed < GetGunTypeData(_combatSystem.playerClass).maxAttackSpeed && !blockImage.attackSpeedBlockImages[0].IsActive())
+        {
+            foreach (var blockImage in blockImage.attackSpeedBlockImages)
+                blockImage.gameObject.SetActive(true);
+        }
+        
+        if(_player.sprintSpeed > playerLevelUp.playerData.sprintSpeedLimit && !blockImage.speedBlockImages[0].IsActive())
+        {
+            foreach (var blockImage in blockImage.speedBlockImages)
+                blockImage.gameObject.SetActive(true);
+        }
+    }
+    
+    public GunTypeData GetGunTypeData(CombatSystem.PlayerClass playerClass)
+    {
+        switch (playerClass)
+        {
+            case CombatSystem.PlayerClass.AssaultRifle:
+                return classTypeSelect.assaultRifleData;
+            case CombatSystem.PlayerClass.Shotgun:
+                return classTypeSelect.shotgunData;
+            case CombatSystem.PlayerClass.Sniper:
+                return classTypeSelect.sniperData;
+            case CombatSystem.PlayerClass.Missile:
+                return classTypeSelect.missileData;
+            case CombatSystem.PlayerClass.Sword:
+                return classTypeSelect.swordData;
+            default:
+                return classTypeSelect.defaultData;
+        }
+    }
+    
+        private void LootChestButtonAssign()
+    {
+        healthButton.onClick.AddListener(() =>
+        {
+            if (isPickedLootChest)
+            {
+                _player.maxHealth += 150f;
+                _player._health += 150f;
+                isPickedLootChest = false;
+            }
+        });
 
+        damageButton.onClick.AddListener(() =>
+        {
+            if (isPickedLootChest)
+            {
+                _player.playerDamage += 20f;
+                isPickedLootChest = false;
+            }
+        });
+
+        attackSpeedButton.onClick.AddListener(() =>
+        {
+            if (isPickedLootChest && playerAttackSpeed ! > _player._playerMaxAttackSpeed)
+            {
+                _player.playerAttackSpeed -= 0.3f;
+                isPickedLootChest = false;
+            }
+        });
+
+        speedButton.onClick.AddListener(() =>
+        {
+            if (isPickedLootChest)
+            {
+                _player.walkSpeed += 3;
+                _player.sprintSpeed += 4;
+                _player.sprintStaminaDrain -= 1f;
+                isPickedLootChest = false;
+            }
+        });
+
+        dashButton.onClick.AddListener(() =>
+        {
+            if (isPickedLootChest)
+            {
+                _player.dashSpeed += 4;
+                _player.dashStaminaDrain -= 1f;
+                isPickedLootChest = false;
+            }
+        });
+    }
+
+    private void PlayerLevelUpButtonAssign()
+    {
+        playerLevelUp.healthText.text = $"+ {playerLevelUp.playerData.upgradeHealth}";
+        playerLevelUp.damageText.text = $"+ {GetGunTypeData(_combatSystem.playerClass).upgradeDamage}";
+        playerLevelUp.attackSpeedText.text = $"+ {GetGunTypeData(_combatSystem.playerClass).upgradeAttackSpeed}";
+        playerLevelUp.speedText.text = $"+ {GetGunTypeData(_combatSystem.playerClass).upgradeAttackSpeed}";
+        
+        playerLevelUp.healthButton.onClick.AddListener(() =>
+        {
+            _player.maxHealth += playerLevelUp.playerData.upgradeHealth;
+            _player._health += playerLevelUp.playerData.upgradeHealth;
+            playerLevelUpPoint--;
+        });
+
+        playerLevelUp.damageButton.onClick.AddListener(() =>
+        {
+            _player.playerDamage += GetGunTypeData(_combatSystem.playerClass).upgradeDamage;
+            playerLevelUpPoint--;
+        });
+
+        playerLevelUp.attackSpeedButton.onClick.AddListener(() =>
+        {
+            _player.playerAttackSpeed -= GetGunTypeData(_combatSystem.playerClass).upgradeAttackSpeed;
+            playerLevelUpPoint--;
+        });
+
+        playerLevelUp.speedButton.onClick.AddListener(() =>
+        {
+            _player.walkSpeed += playerLevelUp.playerData.upgradeSprintSpeed;
+            _player.sprintSpeed += playerLevelUp.playerData.upgradeSprintSpeed;
+            _player.sprintStaminaDrain -= 1f;
+            playerLevelUpPoint--;
+        });
+        
+        playerLevelUp.continueButton.onClick.AddListener(() =>
+        {
+            playerLevelUp.levelUpUI.gameObject.SetActive(false);
+        });
+    }
+
+    private void ClassSelectButtonAssign()
+    {
+        classTypeSelect.assaultRifleButton.onClick.AddListener(() =>
+        {
+            _player._playerMaxAttackSpeed = classTypeSelect.assaultRifleData.maxAttackSpeed;
+            _player.playerAttackSpeed = classTypeSelect.assaultRifleData.attackSpeed;
+            _combatSystem.bulletSpeed = classTypeSelect.assaultRifleData.bulletSpeed;
+            _combatSystem.playerClass = CombatSystem.PlayerClass.AssaultRifle;
+            classTypeSelect.classSelectUI.gameObject.SetActive(false);
+        });
+
+        classTypeSelect.shotGunButton.onClick.AddListener(() =>
+        {
+            _player._playerMaxAttackSpeed = classTypeSelect.shotgunData.maxAttackSpeed;
+            _player.playerAttackSpeed = classTypeSelect.shotgunData.attackSpeed;
+            _combatSystem.bulletSpeed = classTypeSelect.shotgunData.bulletSpeed;
+            _combatSystem.playerClass = CombatSystem.PlayerClass.Shotgun;
+            classTypeSelect.classSelectUI.gameObject.SetActive(false);
+        });
+
+        classTypeSelect.sniperButton.onClick.AddListener(() =>
+        {
+            _player._playerMaxAttackSpeed = classTypeSelect.sniperData.maxAttackSpeed;
+            _player.playerAttackSpeed = classTypeSelect.sniperData.attackSpeed;
+            _combatSystem.bulletSpeed = classTypeSelect.sniperData.bulletSpeed;
+            _combatSystem.playerClass = CombatSystem.PlayerClass.Sniper;
+            classTypeSelect.classSelectUI.gameObject.SetActive(false);
+        });
+
+        classTypeSelect.missileButton.onClick.AddListener(() =>
+        {
+            _player._playerMaxAttackSpeed = classTypeSelect.missileData.maxAttackSpeed;
+            _player.playerAttackSpeed = classTypeSelect.missileData.attackSpeed;
+            _combatSystem.bulletSpeed = classTypeSelect.missileData.bulletSpeed;
+            _combatSystem.playerClass = CombatSystem.PlayerClass.Missile;
+            classTypeSelect.classSelectUI.gameObject.SetActive(false);
+        });
+
+        classTypeSelect.swordButton.onClick.AddListener(() =>
+        {
+            _player._playerMaxAttackSpeed = classTypeSelect.swordData.maxAttackSpeed;
+            _player.playerAttackSpeed = classTypeSelect.swordData.attackSpeed;
+            _combatSystem.bulletSpeed = classTypeSelect.swordData.bulletSpeed;
+            _combatSystem.playerClass = CombatSystem.PlayerClass.Sword;
+            classTypeSelect.classSelectUI.gameObject.SetActive(false);
+        });
+    }
 
 }
 
