@@ -23,7 +23,7 @@ MonoBehaviour:
   destroyTime: 0.5
   maxHpLimit: 300
   damageLimit: 10
-  attackSpeedLimit: 0.75
+  attackSpeedLimit: 0.075
   walkSpeedLimit: 6
   sprintSpeedLimit: 12
   dashSpeedLimit: 30
