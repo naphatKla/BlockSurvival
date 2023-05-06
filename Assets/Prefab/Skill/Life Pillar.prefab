@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d00fd672545f3341b850f9779e9e491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillKey: 57
+  skillKey: 53
   name: Life Pillar
   skillDamage: 5
-  skillCooldown: 5
+  skillCooldown: 30
   skillCurrentCooldown: 0
   destroyTime: 5
   skillOffset: 0

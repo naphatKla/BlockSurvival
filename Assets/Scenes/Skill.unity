@@ -17833,12 +17833,8 @@ MonoBehaviour:
   skills:
   - {fileID: 431636933315799264, guid: 0b6850929d683454bac97da7bb10d0da, type: 3}
   - {fileID: 5054128742638150933, guid: 69059d715b9fc574ca43c30b0f2b212e, type: 3}
-  - {fileID: 7472774371509389036, guid: a423ca5f8cd613145b4bb592b7188fcb, type: 3}
-  - {fileID: 5222246726414712912, guid: e35857a2794a2bf478754df5e8f7f6fa, type: 3}
-  - {fileID: 6414207215539693747, guid: dc3f8637c531f1647bfa3dc26a025aec, type: 3}
-  - {fileID: -2414475436939650802, guid: e93a25bb2747aad48ad85da5485d0f1a, type: 3}
-  - {fileID: 7023472662840263658, guid: 2fbd834b8b548fd4ab2e6f4f1cee00a2, type: 3}
   - {fileID: 3472281050090679940, guid: b7f97b2b630061a48b6e8961b37790d5, type: 3}
+  - {fileID: 7023472662840263658, guid: 2fbd834b8b548fd4ab2e6f4f1cee00a2, type: 3}
   - {fileID: -4214447940744470792, guid: 806de1b2fabe9514db10709cebefac46, type: 3}
 --- !u!61 &1832563870
 BoxCollider2D:

@@ -120,15 +120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa31e6ed73f23234b89c3888b50c233a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillKey: 55
+  skillKey: 52
   name: Armor Up
-  skillDamage: 0
-  skillCooldown: 10
+  skillDamage: 2
+  skillCooldown: 20
   skillCurrentCooldown: 5.604085
   destroyTime: 5
   skillOffset: 0
-  hitMode: 0
-  cooldownPerHit: 0
+  hitMode: 1
+  cooldownPerHit: 1
   isKnockBack: 0
   knockBackForce: 0
   knockBackDuration: 0

@@ -4977,15 +4977,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63620fb4f389384498dec9e662b727f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillKey: 56
+  skillKey: 51
   name: Flame Thrower
-  skillDamage: 1
-  skillCooldown: 2
+  skillDamage: 3
+  skillCooldown: 15
   skillCurrentCooldown: 0
   destroyTime: 5
   skillOffset: 3
   hitMode: 1
-  cooldownPerHit: 1
+  cooldownPerHit: 0.2
   isKnockBack: 0
   knockBackForce: 0
   knockBackDuration: 0

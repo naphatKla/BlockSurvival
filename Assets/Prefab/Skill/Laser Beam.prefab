@@ -150,7 +150,7 @@ MonoBehaviour:
   skillKey: 49
   name: Laser Beam
   skillDamage: 2
-  skillCooldown: 5
+  skillCooldown: 7
   skillCurrentCooldown: 2.5224943
   destroyTime: 2
   skillOffset: 1
