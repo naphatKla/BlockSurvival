@@ -32,10 +32,7 @@ public class Enemy : MonoBehaviour
     private float _smoothDampVelocity;
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
-
-    [Header("Loot Chest")] 
-    [SerializeField] private GameObject lootChest;
-
+    
     [Header("Other")]
     [HideInInspector] public Rigidbody2D rigidbody2D;
     private Player _player;
@@ -48,6 +45,9 @@ public class Enemy : MonoBehaviour
     
     [Header("Bar")]
     private Scrollbar _hpBar;
+    
+    [Header("Loot Chest")] 
+    [SerializeField] private GameObject lootChest;
     
     public enum EnemyType
     {

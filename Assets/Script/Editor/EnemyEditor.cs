@@ -22,6 +22,7 @@ public class EnemyEditor : Editor
     protected SerializedProperty turnDirectionDamp;
     protected SerializedProperty distanceThreshold;
     protected SerializedProperty deadParticleSystem;
+    protected SerializedProperty lootChest;
     
     protected virtual void OnEnable()
     {
@@ -39,6 +40,7 @@ public class EnemyEditor : Editor
         turnDirectionDamp = serializedObject.FindProperty("turnDirectionDamp");
         distanceThreshold = serializedObject.FindProperty("distanceThreshold");
         deadParticleSystem = serializedObject.FindProperty("deadParticleSystem");
+        lootChest = serializedObject.FindProperty("lootChest");
     }
 
     public override void OnInspectorGUI()
@@ -64,8 +66,7 @@ public class EnemyEditor : Editor
         EditorGUILayout.PropertyField(turnDirectionDamp);
         EditorGUILayout.PropertyField(distanceThreshold);
         EditorGUILayout.PropertyField(deadParticleSystem);
-        
-        
+        EditorGUILayout.PropertyField(lootChest);
         serializedObject.ApplyModifiedProperties();
     }
 }

@@ -112,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 341671377
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.5331225, g: 0.495283, b: 1, a: 1}
@@ -150,9 +150,9 @@ MonoBehaviour:
   minSpeed: 1
   turnDirectionDamp: 1
   distanceThreshold: 5
-  lootChest: {fileID: 0}
   rigidbody2D: {fileID: 0}
   deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
+  lootChest: {fileID: 1069015346814206378, guid: 78dd40350f5a052439a36a344c5aa670, type: 3}
 --- !u!50 &4647665230430878529
 Rigidbody2D:
   serializedVersion: 4
