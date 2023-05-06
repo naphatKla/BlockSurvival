@@ -50,7 +50,6 @@ public class SkillSystem : MonoBehaviour
         
         while (skill.skillCurrentCooldown > 0)
         {
-            Debug.Log($"{skill.name} cooldown : {skill.skillCurrentCooldown:F0}");
             skill.skillCurrentCooldown -= Time.deltaTime;
             skill.skillCurrentCooldown = Mathf.Clamp(skill.skillCurrentCooldown, 0, skill.skillCooldown);
             yield return null;

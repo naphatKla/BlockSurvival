@@ -26,6 +26,7 @@ public class SkillCooldownUI : MonoBehaviour
     {
         foreach (SkillBase skill in _skillSystem.skills)
         {
+            if(_skillSystem.skills.IndexOf(skill) >= skillImageList.Count) break;
             skillImageList[_skillSystem.skills.IndexOf(skill)].fillAmount = skill.skillCurrentCooldown / skill.skillCooldown;
         }
     }
