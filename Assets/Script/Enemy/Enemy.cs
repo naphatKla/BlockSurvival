@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour
 
     private void ShootBullet()
     {
-        Destroy(Instantiate(bulletPrefab, transform.position + (transform.up * bulletOffset), transform.rotation),2f);
+        Instantiate(bulletPrefab, transform.position + (transform.up * bulletOffset), transform.rotation);
         Invoke(nameof(ShootBullet), fireRate);
     }
     

@@ -24,7 +24,8 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        AssignBulletData();
+        if(bulletType.Equals(BulletType.Player))
+            AssignBulletData();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _player = FindObjectOfType<Player>();
         _rigidbody2D.velocity = transform.up * bulletSpeed;
