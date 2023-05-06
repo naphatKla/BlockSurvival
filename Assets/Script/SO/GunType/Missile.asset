@@ -20,7 +20,7 @@ MonoBehaviour:
   dashSpeed: 25
   bulletSpeed: 10
   bulletOffSetScale: 0.5
-  destroyTime: 1
+  destroyTime: 2
   maxHpLimit: 300
   damageLimit: 15
   attackSpeedLimit: 0.5

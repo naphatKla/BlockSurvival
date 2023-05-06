@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
-    [SerializeField] public float explodeDamage;
+    [SerializeField] public float destroyTime;
     private Player _player;
     void Start()
     {
         _player = FindObjectOfType<Player>();
+        Destroy(gameObject, destroyTime);
     }
 
     // Update is called once per frame
@@ -21,11 +23,17 @@ public class Explode : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy"))
         {
-            Enemy _enemy = col.gameObject.GetComponent<Enemy>();
-            
-            if(_enemy == null) return;
-            _enemy.TakeDamage(explodeDamage * _player.playerDamage);
-            
+            try
+            {
+                if(col == null) return;
+                Enemy _enemy = col.gameObject.GetComponent<Enemy>();
+                if(_enemy == null) return;
+                _enemy.TakeDamage(_player.playerDamage/2);
+            }
+            catch (Exception e)
+            {
+                //Debug.Log(e);
+            }
         }
     }
     

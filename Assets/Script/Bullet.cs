@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         Enemy
     }
     
-    private Player _player;
+    protected Player player;
     private Rigidbody2D _rigidbody2D;
 
     void Start()
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         if(bulletType.Equals(BulletType.Player))
             AssignBulletData();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
         _rigidbody2D.velocity = transform.up * bulletSpeed;
         Destroy(gameObject, destroyTime);
     }
@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
     {
         //_rigidbody2D.velocity = transform.up * bulletSpeed;
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    protected virtual void OnTriggerEnter2D(Collider2D col)
     {
         
         if (bulletType.Equals(BulletType.Enemy))
@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
         
         if (col.gameObject.CompareTag("Guard"))
         {
-            col.GetComponent<Guard>().TakeDamage(_player.playerDamage);
+            col.GetComponent<Guard>().TakeDamage(player.playerDamage);
             Destroy(gameObject);
         }
         
@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
                 if(col == null) return;
                 Enemy _enemy = col.gameObject.GetComponent<Enemy>();
                 if(_enemy == null) return;
-                _enemy.TakeDamage(_player.playerDamage);
+                _enemy.TakeDamage(player.playerDamage);
             }
             catch (Exception e)
             {

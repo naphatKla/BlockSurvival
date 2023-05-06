@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -648755911
-  m_SortingLayer: 4
+  m_SortingLayerID: -418559399
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0.56078434}
@@ -125,7 +125,7 @@ MonoBehaviour:
   name: BeastBall
   skillDamage: 30
   skillCooldown: 15
-  skillCurrentCooldown: 1.5109142
+  skillCurrentCooldown: 0
   destroyTime: 5
   skillOffset: 1
   hitMode: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   knockBackForce: 5
   knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 1
+  isCooldown: 0
   speed: 3
 --- !u!58 &8796720535302960442
 CircleCollider2D:
@@ -5052,8 +5052,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -648755911
-  m_SortingLayer: 4
+  m_SortingLayerID: -418559399
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

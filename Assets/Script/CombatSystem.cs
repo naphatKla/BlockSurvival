@@ -24,9 +24,7 @@ public class CombatSystem : MonoBehaviour
  
     private Player _player;
     public float bulletSpeed;
-    public Vector3 explodeScale;
-    public float missileDamage;
-    
+
     public enum PlayerClass
     {
         Default,
@@ -43,8 +41,6 @@ public class CombatSystem : MonoBehaviour
     void Start()
     {
         bulletSpeed = bullet.GetComponent<Bullet>().bulletSpeed;
-        explodeScale = explode.GetComponent<Explode>().transform.localScale;
-        missileDamage = explode.GetComponent<Explode>().explodeDamage;
         _player = GetComponent<Player>();
         playerClass = PlayerClass.Default;
         Invoke("BulletSpawn", _player.playerAttackSpeed);
@@ -120,7 +116,7 @@ public class CombatSystem : MonoBehaviour
     private void BulletMissilePatternSpawn()
     {
         Vector3 bulletOffSet = _player.playerTransform.up * missileBullet.bulletOffSetScale;
-        GameObject bulletSpawn = Instantiate(shotgunBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
+        GameObject bulletSpawn = Instantiate(missileBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
         bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
     }
     

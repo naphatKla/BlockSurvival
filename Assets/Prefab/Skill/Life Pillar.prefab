@@ -189,7 +189,7 @@ MonoBehaviour:
   name: Life Pillar
   skillDamage: 5
   skillCooldown: 30
-  skillCurrentCooldown: 0
+  skillCurrentCooldown: 19.97872
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
@@ -198,7 +198,7 @@ MonoBehaviour:
   knockBackForce: 0
   knockBackDuration: 0
   player: {fileID: 0}
-  isCooldown: 0
+  isCooldown: 1
 --- !u!61 &2013677716577079311
 BoxCollider2D:
   m_ObjectHideFlags: 0
