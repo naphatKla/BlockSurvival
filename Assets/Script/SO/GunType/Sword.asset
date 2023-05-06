@@ -12,14 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de822bf451052a34d95ddf574e3c0f49, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  damage: 0
-  attackSpeed: 0.15
-  bulletSpeed: 10
+  health: 150
+  damage: 1
+  attackSpeed: 0.4
+  walkSpeed: 3
+  sprintSpeed: 6
+  dashSpeed: 15
+  bulletSpeed: 15
   bulletOffSetScale: 0
   destroyTime: 0.2
-  maxDamage: 0
-  maxAttackSpeed: 0
-  maxBulletSpeed: 0
-  upgradeDamage: 0
-  upgradeAttackSpeed: 0
-  upgradeBulletSpeed: 0
+  maxHpLimit: 400
+  damageLimit: 5
+  attackSpeedLimit: 0.75
+  walkSpeedLimit: 10
+  sprintSpeedLimit: 20
+  dashSpeedLimit: 35
+  upgradeHealth: 30
+  upgradeDamage: 0.5
+  upgradeAttackSpeed: 0.75
+  upgradeWalkSpeed: 1
+  upgradeSprintSpeed: 1
+  upgradeSprintStaminaDrain: 0.5

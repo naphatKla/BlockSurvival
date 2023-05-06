@@ -12,14 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de822bf451052a34d95ddf574e3c0f49, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  health: 125
   damage: 2
   attackSpeed: 0.5
-  bulletSpeed: 10
+  walkSpeed: 3
+  sprintSpeed: 6
+  dashSpeed: 15
+  bulletSpeed: 15
   bulletOffSetScale: 0.5
   destroyTime: 0.3
-  maxDamage: 0
-  maxAttackSpeed: 0
-  maxBulletSpeed: 0
-  upgradeDamage: 0
-  upgradeAttackSpeed: 0
-  upgradeBulletSpeed: 0
+  maxHpLimit: 350
+  damageLimit: 10
+  attackSpeedLimit: 0.25
+  walkSpeedLimit: 8
+  sprintSpeedLimit: 15
+  dashSpeedLimit: 30
+  upgradeHealth: 25
+  upgradeDamage: 1.5
+  upgradeAttackSpeed: 0.05
+  upgradeWalkSpeed: 0.75
+  upgradeSprintSpeed: 0.75
+  upgradeSprintStaminaDrain: 0.5

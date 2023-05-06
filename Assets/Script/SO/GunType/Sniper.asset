@@ -12,14 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de822bf451052a34d95ddf574e3c0f49, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
-  damage: 0
-  attackSpeed: 1
-  bulletSpeed: 10
+  health: 100
+  damage: 5
+  attackSpeed: 0.75
+  walkSpeed: 3
+  sprintSpeed: 6
+  dashSpeed: 15
+  bulletSpeed: 25
   bulletOffSetScale: 0.5
   destroyTime: 1
-  maxDamage: 0
-  maxAttackSpeed: 0
-  maxBulletSpeed: 0
-  upgradeDamage: 0
-  upgradeAttackSpeed: 0
-  upgradeBulletSpeed: 0
+  maxHpLimit: 250
+  damageLimit: 15
+  attackSpeedLimit: 0.3
+  walkSpeedLimit: 6
+  sprintSpeedLimit: 12
+  dashSpeedLimit: 30
+  upgradeHealth: 15
+  upgradeDamage: 2
+  upgradeAttackSpeed: 0.05
+  upgradeWalkSpeed: 0.75
+  upgradeSprintSpeed: 0.75
+  upgradeSprintStaminaDrain: 0.5

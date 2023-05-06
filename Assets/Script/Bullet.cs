@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GunTypeData gunTypeData;
+    [SerializeField] private PlayerClassData playerClassData;
     [HideInInspector] public float bulletSpeed;
     [HideInInspector] public float bulletDamage;
     [HideInInspector] public float bulletOffSetScale;
@@ -32,15 +32,14 @@ public class Bullet : MonoBehaviour
             Enemy _enemy = col.gameObject.GetComponent<Enemy>();
             
             if(_enemy == null) return;
-            _enemy.TakeDamage(bulletDamage * _player.playerDamage);
+            _enemy.TakeDamage(_player.playerDamage);
         }
     }
 
     private void AssignBulletData()
     {
-        bulletDamage = gunTypeData.damage;
-        bulletSpeed = gunTypeData.bulletSpeed;
-        bulletOffSetScale = gunTypeData.bulletOffSetScale;
-        destroyTime = gunTypeData.destroyTime;
+        bulletSpeed = playerClassData.bulletSpeed;
+        bulletOffSetScale = playerClassData.bulletOffSetScale;
+        destroyTime = playerClassData.destroyTime;
     }
 }

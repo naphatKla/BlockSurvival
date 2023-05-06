@@ -14,15 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private TrailRenderer trailEffect;
 
     [Header("Player Stats")] 
-    [SerializeField] public float maxHealth;
+    public float maxHealth;
     [SerializeField] private float maxStamina;
     [SerializeField] private float staminaRegen;
-    [SerializeField] public float playerAttackSpeed;
-    [SerializeField] public float playerDamage;
-    public float _health;
+    public float playerAttackSpeed;
+    public float playerDamage;
+    public float health;
     private float _stamina;
-    public float _playerMaxAttackSpeed = 0.1f;
-    
+
     [Header("UI Bar")] 
     [SerializeField] private Scrollbar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -33,16 +32,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float cameraSmoothDamp;
     private Vector3 _velocity = Vector3.zero;
-    private Vector3 _velocity2 = Vector3.zero;
 
     [Header("Player Movement")] 
     [SerializeField] private KeyCode sprintKey;
     [SerializeField] private KeyCode dashKey;
-    [SerializeField] public float walkSpeed;
-    [SerializeField] public float sprintSpeed;
-    [SerializeField] public float dashStaminaDrain;
-    [SerializeField] public float sprintStaminaDrain;
-    [SerializeField] public float dashSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
+    public float dashStaminaDrain;
+    public float sprintStaminaDrain;
+    public float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float staminaRecoveryCooldown;
     [HideInInspector] public Transform playerTransform;
@@ -66,7 +64,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerTransform = transform.GetChild(0);
-        _health = maxHealth;
+        health = maxHealth;
         _stamina = maxStamina;
         _currentSpeed = walkSpeed;
     }
@@ -77,8 +75,7 @@ public class Player : MonoBehaviour
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
-        playerAttackSpeed = Mathf.Clamp(playerAttackSpeed, _playerMaxAttackSpeed, 5f);
-        _health = Mathf.Clamp(_health, 0, maxHealth);
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
     
     private IEnumerator Dash()
@@ -174,12 +171,12 @@ public class Player : MonoBehaviour
         SprintHandle();
         DashHandle();
     }
-    private void PlayerBarUpdate()
+    public void PlayerBarUpdate()
     {
         staminaBar.size = _stamina / maxStamina;
         staminaText.text = $"{_stamina:F0} / {maxStamina}";
-        healthBar.size = _health / maxHealth;
-        healthText.text = $"{_health:F0} / {maxHealth}";
+        healthBar.size = health / maxHealth;
+        healthText.text = $"{health:F0} / {maxHealth}";
     }
     
     private bool MovementConditionCheck(PlayerStatus status)

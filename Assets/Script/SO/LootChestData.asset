@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1c6cb3a31d94e41bd5bd55d61c6d68, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: c775e8dbe6140cb4bb2cb68482d8171e, type: 3}
+  m_Name: LootChestData
   m_EditorClassIdentifier: 
-  maxHpLimit: 500
-  sprintSpeedLimit: 10
-  dashSpeedLimit: 30
-  upgradeHealth: 20
-  upgradeWalkSpeed: 1
-  upgradeSprintSpeed: 1
-  upgradeDashSpeed: 3
+  upgradeHealth: 150
+  upgradeDamage: 20
+  upgradeAttackSpeed: 0.3
+  upgradeWalkSpeed: 3
+  upgradeSprintSpeed: 3
+  upgradeDashSpeed: 4
   upgradeSprintStaminaDrain: 1
   upgradeDashStaminaDrain: 1

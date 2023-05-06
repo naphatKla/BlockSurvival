@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -91,23 +92,19 @@ public class Enemy : MonoBehaviour
         
         if (isBounce)
             StartCoroutine(BounceOff(bounceForce,bounceDuration));
-        
+
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(_deadParticleSystem,transform.position);
-            LootChestSpawn();
+            if(Random.Range(0,101) >= 99.95f)
+                LootChestSpawn();
+            _level.enemyKill++;
+            _level.LevelGain(expDrop);
+            player.health += 1;
             Destroy(gameObject);
         }
-        
     }
-
-    private void OnDestroy()
-    {
-        _level.enemyKill += expDrop;
-        _level.LevelGain(expDrop);
-        player._health += 1;
-    }
-
+    
     private IEnumerator BounceOff(float bounceForce = 5, float bounceDuration = 0.1f)
     {
         float timeCount = 0;

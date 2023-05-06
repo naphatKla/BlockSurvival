@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
-public class PlayerData : ScriptableObject
+[CreateAssetMenu(fileName = "LootChestData", menuName = "ScriptableObjects/LootChestData", order = 1)]
+public class LootChestData : ScriptableObject
 {
-    [Header("Max Stats")]
-    public float maxHpLimit;
-    public float walkSpeedLimit;
-    public float sprintSpeedLimit;
-    public float dashSpeedLimit;
-
     [Header("Upgrade Stats")] 
     public float upgradeHealth;
+    public float upgradeDamage;
+    public float upgradeAttackSpeed;
     public float upgradeWalkSpeed;
     public float upgradeSprintSpeed;
     public float upgradeDashSpeed;

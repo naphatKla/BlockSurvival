@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744d7d6e7a6656f43a1cbcaf64a688b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTypeData: {fileID: 11400000, guid: 6afd04a73983c1b4fab1f01d28c23713, type: 2}
+  playerClassData: {fileID: 11400000, guid: 6afd04a73983c1b4fab1f01d28c23713, type: 2}
   bulletSpeed: 10
   bulletDamage: 1
   bulletOffSetScale: 0.5

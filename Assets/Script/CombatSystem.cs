@@ -21,7 +21,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] public GameObject explode;
     public PlayerClass playerClass;
     
-    // change this later
+ 
     private Player _player;
     public float bulletSpeed;
     public Vector3 explodeScale;
@@ -100,6 +100,7 @@ public class CombatSystem : MonoBehaviour
         {
             GameObject bulletSpawn = Instantiate(shotgunBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation * Quaternion.Euler(0,0,angle));
             angle -= 30;
+            bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
         }
     }
     private void BulletAssaultRiflePatternSpawn()

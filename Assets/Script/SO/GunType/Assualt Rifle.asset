@@ -12,14 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de822bf451052a34d95ddf574e3c0f49, type: 3}
   m_Name: Assualt Rifle
   m_EditorClassIdentifier: 
+  health: 100
   damage: 1
   attackSpeed: 0.25
-  bulletSpeed: 10
+  walkSpeed: 3
+  sprintSpeed: 6
+  dashSpeed: 15
+  bulletSpeed: 20
   bulletOffSetScale: 0.5
   destroyTime: 0.5
-  maxDamage: 0
-  maxAttackSpeed: 0
-  maxBulletSpeed: 0
-  upgradeDamage: 0
-  upgradeAttackSpeed: 0
-  upgradeBulletSpeed: 0
+  maxHpLimit: 300
+  damageLimit: 10
+  attackSpeedLimit: 0.75
+  walkSpeedLimit: 6
+  sprintSpeedLimit: 12
+  dashSpeedLimit: 25
+  upgradeHealth: 20
+  upgradeDamage: 1
+  upgradeAttackSpeed: 0.1
+  upgradeWalkSpeed: 0.5
+  upgradeSprintSpeed: 0.5
+  upgradeSprintStaminaDrain: 0.5
