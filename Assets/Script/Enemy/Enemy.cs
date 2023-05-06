@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     [Space] [Header("Enemy Stats")]
     [SerializeField] private float maxHp;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float expDrop;
     
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
@@ -31,12 +32,16 @@ public class Enemy : MonoBehaviour
     private float _smoothDampVelocity;
     // The condition of distance for change enemy speed depend on target distance
     [SerializeField] private float distanceThreshold;
-    
+
+    [Header("Loot Chest")] 
+    [SerializeField] private GameObject lootChest;
+
     [Header("Other")]
     [HideInInspector] public Rigidbody2D rigidbody2D;
     private Player _player;
     private float _currentSpeed;
     private float _currentHp;
+    private Level _level;
 
     [Header("Particle Effect")]
     [SerializeField] private ParticleSystem deadParticleSystem;
@@ -57,6 +62,7 @@ public class Enemy : MonoBehaviour
         _currentHp = maxHp;
         _canMove = true;
         _player = FindObjectOfType<Player>();
+        _level = FindObjectOfType<Level>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         _hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         _hpBar.gameObject.SetActive(false);
@@ -163,6 +169,11 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(deadParticleSystem,transform.position);
+            if(Random.Range(0,101) >= 99.95f)
+                LootChestSpawn();
+            _level.enemyKill++;
+            _level.LevelGain(expDrop);
+            _player.health += 1;
             Destroy(gameObject);
         }
     }
@@ -173,5 +184,10 @@ public class Enemy : MonoBehaviour
         Invoke(nameof(ShootBullet), fireRate);
     }
     
+    private void LootChestSpawn()
+    {
+        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
+        Destroy(lootChestSpawn, 3f);
+    }
     #endregion
 }

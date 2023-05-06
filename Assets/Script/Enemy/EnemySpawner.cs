@@ -75,9 +75,11 @@ public class EnemySpawner : MonoBehaviour
 
     #region Method
     private void SpawnEnemy(int amount)
-    { 
-        for(int i = 0; i < amount; i++)
+    {
+        for (int i = 0; i < amount; i++)
+        {
             Instantiate(enemy, spawnPositionList[Random.Range(0,spawnPositionList.Count)].position, quaternion.identity);
+        }
     }
     
     private void SetTimeInGameText()

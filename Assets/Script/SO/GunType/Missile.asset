@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de822bf451052a34d95ddf574e3c0f49, type: 3}
+  m_Name: Missile
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 3
+  attackSpeed: 1
+  walkSpeed: 3
+  sprintSpeed: 6
+  dashSpeed: 15
+  bulletSpeed: 10
+  bulletOffSetScale: 0.5
+  destroyTime: 1
+  maxHpLimit: 300
+  damageLimit: 15
+  attackSpeedLimit: 0.5
+  walkSpeedLimit: 6
+  sprintSpeedLimit: 12
+  dashSpeedLimit: 25
+  upgradeHealth: 20
+  upgradeDamage: 1.5
+  upgradeAttackSpeed: 0.05
+  upgradeWalkSpeed: 0.5
+  upgradeSprintSpeed: 0.5
+  upgradeSprintStaminaDrain: 0.5

@@ -16,15 +16,14 @@ public class Player : MonoBehaviour
     private Color _defaultSpriteColor;
 
     [Header("Player Stats")] 
-    [SerializeField] private float maxHealth;
+    public float maxHealth;
     [SerializeField] private float maxStamina;
     [SerializeField] private float staminaRegen;
-    [SerializeField] public float playerAttackSpeed;
-    [SerializeField] public float playerLevel;
-    [SerializeField] public float playerDamage;
-    private float _health;
+    public float playerAttackSpeed;
+    public float playerDamage;
+    public float health;
     private float _stamina;
-    
+
     [Header("UI Bar")] 
     [SerializeField] private Scrollbar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -35,20 +34,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float cameraSmoothDamp;
     private Vector3 _velocity = Vector3.zero;
-    private Vector3 _velocity2 = Vector3.zero;
 
     [Header("Player Movement")] 
     [SerializeField] private KeyCode sprintKey;
     [SerializeField] private KeyCode dashKey;
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintSpeed;
-    [SerializeField] private float dashStaminaDrain;
-    [SerializeField] private float sprintStaminaDrain;
-    [SerializeField] private float dashSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
+    public float dashStaminaDrain;
+    public float sprintStaminaDrain;
+    public float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float staminaRecoveryCooldown;
     [HideInInspector] public Transform playerTransform;
-    private float _currentSpeed;
+    public float _currentSpeed;
     public PlayerStatus playerStatus;
 
     public enum PlayerStatus
@@ -70,16 +68,18 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _defaultSpriteColor = _spriteRenderer.color;
         playerTransform = transform.GetChild(0);
-        _health = maxHealth;
+        health = maxHealth;
         _stamina = maxStamina;
         _currentSpeed = walkSpeed;
     }
     void Update()
     {
+        if(Time.timeScale.Equals(0)) return;
         RotatePlayerFollowMouseDirection();
         CameraFollowPlayer();
         PlayerMovementHandle();
         PlayerBarUpdate();
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
     
     private IEnumerator Dash()
@@ -194,12 +194,12 @@ public class Player : MonoBehaviour
         SprintHandle();
         DashHandle();
     }
-    private void PlayerBarUpdate()
+    public void PlayerBarUpdate()
     {
         staminaBar.size = _stamina / maxStamina;
         staminaText.text = $"{_stamina:F0} / {maxStamina}";
-        healthBar.size = _health / maxHealth;
-        healthText.text = $"{_health:F0} / {maxHealth}";
+        healthBar.size = health / maxHealth;
+        healthText.text = $"{health:F0} / {maxHealth}";
     }
     
     private bool MovementConditionCheck(PlayerStatus status)
@@ -233,11 +233,11 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if(playerStatus.Equals(PlayerStatus.Dash)) return;
-        _health -= damage;
+        health -= damage;
         _spriteRenderer.color = Color.red - new Color(0,0,0,0.5f);
         Invoke(nameof(ResetSpriteColor),0.1f);
         
-        if (_health <= 0)
+        if (health <= 0)
         {
             // Die
         }
@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
         
         if (damage > 0)
         {
-            _health -= damage;
+            health -= damage;
             _spriteRenderer.color = new Color(1, 0.16f, 0, 0.5f);
             Invoke(nameof(ResetSpriteColor),0.1f);
         }
@@ -259,7 +259,7 @@ public class Player : MonoBehaviour
             StartCoroutine(KnockBack(knockDirection, knockBackForce, knockBackDuration));
         }
 
-        if (_health <= 0)
+        if (health <= 0)
         {
             // Die
         }

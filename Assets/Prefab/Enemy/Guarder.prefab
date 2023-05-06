@@ -583,10 +583,12 @@ MonoBehaviour:
   attackRange: 7
   maxHp: 50
   attackDamage: 1
+  expDrop: 20
   maxSpeed: 5
   minSpeed: 2
   turnDirectionDamp: 1.5
   distanceThreshold: 5
+  lootChest: {fileID: 0}
   rigidbody2D: {fileID: 0}
   deadParticleSystem: {fileID: 5082438276172502402, guid: 935e6ce13f9b0a847beff7c746ab9e78, type: 3}
 --- !u!50 &1090280884631817662

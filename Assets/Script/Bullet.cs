@@ -7,12 +7,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletType bulletType;
-    [SerializeField] private Rigidbody2D Rigidbody2D;
+    [SerializeField] private PlayerClassData playerClassData;
+    [HideInInspector] public float bulletSpeed;
+    [HideInInspector] public float bulletDamage;
+    [HideInInspector] public float bulletOffSetScale;
+    [HideInInspector] public float destroyTime;
 
-    [Header("bulletInfo")]
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] public float bulletDamage;
-    
     public enum BulletType
     {
         Player,
@@ -20,19 +20,20 @@ public class Bullet : MonoBehaviour
     }
     
     private Player _player;
-    
-    
+    private Rigidbody2D _rigidbody2D;
+
     void Start()
     {
+        AssignBulletData();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _player = FindObjectOfType<Player>();
+        _rigidbody2D.velocity = transform.up * bulletSpeed;
+        Destroy(gameObject, destroyTime);
     }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Rigidbody2D.velocity = transform.up * bulletSpeed;
+        //_rigidbody2D.velocity = transform.up * bulletSpeed;
     }
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         
@@ -43,14 +44,14 @@ public class Bullet : MonoBehaviour
                 Player player = col.gameObject.GetComponent<Player>();
             
                 if(player == null) return;
-                player.TakeDamage(bulletDamage * _player.playerDamage);
+                player.TakeDamage(bulletDamage);
             }
             return;
         }
         
         if (col.gameObject.CompareTag("Guard"))
         {
-            col.GetComponent<Guard>().TakeDamage(bulletDamage);
+            col.GetComponent<Guard>().TakeDamage(_player.playerDamage);
             Destroy(gameObject);
         }
         
@@ -61,12 +62,19 @@ public class Bullet : MonoBehaviour
                 if(col == null) return;
                 Enemy _enemy = col.gameObject.GetComponent<Enemy>();
                 if(_enemy == null) return;
-                _enemy.TakeDamage(bulletDamage * _player.playerDamage);
+                _enemy.TakeDamage(_player.playerDamage);
             }
             catch (Exception e)
             {
                 //Debug.Log(e);
             }
         }
+    }
+
+    private void AssignBulletData()
+    {
+        bulletSpeed = playerClassData.bulletSpeed;
+        bulletOffSetScale = playerClassData.bulletOffSetScale;
+        destroyTime = playerClassData.destroyTime;
     }
 }
