@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 865993947439010482}
   - component: {fileID: 4647665230430878529}
   - component: {fileID: -1135054342150573880}
+  - component: {fileID: 2667421264230369020}
   m_Layer: 6
   m_Name: Tank
   m_TagString: Enemy
@@ -66,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 865993947439010477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.73, y: 1.39, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.2091}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5459102446720596190}
@@ -203,6 +204,26 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.5}
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 0.5}
+--- !u!95 &2667421264230369020
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865993947439010477}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c19b0aa1705426549a886aa51dc600b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5233310073966855784
 GameObject:
   m_ObjectHideFlags: 0

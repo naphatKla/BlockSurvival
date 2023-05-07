@@ -10870,6 +10870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 685171999}
   - component: {fileID: 685172000}
+  - component: {fileID: 685172001}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -10930,8 +10931,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -418559399
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.41037738, g: 1, b: 0.414523, a: 1}
@@ -10944,6 +10945,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &685172001
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685171998}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7faefec46b787634c891ff7252a8cbfe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &687233151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7467399288303019219, guid: e7180f418eacf6444b6943994751424b, type: 3}
@@ -33168,8 +33189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61406d72488a94740980579f8f933201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevel: 1
-  playerExp: 0
+  playerLevel: 4
+  playerExp: 19
   playerNextLevelUpExp: 20
   playerLevelUpPoint: 0
   lootChestPickPoint: 0
