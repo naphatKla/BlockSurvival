@@ -59,10 +59,16 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemy(int amount, float delay)
     {
         int random = Random.Range(0,spawnPositionList.Count);
-        for (int i = 0; i < amount; i++)
+        
+        if (_gameManager.enemyLeft < 300)
         {
-            Instantiate(enemy, spawnPositionList[random].position, quaternion.identity);
-            yield return new WaitForSeconds(delay);
+            for (int i = 0; i < amount; i++)
+            {
+                Instantiate(enemy, spawnPositionList[random].position, quaternion.identity);
+                _gameManager.enemyLeft++;
+                _gameManager.enemySpawned++;
+                yield return new WaitForSeconds(delay);
+            }
         }
     }
     

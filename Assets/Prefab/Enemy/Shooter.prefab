@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3375801170909187528}
   - component: {fileID: 7904517670907384332}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5706877879555774662}
   - component: {fileID: 972492882793594273}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4302325702973182137}
   - component: {fileID: 419425647818871269}
   - component: {fileID: 1349330219905047237}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 9170042030620758077}
   - component: {fileID: 2964346051956597591}
   - component: {fileID: 2653980114456364633}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 6563121670684230813}
   - component: {fileID: 8267347904960049260}
   - component: {fileID: 9003085480161123000}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1105132799
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8267347904960049260
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 4173437793369213053}
   - component: {fileID: -1870463330800075027}
   - component: {fileID: 1143112754818300029}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5012035197889006223}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

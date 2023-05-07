@@ -715,63 +715,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39571538}
   m_CullTransparentMesh: 1
---- !u!1001 &42724125
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935475, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131746730232935487, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
-      propertyPath: m_Name
-      value: Explode
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
 --- !u!4 &49242325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 865993947439010480, guid: b5dca8737e4405649bab50fbb7293a7d, type: 3}
@@ -6493,7 +6436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &453496682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13564,6 +13507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCountText: {fileID: 1122977827}
+  enemySpawned: 0
+  enemyLeft: 0
   timeInGame: 0
 --- !u!1 &867468727
 GameObject:
@@ -20366,11 +20311,11 @@ MonoBehaviour:
   - {fileID: 1268460496}
   enemy: {fileID: 7103258213390938063, guid: fab55a5739d30dc41b8fc4bd1fa9a08a, type: 3}
   timeStart: 0
-  timeEnd: 300
+  timeEnd: 900
   spawnRate: 5
   minSpawnRate: 1
   reduceSpawnRate: 0.25
-  reduceDuration: 10
+  reduceDuration: 9
   spawnAmount: 3
 --- !u!95 &1265690892
 Animator:
@@ -20427,7 +20372,7 @@ MonoBehaviour:
   spawnRate: 5
   minSpawnRate: 1
   reduceSpawnRate: 0.25
-  reduceDuration: 10
+  reduceDuration: 9
   spawnAmount: 5
 --- !u!114 &1265690894
 MonoBehaviour:
@@ -20461,11 +20406,11 @@ MonoBehaviour:
   enemy: {fileID: 4853198966283134034, guid: 82184bd9cc833784e83bcacb6f1ad4e1, type: 3}
   timeStart: 240
   timeEnd: 900
-  spawnRate: 5
-  minSpawnRate: 1
+  spawnRate: 10
+  minSpawnRate: 5
   reduceSpawnRate: 0.25
-  reduceDuration: 10
-  spawnAmount: 2
+  reduceDuration: 9
+  spawnAmount: 1
 --- !u!114 &1265690895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20501,7 +20446,7 @@ MonoBehaviour:
   spawnRate: 5
   minSpawnRate: 1
   reduceSpawnRate: 0.25
-  reduceDuration: 10
+  reduceDuration: 9
   spawnAmount: 3
 --- !u!114 &1265690896
 MonoBehaviour:
@@ -20538,7 +20483,7 @@ MonoBehaviour:
   spawnRate: 5
   minSpawnRate: 1
   reduceSpawnRate: 0.25
-  reduceDuration: 10
+  reduceDuration: 9
   spawnAmount: 3
 --- !u!4 &1265994099 stripped
 Transform:
@@ -33237,8 +33182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61406d72488a94740980579f8f933201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevel: 4
-  playerExp: 19
+  playerLevel: 1
+  playerExp: 0
   playerNextLevelUpExp: 20
   playerLevelUpPoint: 0
   lootChestPickPoint: 0
@@ -33346,6 +33291,7 @@ MonoBehaviour:
   explode: {fileID: 4131746730232935487, guid: 2f43f2d14425e1143b3dcd1304879946, type: 3}
   playerClass: 0
   bulletSpeed: 0
+  bulletOfsetScale: 0
 --- !u!96 &2070501655
 TrailRenderer:
   serializedVersion: 2

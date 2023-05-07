@@ -249,7 +249,8 @@ public class Level : MonoBehaviour
         if (playerExp >= playerNextLevelUpExp)
         {
             playerLevel += 1;
-            playerLevelUpPoint += 1;
+            if(playerLevel >= 5)
+                playerLevelUpPoint += 1;
             playerExp = 0;
             playerNextLevelUpExp += playerNextLevelUpExp / 2 ;
         }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4330921453347125683}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 4647665230430878529}
   - component: {fileID: -1135054342150573880}
   - component: {fileID: 2667421264230369020}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 2486040914636519329}
   - component: {fileID: 805951329255342928}
   - component: {fileID: 388919130776496516}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1105132799
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &805951329255342928
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 492684343919977217}
   - component: {fileID: 5816307040557338731}
   - component: {fileID: 6719372512082081125}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 4764873303159317381}
   - component: {fileID: 8955069274689168089}
   - component: {fileID: 7722861677100771833}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

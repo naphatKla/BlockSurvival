@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     private float _currentSpeed;
     private float _currentHp;
     private Level _level;
+    private GameManager _gameManager;
 
     [Header("Particle Effect")]
     [SerializeField] private ParticleSystem deadParticleSystem;
@@ -61,6 +62,7 @@ public class Enemy : MonoBehaviour
     {
         _currentHp = maxHp;
         _canMove = true;
+        _gameManager = FindObjectOfType<GameManager>();
         _player = FindObjectOfType<Player>();
         _level = FindObjectOfType<Level>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -169,11 +171,12 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(deadParticleSystem,transform.position);
-            if(Random.Range(0,101) >= 99.95f)
+            if(Random.Range(0,101) >= 99.99f)
                 LootChestSpawn();
             _level.enemyKill++;
             _level.LevelGain(expDrop);
-            _player.health += 1;
+            _gameManager.enemyLeft--;
+            Debug.Log(_gameManager.enemyLeft);
             Destroy(gameObject);
         }
     }

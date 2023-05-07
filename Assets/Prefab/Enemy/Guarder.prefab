@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23839935}
   - component: {fileID: 23839936}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1349601151
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 0
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1785492453}
   - component: {fileID: 1785492454}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Right Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,9 +154,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1349601151
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7916931622712885598}
   - component: {fileID: 4931993690850735535}
   - component: {fileID: 5348888450368905083}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1105132799
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4931993690850735535
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5298761608474646014}
   - component: {fileID: 2299380323707971220}
   - component: {fileID: 1305665547312677786}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: EnemyHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 1212203952376287627}
   - component: {fileID: 5239282264479115146}
   - component: {fileID: 88823109}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: EnemyBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1349601151
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4056, g: 0.4056, b: 0.4056, a: 1}
   m_FlipX: 0
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 972387541542589818}
   - component: {fileID: 3681809621698745382}
   - component: {fileID: 2626649235209412358}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 4853198966283134029}
   - component: {fileID: 1090280884631817662}
   - component: {fileID: 7818434678653927950}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Guarder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1349601151
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
   m_FlipX: 0
@@ -756,7 +756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8305799117930188620}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,13 +795,21 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2180886857331969300, guid: 06ada53d0df95be47b222cd5d1053fc1, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180886857331969300, guid: 06ada53d0df95be47b222cd5d1053fc1, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1349601151
+      objectReference: {fileID: 0}
     - target: {fileID: 2180886857331969384, guid: 06ada53d0df95be47b222cd5d1053fc1, type: 3}
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
     - target: {fileID: 2180886857331969384, guid: 06ada53d0df95be47b222cd5d1053fc1, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2180886857331969385, guid: 06ada53d0df95be47b222cd5d1053fc1, type: 3}
       propertyPath: m_RootOrder

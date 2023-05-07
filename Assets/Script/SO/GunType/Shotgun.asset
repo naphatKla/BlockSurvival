@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 125
   damage: 2
-  attackSpeed: 0.5
+  attackSpeed: 0.6
   walkSpeed: 3
   sprintSpeed: 6
   dashSpeed: 30
@@ -25,11 +25,11 @@ MonoBehaviour:
   damageLimit: 10
   attackSpeedLimit: 0.25
   walkSpeedLimit: 8
-  sprintSpeedLimit: 15
+  sprintSpeedLimit: 16
   dashSpeedLimit: 30
-  upgradeHealth: 25
-  upgradeDamage: 1.5
-  upgradeAttackSpeed: 0.05
-  upgradeWalkSpeed: 0.75
-  upgradeSprintSpeed: 0.75
+  upgradeHealth: 46
+  upgradeDamage: 1.6
+  upgradeAttackSpeed: 0.07
+  upgradeWalkSpeed: 1
+  upgradeSprintSpeed: 2
   upgradeSprintStaminaDrain: 0.5

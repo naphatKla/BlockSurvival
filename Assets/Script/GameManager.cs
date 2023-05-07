@@ -6,11 +6,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timeCountText;
+    public int enemySpawned;
+    public int enemyLeft;
     public float timeInGame;
 
     void Start()
     {
-        
+        enemyLeft = 0;
+        enemySpawned = 0;
     }
     
     void Update()

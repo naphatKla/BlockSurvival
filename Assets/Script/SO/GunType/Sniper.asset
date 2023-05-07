@@ -27,9 +27,9 @@ MonoBehaviour:
   walkSpeedLimit: 6
   sprintSpeedLimit: 12
   dashSpeedLimit: 40
-  upgradeHealth: 15
+  upgradeHealth: 30
   upgradeDamage: 2
-  upgradeAttackSpeed: 0.05
-  upgradeWalkSpeed: 0.75
-  upgradeSprintSpeed: 0.75
+  upgradeAttackSpeed: 0.09
+  upgradeWalkSpeed: 0.6
+  upgradeSprintSpeed: 1.2
   upgradeSprintStaminaDrain: 0.5
