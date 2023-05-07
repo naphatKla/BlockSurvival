@@ -8,10 +8,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletType bulletType;
     [SerializeField] private PlayerClassData playerClassData;
-    [HideInInspector] public float bulletSpeed;
-    [HideInInspector] public float bulletDamage;
-    [HideInInspector] public float bulletOffSetScale;
-    [HideInInspector] public float destroyTime;
+    [SerializeField] public float bulletSpeed;
+    [SerializeField] public float bulletDamage;
+    [SerializeField] public float bulletOffSetScale;
+    [SerializeField] public float destroyTime;
 
     public enum BulletType
     {

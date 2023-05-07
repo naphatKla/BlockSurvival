@@ -15,7 +15,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemy")] 
     public GameObject enemy;
     [Space] 
-    public float timeBeforeStart;
+    public float timeStart;
+    public float timeEnd;
     // Less spawn rate = more enemy spawn
     public float spawnRate;
     public float minSpawnRate;
@@ -23,42 +24,45 @@ public class EnemySpawner : MonoBehaviour
     public float reduceDuration;
     public int spawnAmount;
     
-    [Header("TimeCountUi")] 
-    [SerializeField] private TextMeshProUGUI timeCountText;
-    private float _timeInGame;
+    private GameManager _gameManager;
     #endregion
 
     #region Unity Method
     void Start()
     {
-        _timeInGame = 0;
+        _gameManager = FindObjectOfType<GameManager>();
         StartCoroutine(SpawnEnemyHandle());
-    }
-    
-    void Update()
-    {
-        SetTimeInGameText();
     }
     
     private IEnumerator SpawnEnemyHandle()
     {
-        yield return new WaitForSeconds(timeBeforeStart);
+        yield return new WaitUntil(() => _gameManager.timeInGame >= timeStart);
         StartCoroutine(ReduceSpawnRateHandle());
         
-        while (true)
+        while (_gameManager.timeInGame < timeEnd)
         {
-            SpawnEnemy(spawnAmount);
+            StartCoroutine(SpawnEnemy(spawnAmount, 0.2f));
            yield return new WaitForSeconds(spawnRate);
         }
     }
     
     private IEnumerator ReduceSpawnRateHandle()
     {
-        while (true)
+        while (_gameManager.timeInGame < timeEnd)
         { 
             yield return new WaitForSeconds(reduceDuration);
             spawnRate -= reduceSpawnRate;
             spawnRate = Mathf.Clamp(spawnRate, minSpawnRate, 100);
+        }
+    }
+
+    private IEnumerator SpawnEnemy(int amount, float delay)
+    {
+        int random = Random.Range(0,spawnPositionList.Count);
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(enemy, spawnPositionList[random].position, quaternion.identity);
+            yield return new WaitForSeconds(delay);
         }
     }
     
@@ -74,18 +78,5 @@ public class EnemySpawner : MonoBehaviour
     #endregion
 
     #region Method
-    private void SpawnEnemy(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            Instantiate(enemy, spawnPositionList[Random.Range(0,spawnPositionList.Count)].position, quaternion.identity);
-        }
-    }
-    
-    private void SetTimeInGameText()
-    {
-        _timeInGame += Time.deltaTime;
-        timeCountText.text = "" + Mathf.FloorToInt(_timeInGame / 60) + ":" + Mathf.FloorToInt(_timeInGame % 60).ToString("00");
-    }
     #endregion
 }

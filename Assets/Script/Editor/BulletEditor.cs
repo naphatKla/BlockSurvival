@@ -27,17 +27,16 @@ public class BulletEditor : Editor
     {
         serializedObject.Update();
         EditorGUILayout.PropertyField(_bulletType);
-        if (_bulletType.enumValueIndex == (int)Bullet.BulletType.Enemy)
+        if (_bulletType.enumValueIndex.Equals((int)Bullet.BulletType.Enemy))
         {
             EditorGUILayout.PropertyField(_bulletSpeed);
             EditorGUILayout.PropertyField(_bulletDamage);
             EditorGUILayout.PropertyField(_bulletOffSetScale);
             EditorGUILayout.PropertyField(_destroyTime);
         }
-        else
-        {
+        
+        if (_bulletType.enumValueIndex.Equals((int)Bullet.BulletType.Player))
             EditorGUILayout.PropertyField(_playerClassData);
-        }
         serializedObject.ApplyModifiedProperties();
     }
 }

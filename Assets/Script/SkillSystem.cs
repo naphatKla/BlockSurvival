@@ -6,9 +6,11 @@ public class SkillSystem : MonoBehaviour
 {
     [SerializeField] public List<SkillBase> skills;
     private Player _player;
+    private Level _level;
     void Start()
     {
         _player = GetComponent<Player>();
+        _level = GetComponent<Level>();
         
         // I don't know why this doesn't work
          foreach (SkillBase skill in skills)
@@ -31,6 +33,7 @@ public class SkillSystem : MonoBehaviour
     
     private bool CheckSkillCondition(SkillBase skill)
     {
+        if (_level.playerLevel < skill.skillLevelUnlock) return false;
         if (skill.isCooldown) return false;
         if (Input.GetKeyDown(skill.skillKey)) return true;
         return false;

@@ -10,9 +10,14 @@ public class ParticleEffectManager : Singleton<ParticleEffectManager>
     {
         Instance.enabled = true;
     }
-
+    
     public void PlayParticleEffect(ParticleSystem particleEffect, Vector3 position)
     {
         Destroy(Instantiate(particleEffect, position, Quaternion.identity).gameObject, particleEffect.main.startLifetime.constantMax);
+    }
+    
+    public void PlayParticleEffect(ParticleSystem particleEffect, Vector3 position, Transform parent)
+    {
+        Destroy(Instantiate(particleEffect, position, Quaternion.identity,parent).gameObject, particleEffect.main.startLifetime.constantMax);
     }
 }

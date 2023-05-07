@@ -47,6 +47,12 @@ TagManager:
   - name: Enemy
     uniqueID: 2945366145
     locked: 0
+  - name: ParicleEffect
+    uniqueID: 492828945
+    locked: 0
+  - name: Bullet
+    uniqueID: 1206634709
+    locked: 0
   - name: Skill
     uniqueID: 3876407897
     locked: 0

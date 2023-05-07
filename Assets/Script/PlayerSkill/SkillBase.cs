@@ -17,6 +17,7 @@ public abstract class SkillBase : MonoBehaviour
     [SerializeField] public string name;
     [SerializeField] public float skillDamage;
     [SerializeField] public float skillCooldown;
+    [SerializeField] public float skillLevelUnlock;
     [HideInInspector] public float skillCurrentCooldown;
     [SerializeField] public float destroyTime;
     [SerializeField] public float skillOffset;
