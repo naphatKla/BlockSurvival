@@ -4982,7 +4982,7 @@ MonoBehaviour:
   skillDamage: 3
   skillCooldown: 15
   skillLevelUnlock: 10
-  skillCurrentCooldown: 9.15965
+  skillCurrentCooldown: 8.582778
   destroyTime: 5
   skillOffset: 3
   hitMode: 1

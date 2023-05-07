@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -418559399
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -152,7 +152,7 @@ MonoBehaviour:
   skillDamage: 2
   skillCooldown: 7
   skillLevelUnlock: 5
-  skillCurrentCooldown: 0
+  skillCurrentCooldown: 3.7778254
   destroyTime: 2
   skillOffset: 1
   hitMode: 1
@@ -161,7 +161,7 @@ MonoBehaviour:
   knockBackForce: 5
   knockBackDuration: 0.2
   player: {fileID: 0}
-  isCooldown: 0
+  isCooldown: 1
 --- !u!1001 &7239645043367805107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 36507129332623301, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 36507129332623301, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: m_SortingLayerID
@@ -224,6 +224,14 @@ PrefabInstance:
     - target: {fileID: 6135619020446192916, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902559502146729134, guid: 4d5038832b211934186cb97ea586091e, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902559502146729134, guid: 4d5038832b211934186cb97ea586091e, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d5038832b211934186cb97ea586091e, type: 3}

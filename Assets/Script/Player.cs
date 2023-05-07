@@ -36,9 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float cameraSmoothDamp;
     private Vector3 _velocity = Vector3.zero;
 
-    [Header("Player Movement")] 
-    [SerializeField] private KeyCode sprintKey;
-    [SerializeField] private KeyCode dashKey;
+    [Header("Player Movement")]
     public float walkSpeed;
     public float sprintSpeed;
     public float dashStaminaDrain;
@@ -209,9 +207,9 @@ public class Player : MonoBehaviour
         switch (movementStatus)
         {
             case PlayerMovementStatus.Sprint:
-                return Input.GetKey(sprintKey) && _stamina > 0;
+                return Input.GetKey(KeyCode.LeftShift) && _stamina > 0;
             case PlayerMovementStatus.Dash:
-                return Input.GetKeyDown(dashKey) && !playerMovementStatus.Equals( PlayerMovementStatus.Dash) && _stamina >= dashStaminaDrain;
+                return Input.GetKeyDown(KeyCode.LeftControl) && !playerMovementStatus.Equals( PlayerMovementStatus.Dash) && _stamina >= dashStaminaDrain;
             default: return false;
         }
     }
