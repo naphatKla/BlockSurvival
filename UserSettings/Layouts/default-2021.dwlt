@@ -146,8 +146,8 @@ MonoBehaviour:
     y: 0
     width: 338
     height: 429
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 18}
@@ -400,7 +400,8 @@ MonoBehaviour:
     m_SaveData: []
   m_ViewTransforms:
     m_KeySerializationHelper:
-    - {fileID: 3306408260649253522, guid: 4b7aede2af9a9864ab4f334e0f5b821e, type: 2}
+    - {fileID: 1077999595255551495, guid: 2ff849f88a1b4eb44a30bbda7810cbf2, type: 2}
+    - {fileID: 4045790322562208673, guid: f226340a7951fd948b83adbf0633cef7, type: 2}
     m_ValueSerializationHelper:
     - e00: 1
       e01: 0
@@ -418,10 +419,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 4b7aede2af9a9864ab4f334e0f5b821e, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: f226340a7951fd948b83adbf0633cef7, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 3306408260649253522, guid: 4b7aede2af9a9864ab4f334e0f5b821e, type: 2}
+  - m_Target: {fileID: 4045790322562208673, guid: f226340a7951fd948b83adbf0633cef7, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -493,18 +510,18 @@ MonoBehaviour:
     m_ExpandedIDs: 00000000186200002a620000ba6a0000a66e0000b87200003a7300006a78000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Prefab
+      m_OriginalName: Prefab
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 25350
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 7}
     m_SearchString: 
@@ -518,7 +535,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000018620000
+    m_ExpandedIDs: 00000000e2620000e4620000e6620000e8620000ea620000ec620000ee620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -605,7 +622,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 160
+    m_CachedPref: -160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
