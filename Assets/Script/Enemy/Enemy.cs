@@ -176,7 +176,6 @@ public class Enemy : MonoBehaviour
             _level.enemyKill++;
             _level.LevelGain(expDrop);
             _gameManager.enemyLeft--;
-            Debug.Log(_gameManager.enemyLeft);
             Destroy(gameObject);
         }
     }
