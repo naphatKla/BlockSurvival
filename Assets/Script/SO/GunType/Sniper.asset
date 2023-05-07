@@ -19,7 +19,7 @@ MonoBehaviour:
   sprintSpeed: 6
   dashSpeed: 30
   bulletSpeed: 25
-  bulletOffSetScale: 0.5
+  bulletOffSetScale: 1
   destroyTime: 1
   maxHpLimit: 250
   damageLimit: 15

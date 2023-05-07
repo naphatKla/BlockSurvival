@@ -23,7 +23,9 @@ public class CombatSystem : MonoBehaviour
     
  
     private Player _player;
+    private Level _level;
     public float bulletSpeed;
+    public float bulletOfsetScale;
 
     public enum PlayerClass
     {
@@ -40,7 +42,9 @@ public class CombatSystem : MonoBehaviour
     #region Unity Method
     void Start()
     {
-        bulletSpeed = bullet.GetComponent<Bullet>().bulletSpeed;
+        _level = GetComponent<Level>();
+        bulletSpeed = _level.defaultData.bulletSpeed;
+        bulletOfsetScale = _level.defaultData.bulletOffSetScale;
         _player = GetComponent<Player>();
         playerClass = PlayerClass.Default;
         Invoke("BulletSpawn", _player.playerAttackSpeed);
@@ -89,7 +93,7 @@ public class CombatSystem : MonoBehaviour
 
     private void BulletShotGunPatternSpawn()
     {
-        Vector3 bulletOffSet = _player.playerTransform.up * shotgunBullet.bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * _level.shotgunData.bulletOffSetScale;
         float angle = 30;
 
         for (int i = 0; i < 3; i++)
@@ -101,28 +105,29 @@ public class CombatSystem : MonoBehaviour
     }
     private void BulletAssaultRiflePatternSpawn()
     {
-        Vector3 bulletOffSet = _player.playerTransform.up * assaultRifleBullet.bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * _level.assaultRifleData.bulletOffSetScale;
         GameObject bulletSpawn = Instantiate(assaultRifleBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
         bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
     }
     
     private void BulletSniperPatternSpawn()
     {
-        Vector3 bulletOffSet = _player.playerTransform.up * sniperBullet.bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * _level.sniperData.bulletOffSetScale;
+        Debug.Log(sniperBullet.bulletOffSetScale);
         GameObject bulletSpawn = Instantiate(sniperBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
         bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
     }
     
     private void BulletMissilePatternSpawn()
     {
-        Vector3 bulletOffSet = _player.playerTransform.up * missileBullet.bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * _level.missileData.bulletOffSetScale;
         GameObject bulletSpawn = Instantiate(missileBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation);
         bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
     }
     
     private void BulletSwordPatternSpawn()
     {
-        Vector3 bulletOffSet = _player.playerTransform.up * sword.bulletOffSetScale;
+        Vector3 bulletOffSet = _player.playerTransform.up * _level.swordData.bulletOffSetScale;
         float angle = 75;
 
         for (int i = 0; i < 3; i++)
