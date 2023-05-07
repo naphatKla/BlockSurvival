@@ -133,7 +133,7 @@ public class Level : MonoBehaviour
         LootChestButtonAssign();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         PlayerStatusUpdate();
     }
@@ -252,10 +252,11 @@ public class Level : MonoBehaviour
         if (playerExp >= playerNextLevelUpExp)
         {
             playerLevel += 1;
-            if(playerLevel >= 5)
+            if(playerLevel > 5)
                 playerLevelUpPoint += 1;
             playerExp = 0;
-            playerNextLevelUpExp += playerNextLevelUpExp / 2 ;
+            playerLevelBar.size = 0;
+            playerNextLevelUpExp += playerNextLevelUpExp / 2.5f ;
         }
 
         if (playerLevel.Equals(5))
@@ -339,6 +340,7 @@ public class Level : MonoBehaviour
             $"Enemy Left : {_gameManager.enemyLeft}";
         playerLevelBar.size = playerExp / playerNextLevelUpExp;
         playerLevelText.text = $"{playerLevel}";
+        playerLevelBar.value = 0;
     }
     
     public void LootChestPick()

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
             pauseMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
         });
+        
     }
     
     void Update()

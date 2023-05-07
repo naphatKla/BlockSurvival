@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Boss : Enemy
 {
@@ -15,6 +18,21 @@ public class Boss : Enemy
     {
         base.Update();
         
+    }
+    
+    protected override void OnDestroy ()
+    {
+        try
+        {
+            LootChestSpawn();
+            _level.enemyKill++;
+            _level.LevelGain(expDrop);
+            _gameManager.enemyLeft--;
+        }
+        catch (Exception e)
+        {
+            //Debug.Log(e);
+        }
     }
 
     private IEnumerator RandomSkill()

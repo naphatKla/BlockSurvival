@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c775e8dbe6140cb4bb2cb68482d8171e, type: 3}
   m_Name: LootChestData
   m_EditorClassIdentifier: 
-  upgradeHealth: 150
-  upgradeDamage: 20
-  upgradeAttackSpeed: 0.3
+  upgradeHealth: 80
+  upgradeDamage: 2
+  upgradeAttackSpeed: 0.1
   upgradeWalkSpeed: 3
-  upgradeSprintSpeed: 3
+  upgradeSprintSpeed: 6
   upgradeDashSpeed: 4
   upgradeSprintStaminaDrain: 1
   upgradeDashStaminaDrain: 1

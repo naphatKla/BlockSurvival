@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public float minSpawnRate;
     public float reduceSpawnRate;
     public float reduceDuration;
-    public int spawnAmount;
+    public Vector2 spawnAmount;
     public bool isSpawnOneTime;
     
     private GameManager _gameManager;
@@ -43,7 +43,8 @@ public class EnemySpawner : MonoBehaviour
         
         while (_gameManager.timeInGame < timeEnd)
         {
-            StartCoroutine(SpawnEnemy(spawnAmount, 0.2f));
+            int randomAmout = Random.Range((int)spawnAmount.x, (int)spawnAmount.y+1);
+            StartCoroutine(SpawnEnemy(randomAmout, 0.2f));
             if(isSpawnOneTime)
                 break;
            yield return new WaitForSeconds(spawnRate);

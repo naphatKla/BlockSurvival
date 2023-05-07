@@ -175,11 +175,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         try
         {
-            if(Random.Range(0,1001) >= 999f && _level.playerLevel >= 5)
+            if(Random.Range(0,5001) >= 4999f && _level.playerLevel >= 5)
                 LootChestSpawn();
             _level.enemyKill++;
             _level.LevelGain(expDrop);
@@ -197,7 +197,7 @@ public class Enemy : MonoBehaviour
         Invoke(nameof(ShootBullet), fireRate);
     }
     
-    private void LootChestSpawn()
+    protected void LootChestSpawn()
     {
         GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
         Destroy(lootChestSpawn, 15f);
