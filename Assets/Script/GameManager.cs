@@ -41,7 +41,15 @@ public class GameManager : MonoBehaviour
         if(timeInGame < 2) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         
+        if (pauseMenu.gameObject.activeSelf)
+        {
+            pauseMenu.gameObject.SetActive(false);
+            Time.timeScale = 1;
+            return;
+        }
+        
         pauseMenu.gameObject.SetActive(true);
         Time.timeScale = 0;
+        
     }
 }
