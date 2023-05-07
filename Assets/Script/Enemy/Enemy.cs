@@ -11,44 +11,44 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
     #region Declare Variable
-    [SerializeField] private string enemyName;
-    [SerializeField] private EnemyType enemyType;
+    [SerializeField] protected string enemyName;
+    [SerializeField] protected EnemyType enemyType;
     // For range enemy
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletOffset;
-    [SerializeField] private float fireRate;
-    [SerializeField] private float attackRange;
+    [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected float bulletOffset;
+    [SerializeField] protected float fireRate;
+    [SerializeField] protected float attackRange;
 
     [Space] [Header("Enemy Stats")]
-    [SerializeField] private float maxHp;
-    [SerializeField] private float attackDamage;
-    [SerializeField] private float expDrop;
+    [SerializeField] protected float maxHp;
+    [SerializeField] protected float attackDamage;
+    [SerializeField] protected float expDrop;
     
     [Header("Movement")]
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float minSpeed;
-    [SerializeField] private float turnDirectionDamp;
-    private bool _canMove;
-    private float _smoothDampVelocity;
+    [SerializeField] protected float maxSpeed;
+    [SerializeField] protected float minSpeed;
+    [SerializeField] protected float turnDirectionDamp;
+    protected bool _canMove;
+    protected float _smoothDampVelocity;
     // The condition of distance for change enemy speed depend on target distance
-    [SerializeField] private float distanceThreshold;
+    [SerializeField] protected float distanceThreshold;
     
     [Header("Other")]
     [HideInInspector] public Rigidbody2D rigidbody2D;
-    private Player _player;
-    private float _currentSpeed;
-    private float _currentHp;
-    private Level _level;
-    private GameManager _gameManager;
+    protected Player _player;
+    protected float _currentSpeed;
+    protected float _currentHp;
+    protected Level _level;
+    protected GameManager _gameManager;
 
     [Header("Particle Effect")]
-    [SerializeField] private ParticleSystem deadParticleSystem;
+    [SerializeField] protected ParticleSystem deadParticleSystem;
     
     [Header("Bar")]
-    private Scrollbar _hpBar;
+    protected Scrollbar _hpBar;
     
     [Header("Loot Chest")] 
-    [SerializeField] private GameObject lootChest;
+    [SerializeField] protected GameObject lootChest;
     
     public enum EnemyType
     {
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Unity Method
-    void Start()
+    protected virtual void Start()
     {
         _currentHp = maxHp;
         _canMove = true;
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
         Invoke(nameof(ShootBullet), fireRate);
     }
     
-    void Update()
+    protected virtual void Update()
     {
         FollowTargetHandle(_player);
         EnemyBarUpdate();
@@ -171,12 +171,23 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0)
         {
             ParticleEffectManager.Instance.PlayParticleEffect(deadParticleSystem,transform.position);
-            if(Random.Range(0,101) >= 99.99f)
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        try
+        {
+            if(Random.Range(0,1001) >= 999f && _level.playerLevel >= 5)
                 LootChestSpawn();
             _level.enemyKill++;
             _level.LevelGain(expDrop);
             _gameManager.enemyLeft--;
-            Destroy(gameObject);
+        }
+        catch (Exception e)
+        {
+            //Debug.Log(e);
         }
     }
 
@@ -189,7 +200,7 @@ public class Enemy : MonoBehaviour
     private void LootChestSpawn()
     {
         GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
-        Destroy(lootChestSpawn, 3f);
+        Destroy(lootChestSpawn, 15f);
     }
     #endregion
 }

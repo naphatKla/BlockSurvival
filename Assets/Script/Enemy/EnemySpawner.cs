@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     public float reduceSpawnRate;
     public float reduceDuration;
     public int spawnAmount;
+    public bool isSpawnOneTime;
     
     private GameManager _gameManager;
     #endregion
@@ -37,11 +38,14 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemyHandle()
     {
         yield return new WaitUntil(() => _gameManager.timeInGame >= timeStart);
-        StartCoroutine(ReduceSpawnRateHandle());
+        if(!isSpawnOneTime)
+            StartCoroutine(ReduceSpawnRateHandle());
         
         while (_gameManager.timeInGame < timeEnd)
         {
             StartCoroutine(SpawnEnemy(spawnAmount, 0.2f));
+            if(isSpawnOneTime)
+                break;
            yield return new WaitForSeconds(spawnRate);
         }
     }

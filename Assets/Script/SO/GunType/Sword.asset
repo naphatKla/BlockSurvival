@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 150
   damage: 1
-  attackSpeed: 0.4
+  attackSpeed: 0.5
   walkSpeed: 3
   sprintSpeed: 6
   dashSpeed: 35
   bulletSpeed: 20
-  bulletOffSetScale: 0.75
+  bulletOffSetScale: 0
   destroyTime: 0.2
   maxHpLimit: 400
   damageLimit: 5
-  attackSpeedLimit: 0.1
+  attackSpeedLimit: 0.2
   walkSpeedLimit: 10
   sprintSpeedLimit: 20
   dashSpeedLimit: 45

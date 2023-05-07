@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5422346606647219416}
   - component: {fileID: 4305345402128566874}
   - component: {fileID: 7668233669211043365}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 2629775217670698474}
   - component: {fileID: 3472281050090679940}
   - component: {fileID: 5733547954503107214}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4956,7 +4956,7 @@ MonoBehaviour:
   skillDamage: 3
   skillCooldown: 15
   skillLevelUnlock: 10
-  skillCurrentCooldown: 5.499942
+  skillCurrentCooldown: 7.0785847
   destroyTime: 5
   skillOffset: 3
   hitMode: 1
@@ -4964,6 +4964,7 @@ MonoBehaviour:
   isKnockBack: 0
   knockBackForce: 0
   knockBackDuration: 0
+  currentAttackCooldown: 0
   player: {fileID: 0}
   isCooldown: 1
 --- !u!60 &5733547954503107214

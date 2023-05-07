@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2257486483508621386}
   - component: {fileID: 2629775217670698474}
   - component: {fileID: 431636933315799264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Laser Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   skillDamage: 2
   skillCooldown: 7
   skillLevelUnlock: 5
-  skillCurrentCooldown: 2.3667414
+  skillCurrentCooldown: 0
   destroyTime: 2
   skillOffset: 1
   hitMode: 1
@@ -160,8 +160,9 @@ MonoBehaviour:
   isKnockBack: 0
   knockBackForce: 5
   knockBackDuration: 0.2
+  currentAttackCooldown: 0
   player: {fileID: 0}
-  isCooldown: 1
+  isCooldown: 0
 --- !u!1001 &7239645043367805107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 3454339617473830078, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: m_Name
       value: Laser_PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454339617473830078, guid: 4d5038832b211934186cb97ea586091e, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6135619020446192916, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: m_RootOrder

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8920519049486811458}
   - component: {fileID: 7023472662840263658}
   - component: {fileID: -4600244478585514563}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Armor Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: -418559399
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 49d5cb7972a8e3d4d965fc661b4c611f, type: 3}
-  m_Color: {r: 0.114587024, g: 0.9716981, b: 0.9451617, a: 0.5803922}
+  m_Sprite: {fileID: 1298711410, guid: 22dc2a772bbf14d4780a32bbb5fbc9cc, type: 3}
+  m_Color: {r: 0.114587024, g: 0.9716981, b: 0.9451617, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   skillDamage: 2
   skillCooldown: 20
   skillLevelUnlock: 13
-  skillCurrentCooldown: 12.271814
+  skillCurrentCooldown: 15.871728
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
@@ -133,6 +133,7 @@ MonoBehaviour:
   isKnockBack: 1
   knockBackForce: 10
   knockBackDuration: 0.25
+  currentAttackCooldown: 0
   player: {fileID: 0}
   isCooldown: 1
 --- !u!61 &-4600244478585514563
@@ -152,7 +153,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.12, y: 1.12}
     newSize: {x: 20, y: 20}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

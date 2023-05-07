@@ -96,10 +96,10 @@ public class CombatSystem : MonoBehaviour
         Vector3 bulletOffSet = _player.playerTransform.up * _level.shotgunData.bulletOffSetScale;
         float angle = 30;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject bulletSpawn = Instantiate(shotgunBullet.gameObject, _player.playerTransform.position + bulletOffSet, _player.playerTransform.rotation * Quaternion.Euler(0,0,angle));
-            angle -= 30;
+            angle -= 15;
             bulletSpawn.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
         }
     }

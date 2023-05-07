@@ -19,17 +19,17 @@ MonoBehaviour:
   sprintSpeed: 6
   dashSpeed: 25
   bulletSpeed: 12
-  bulletOffSetScale: 1
+  bulletOffSetScale: 1.75
   destroyTime: 2
   maxHpLimit: 300
   damageLimit: 15
-  attackSpeedLimit: 0.5
+  attackSpeedLimit: 0.4
   walkSpeedLimit: 6
   sprintSpeedLimit: 12
   dashSpeedLimit: 30
   upgradeHealth: 40
   upgradeDamage: 2.4
-  upgradeAttackSpeed: 0.1
+  upgradeAttackSpeed: 0.12
   upgradeWalkSpeed: 0.6
   upgradeSprintSpeed: 1.2
   upgradeSprintStaminaDrain: 0.5

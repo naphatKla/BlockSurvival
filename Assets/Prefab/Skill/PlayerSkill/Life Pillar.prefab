@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6932304630600220048}
   - component: {fileID: 6972610151446958274}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2013677716577079311}
   - component: {fileID: -4264615639262289815}
   - component: {fileID: 8720810489966098321}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Life Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   skillDamage: 5
   skillCooldown: 30
   skillLevelUnlock: 15
-  skillCurrentCooldown: 24.824625
+  skillCurrentCooldown: 22.187443
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
@@ -199,6 +199,7 @@ MonoBehaviour:
   isKnockBack: 0
   knockBackForce: 0
   knockBackDuration: 0
+  currentAttackCooldown: 0
   player: {fileID: 0}
   isCooldown: 1
 --- !u!61 &2013677716577079311
@@ -322,6 +323,10 @@ PrefabInstance:
     - target: {fileID: 6684493075275325308, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
       propertyPath: m_Name
       value: Heal_PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684493075275325308, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8774433964087664264, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
       propertyPath: ShapeModule.m_Scale.x

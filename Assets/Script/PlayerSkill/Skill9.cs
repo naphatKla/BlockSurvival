@@ -16,7 +16,7 @@ public class Skill9 : SkillBase
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.health += Time.deltaTime * 10;
+            player.health += Time.deltaTime * 20;
             Debug.Log(player.health);
         }
     }

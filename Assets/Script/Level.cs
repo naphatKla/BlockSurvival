@@ -36,10 +36,12 @@ public class Level : MonoBehaviour
     [SerializeField] private PlayerLevelUp playerLevelUp;
     [SerializeField] private ClassTypeSelect classTypeSelect;
     [SerializeField] private Block blockImage;
+    public TextMeshProUGUI playerLevelText;
     
     [Header("Other")]
     private CombatSystem _combatSystem;
     private Player _player;
+    private GameManager _gameManager;
     
     [Serializable] public struct PlayerStatus
     {
@@ -113,6 +115,7 @@ public class Level : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
+        _gameManager = FindObjectOfType<GameManager>();
         _combatSystem = GetComponent<CombatSystem>();
         lootChest.animator = lootChest.lootChestUI.GetComponent<Animator>();
         classTypeSelect.animator = classTypeSelect.classSelectUI.GetComponent<Animator>();
@@ -331,8 +334,11 @@ public class Level : MonoBehaviour
             $"Speed : {_player.sprintSpeed:F2} \n" +
             $"Dash Speed : {_player.dashSpeed:F2} \n";
         
-        playerStatus.enemyKillText.text = $"Enemy Kill : {enemyKill}"; 
+
+            playerStatus.enemyKillText.text = $"Enemy Kill : {enemyKill}\n" +
+            $"Enemy Left : {_gameManager.enemyLeft}";
         playerLevelBar.size = playerExp / playerNextLevelUpExp;
+        playerLevelText.text = $"{playerLevel}";
     }
     
     public void LootChestPick()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8920519049486811458}
   - component: {fileID: 5054128742638150933}
   - component: {fileID: 8796720535302960442}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Beast Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   skillDamage: 30
   skillCooldown: 15
   skillLevelUnlock: 7
-  skillCurrentCooldown: 12.826045
+  skillCurrentCooldown: 7.0785847
   destroyTime: 5
   skillOffset: 1
   hitMode: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   isKnockBack: 1
   knockBackForce: 5
   knockBackDuration: 0.2
+  currentAttackCooldown: 0
   player: {fileID: 0}
   isCooldown: 1
   speed: 7
@@ -164,7 +165,7 @@ GameObject:
   - component: {fileID: 7369099453306718311}
   - component: {fileID: 4715067597343427943}
   - component: {fileID: 5475026332108834328}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
