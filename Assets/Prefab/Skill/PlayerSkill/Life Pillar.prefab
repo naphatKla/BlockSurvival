@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: -4214447940744470792}
   - component: {fileID: 2013677716577079311}
   - component: {fileID: -4264615639262289815}
+  - component: {fileID: 8720810489966098321}
   m_Layer: 0
   m_Name: Life Pillar
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 8789442863081912276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.300239, y: -0.26129833, z: 0}
-  m_LocalScale: {x: 11.1748495, y: 7.842, z: 7.842}
+  m_LocalScale: {x: 15, y: 15, z: 7.842}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6932304630600220048}
@@ -190,7 +191,7 @@ MonoBehaviour:
   skillDamage: 5
   skillCooldown: 30
   skillLevelUnlock: 15
-  skillCurrentCooldown: 0
+  skillCurrentCooldown: 24.824625
   destroyTime: 5
   skillOffset: 0
   hitMode: 1
@@ -199,7 +200,7 @@ MonoBehaviour:
   knockBackForce: 0
   knockBackDuration: 0
   player: {fileID: 0}
-  isCooldown: 0
+  isCooldown: 1
 --- !u!61 &2013677716577079311
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -247,6 +248,26 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &8720810489966098321
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789442863081912276}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7c00c0b8505e834a881ab7f9ea995ef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4938669268149303295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +322,18 @@ PrefabInstance:
     - target: {fileID: 6684493075275325308, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
       propertyPath: m_Name
       value: Heal_PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774433964087664264, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774433964087664264, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774433964087664264, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b7b265980d53a4c8cfc873a140d98a, type: 3}

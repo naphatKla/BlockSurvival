@@ -101,7 +101,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 10.594208}
+  m_Offset: {x: 0, y: 10.68765}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 21.188416}
+  m_Size: {x: 1, y: 21.3753}
   m_EdgeRadius: 0
 --- !u!50 &2629775217670698474
 Rigidbody2D:
@@ -152,7 +152,7 @@ MonoBehaviour:
   skillDamage: 2
   skillCooldown: 7
   skillLevelUnlock: 5
-  skillCurrentCooldown: 3.7778254
+  skillCurrentCooldown: 2.3667414
   destroyTime: 2
   skillOffset: 1
   hitMode: 1
@@ -227,11 +227,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902559502146729134, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 1.7
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8902559502146729134, guid: 4d5038832b211934186cb97ea586091e, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902559502146729134, guid: 4d5038832b211934186cb97ea586091e, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d5038832b211934186cb97ea586091e, type: 3}

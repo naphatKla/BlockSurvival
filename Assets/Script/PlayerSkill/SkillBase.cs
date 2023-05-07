@@ -25,10 +25,10 @@ public abstract class SkillBase : MonoBehaviour
     [Header("Skill Hit Mode")]
     [SerializeField] public HitMode hitMode;
     [SerializeField] public float cooldownPerHit;
-    [SerializeField] private bool isKnockBack;
-    [SerializeField] private float knockBackForce;
-    [SerializeField] private float knockBackDuration;
-    private float _currentAttackCooldown;
+    [SerializeField] public bool isKnockBack;
+    [SerializeField] public float knockBackForce;
+    [SerializeField] public float knockBackDuration;
+    public float currentAttackCooldown;
     [HideInInspector] public Player player;
     
     public enum HitMode
@@ -42,7 +42,7 @@ public abstract class SkillBase : MonoBehaviour
     void Start()
     {
         skillCurrentCooldown = 0;
-        _currentAttackCooldown = 0;
+        currentAttackCooldown = 0;
         player = FindObjectOfType<Player>();
         SkillAction();
         Destroy(gameObject, destroyTime);
@@ -50,8 +50,8 @@ public abstract class SkillBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        _currentAttackCooldown -= Time.deltaTime;
-        _currentAttackCooldown = Mathf.Clamp(_currentAttackCooldown, 0, cooldownPerHit);
+        currentAttackCooldown -= Time.deltaTime;
+        currentAttackCooldown = Mathf.Clamp(currentAttackCooldown, 0, cooldownPerHit);
     }
 
     private readonly List<Enemy> _enemiesInSkillArea = new List<Enemy>();
@@ -70,10 +70,10 @@ public abstract class SkillBase : MonoBehaviour
     {
         if(hitMode == HitMode.Single) return;
         
-        if (col.gameObject.CompareTag("Enemy") && _currentAttackCooldown <= 0) 
+        if (col.gameObject.CompareTag("Enemy") && currentAttackCooldown <= 0) 
         {
             _enemiesInSkillArea.ForEach(target => target.TakeDamage(skillDamage, isKnockBack, knockBackForce, knockBackDuration));
-            _currentAttackCooldown = cooldownPerHit;
+            currentAttackCooldown = cooldownPerHit;
         }
     }
 

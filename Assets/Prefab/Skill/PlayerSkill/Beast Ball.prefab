@@ -126,7 +126,7 @@ MonoBehaviour:
   skillDamage: 30
   skillCooldown: 15
   skillLevelUnlock: 7
-  skillCurrentCooldown: 1.9307652
+  skillCurrentCooldown: 12.826045
   destroyTime: 5
   skillOffset: 1
   hitMode: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   knockBackDuration: 0.2
   player: {fileID: 0}
   isCooldown: 1
-  speed: 3
+  speed: 7
 --- !u!58 &8796720535302960442
 CircleCollider2D:
   m_ObjectHideFlags: 0
