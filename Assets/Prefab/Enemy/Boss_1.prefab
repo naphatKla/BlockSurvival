@@ -483,8 +483,8 @@ MonoBehaviour:
   bulletOffset: 0
   fireRate: 0
   attackRange: 0
-  maxHp: 500
-  attackDamage: 20
+  maxHp: 1500
+  attackDamage: 10
   expDrop: 100
   maxSpeed: 7
   minSpeed: 4

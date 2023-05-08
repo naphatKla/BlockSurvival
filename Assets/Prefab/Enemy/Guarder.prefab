@@ -413,7 +413,7 @@ MonoBehaviour:
   attackRange: 7
   maxHp: 50
   attackDamage: 1
-  expDrop: 20
+  expDrop: 10
   maxSpeed: 5
   minSpeed: 2
   turnDirectionDamp: 1.5

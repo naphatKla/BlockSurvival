@@ -413,9 +413,9 @@ MonoBehaviour:
   attackRange: 7
   maxHp: 5
   attackDamage: 1
-  expDrop: 3
-  maxSpeed: 10
-  minSpeed: 7
+  expDrop: 2
+  maxSpeed: 9
+  minSpeed: 6
   turnDirectionDamp: 0.25
   distanceThreshold: 5
   rigidbody2D: {fileID: 0}

@@ -503,7 +503,7 @@ MonoBehaviour:
   bulletOffset: 2.5
   fireRate: 3
   attackRange: 10
-  maxHp: 500
+  maxHp: 1500
   attackDamage: 10
   expDrop: 200
   maxSpeed: 3

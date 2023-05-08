@@ -16,6 +16,8 @@ public class SceneController : MonoBehaviour
     public enum SceneName
     {
         MainMenu,
+        Story,
+        Story2,
         Gameplay,
         Exit
     }

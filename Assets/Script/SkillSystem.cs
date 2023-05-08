@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillSystem : MonoBehaviour
 {
     [SerializeField] public List<SkillBase> skills;
+    [SerializeField] public GameObject playerHelperSkill;
     private Player _player;
     private Level _level;
     void Start()
@@ -22,6 +23,7 @@ public class SkillSystem : MonoBehaviour
     void Update()
     {
         if (Time.timeScale.Equals(0)) return;
+        
         foreach (SkillBase skill in skills)
         {
             if (CheckSkillCondition(skill))
@@ -29,6 +31,10 @@ public class SkillSystem : MonoBehaviour
                 PlaySkill(skill);
             }
         }
+        
+        if(_level.playerLevel < 15) return;
+        if(playerHelperSkill.activeSelf) return;
+        playerHelperSkill.SetActive(true);
     }
     
     private bool CheckSkillCondition(SkillBase skill)

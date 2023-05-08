@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button resumeButton;
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject loseMenu;
+    [SerializeField] private GameObject howToPlayMenu;
+    [SerializeField] private Button howToPlayButton;
     [SerializeField] private List<GameObject> otherUI;
 
     public int enemySpawned;
@@ -31,6 +33,12 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
         });
         
+        howToPlayButton.onClick.AddListener(() =>
+        {
+            howToPlayMenu.gameObject.SetActive(false);
+            Time.timeScale = 1;
+        });
+        Invoke(nameof(HowToPlayPopUp),1.5f);
     }
     
     void Update()
@@ -51,6 +59,7 @@ public class GameManager : MonoBehaviour
             isEnd = true;
             StartCoroutine(EndScenePopUp(loseMenu));
         }
+        
     }
     
     private void SetTimeInGameText()
@@ -59,9 +68,13 @@ public class GameManager : MonoBehaviour
         timeCountText.text = "" + Mathf.FloorToInt(timeInGame / 60) + ":" + Mathf.FloorToInt(timeInGame % 60).ToString("00");
     }
 
+    private void HowToPlayPopUp()
+    {
+        StartCoroutine(HowToPlayPop());
+    }
     private void PauseMenuHandle()
     {
-        if(timeInGame < 2) return;
+        if(timeInGame < 1.5f) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         
         if (pauseMenu.gameObject.activeSelf)
@@ -76,11 +89,28 @@ public class GameManager : MonoBehaviour
         
     }
 
+    IEnumerator HowToPlayPop()
+    {
+        Animator animator = howToPlayMenu.GetComponent<Animator>();
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            foreach (var ui in otherUI)
+            {
+                ui.SetActive(false);
+            }
+            howToPlayMenu.SetActive(true);
+            Time.timeScale = 1;
+            yield return null;
+        }
+        
+        while(howToPlayMenu.activeSelf)
+        {
+            Time.timeScale = 0;
+            yield return null;
+        }
+    }
     IEnumerator EndScenePopUp(GameObject endScene)
     {
-
-
-
         while (endScene.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             foreach (var ui in otherUI)

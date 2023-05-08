@@ -16,7 +16,8 @@ public class Bullet : MonoBehaviour
     public enum BulletType
     {
         Player,
-        Enemy
+        Enemy,
+        PlayerHelper
     }
     
     protected Player player;
@@ -37,6 +38,7 @@ public class Bullet : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
+   
         
         if (bulletType.Equals(BulletType.Enemy))
         {
@@ -50,9 +52,11 @@ public class Bullet : MonoBehaviour
             return;
         }
         
+        float damage = bulletType.Equals(BulletType.PlayerHelper) ? bulletDamage : player.playerDamage;
+        
         if (col.gameObject.CompareTag("Guard"))
         {
-            col.GetComponent<Guard>().TakeDamage(player.playerDamage);
+            col.GetComponent<Guard>().TakeDamage(damage);
             Destroy(gameObject);
         }
         
@@ -63,7 +67,7 @@ public class Bullet : MonoBehaviour
                 if(col == null) return;
                 Enemy _enemy = col.gameObject.GetComponent<Enemy>();
                 if(_enemy == null) return;
-                _enemy.TakeDamage(player.playerDamage);
+                _enemy.TakeDamage(damage);
             }
             catch (Exception e)
             {

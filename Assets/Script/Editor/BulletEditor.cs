@@ -27,7 +27,7 @@ public class BulletEditor : Editor
     {
         serializedObject.Update();
         EditorGUILayout.PropertyField(_bulletType);
-        if (_bulletType.enumValueIndex.Equals((int)Bullet.BulletType.Enemy))
+        if (_bulletType.enumValueIndex.Equals((int)Bullet.BulletType.Enemy) || _bulletType.enumValueIndex.Equals((int)Bullet.BulletType.PlayerHelper))
         {
             EditorGUILayout.PropertyField(_bulletSpeed);
             EditorGUILayout.PropertyField(_bulletDamage);
