@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject howToPlayMenu;
     [SerializeField] private Button howToPlayButton;
     [SerializeField] private List<GameObject> otherUI;
-    [SerializeField] private AudioSource escSoundEffect;
 
     public int enemySpawned;
     public int enemyLeft;
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             howToPlayMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
         });
-        Invoke(nameof(HowToPlayPopUp),1.5f);
+        Invoke(nameof(HowToPlayPopUp),1.25f);
     }
     
     void Update()
@@ -75,12 +74,11 @@ public class GameManager : MonoBehaviour
     }
     private void PauseMenuHandle()
     {
-        if(timeInGame < 1.5f) return;
+        if(timeInGame < 1.25f) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         
         if (pauseMenu.gameObject.activeSelf)
         {
-            escSoundEffect.Play();
             pauseMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
             return;
@@ -105,7 +103,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         
-        while(howToPlayMenu.activeSelf)
+        while(howToPlayMenu.activeSelf && isEnd == false)
         {
             Time.timeScale = 0;
             yield return null;

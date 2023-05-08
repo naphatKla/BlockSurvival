@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Image transitionOut;
     private Animator _transitionInanimator;
     private Animator _transitionOutanimator;
+    GameManager _gameManager;
     public enum SceneName
     {
         MainMenu,
@@ -29,6 +30,7 @@ public class SceneController : MonoBehaviour
     }
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _transitionInanimator = transitionIn.GetComponent<Animator>();
         _transitionOutanimator = transitionOut.GetComponent<Animator>();
         
@@ -42,9 +44,13 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeScene(SceneName sceneName)
     {
-        Time.timeScale = 1;
         transitionOut.gameObject.SetActive(true);
-        yield return new WaitUntil(() => _transitionOutanimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+        if(_gameManager!=null) _gameManager.isEnd = true;
+        while ( _transitionOutanimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f )
+        {
+            Time.timeScale = 1;
+            yield return null;
+        }
         
         if (sceneName.Equals(SceneName.Exit))
         {
