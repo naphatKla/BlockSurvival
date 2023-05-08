@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] public float bulletDamage;
     [SerializeField] public float bulletOffSetScale;
     [SerializeField] public float destroyTime;
+    
+    private CombatSystem _combatSystem;
 
     public enum BulletType
     {
@@ -25,6 +27,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        _combatSystem = FindObjectOfType<CombatSystem>();
         if(bulletType.Equals(BulletType.Player))
             AssignBulletData();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -54,7 +57,7 @@ public class Bullet : MonoBehaviour
         
         float damage = bulletType.Equals(BulletType.PlayerHelper) ? bulletDamage : player.playerDamage;
         
-        if (col.gameObject.CompareTag("Guard"))
+        if (col.gameObject.CompareTag("Guard") && !bulletType.Equals(BulletType.PlayerHelper))
         {
             col.GetComponent<Guard>().TakeDamage(damage);
             Destroy(gameObject);
@@ -67,7 +70,13 @@ public class Bullet : MonoBehaviour
                 if(col == null) return;
                 Enemy _enemy = col.gameObject.GetComponent<Enemy>();
                 if(_enemy == null) return;
-                _enemy.TakeDamage(damage);
+                
+                if(_combatSystem.playerClass.Equals(CombatSystem.PlayerClass.Sword) && !bulletType.Equals(BulletType.PlayerHelper) && _enemy.maxHp < 500f)
+                    _enemy.TakeDamage(damage,true,5,0.15f);
+                else
+                {
+                    _enemy.TakeDamage(damage);
+                }
             }
             catch (Exception e)
             {

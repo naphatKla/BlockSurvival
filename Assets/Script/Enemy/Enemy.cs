@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float attackRange;
 
     [Space] [Header("Enemy Stats")]
-    [SerializeField] protected float maxHp;
+    [SerializeField] public float maxHp;
     [SerializeField] protected float attackDamage;
     [SerializeField] protected float expDrop;
     
