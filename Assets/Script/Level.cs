@@ -36,6 +36,7 @@ public class Level : MonoBehaviour
     [SerializeField] private PlayerLevelUp playerLevelUp;
     [SerializeField] private ClassTypeSelect classTypeSelect;
     [SerializeField] private Block blockImage;
+    [SerializeField] private AudioSource levelUpSoundEffect;
     public TextMeshProUGUI playerLevelText;
     
     [Header("Other")]
@@ -252,6 +253,7 @@ public class Level : MonoBehaviour
         if (playerExp >= playerNextLevelUpExp)
         {
             playerLevel += 1;
+            levelUpSoundEffect.Play();
             if(playerLevel >= 5)
                 playerLevelUpPoint += 1;
             playerExp = 0;

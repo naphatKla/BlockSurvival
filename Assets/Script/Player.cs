@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Scrollbar staminaBar;
     [SerializeField] private TextMeshProUGUI staminaText;
+    [SerializeField] private AudioSource getHitSoundEffect;
+    [SerializeField] private AudioSource dashSoundEffect;
 
     [Header("Camera")] 
     [SerializeField] private Camera playerCamera;
@@ -84,6 +86,7 @@ public class Player : MonoBehaviour
     {
         _stamina -= dashStaminaDrain;
         trailEffect.emitting = true;
+        dashSoundEffect.Play();
         _spriteRenderer.color = new Color( _spriteRenderer.color.r,  _spriteRenderer.color.g,  _spriteRenderer.color.b, 0.5f);
         
         float dashTimeCount = 0;
@@ -233,8 +236,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if(isImmune) return;
-        
         health -= damage;
+        getHitSoundEffect.Play();
         _spriteRenderer.color = Color.red - new Color(0,0,0,0.5f);
         Invoke(nameof(ResetSpriteColor),0.1f);
         
@@ -251,6 +254,7 @@ public class Player : MonoBehaviour
         if (damage > 0)
         {
             health -= damage;
+            getHitSoundEffect.Play();
             _spriteRenderer.color = new Color(1, 0.16f, 0, 0.5f);
             Invoke(nameof(ResetSpriteColor),0.1f);
         }
