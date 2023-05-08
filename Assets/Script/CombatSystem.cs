@@ -19,6 +19,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] public Bullet missileBullet;
     [SerializeField] public Bullet sword;
     [SerializeField] public GameObject explode;
+    [SerializeField] private AudioSource shootingSoundEffect;
     public PlayerClass playerClass;
     
  
@@ -80,7 +81,7 @@ public class CombatSystem : MonoBehaviour
                 BulletSwordPatternSpawn();
                 break;
         }
-
+        shootingSoundEffect.Play();
         Invoke("BulletSpawn", _player.playerAttackSpeed);
     }
     

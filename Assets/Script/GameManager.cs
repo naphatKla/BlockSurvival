@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject howToPlayMenu;
     [SerializeField] private Button howToPlayButton;
     [SerializeField] private List<GameObject> otherUI;
+    [SerializeField] private AudioSource escSoundEffect;
 
     public int enemySpawned;
     public int enemyLeft;
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         
         if (pauseMenu.gameObject.activeSelf)
         {
+            escSoundEffect.Play();
             pauseMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
             return;
