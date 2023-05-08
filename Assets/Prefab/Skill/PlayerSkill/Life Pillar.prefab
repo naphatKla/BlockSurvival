@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillKey: 53
   name: Life Pillar
-  skillDamage: 5
+  skillDamage: 3
   skillCooldown: 30
   skillLevelUnlock: 15
   skillCurrentCooldown: 0

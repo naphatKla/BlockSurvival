@@ -199,6 +199,8 @@ public class Player : MonoBehaviour
     }
     public void PlayerBarUpdate()
     {
+        staminaBar.value = 0;
+        healthBar.value = 0;
         staminaBar.size = _stamina / maxStamina;
         staminaText.text = $"{_stamina:F0} / {maxStamina}";
         healthBar.size = health / maxHealth;

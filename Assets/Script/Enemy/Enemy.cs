@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Mono.Cecil.Cil;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -50,6 +51,9 @@ public class Enemy : MonoBehaviour
     [Header("Loot Chest")] 
     [SerializeField] protected GameObject lootChest;
     
+    private SpriteRenderer _spriteRenderer;
+    private Color _originalColor;
+    
     public enum EnemyType
     {
         Melee,
@@ -66,10 +70,12 @@ public class Enemy : MonoBehaviour
         _player = FindObjectOfType<Player>();
         _level = FindObjectOfType<Level>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Scrollbar>();
         _hpBar.gameObject.SetActive(false);
         attackRange = Random.Range(attackRange - 2f, attackRange + 2f);
         attackRange = Mathf.Round(attackRange);
+        _originalColor = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, _spriteRenderer.color.a);
         
         if (enemyType != EnemyType.Range) return;
         Invoke(nameof(ShootBullet), fireRate);
@@ -95,6 +101,13 @@ public class Enemy : MonoBehaviour
         rigidbody2D.velocity = Vector2.zero;
 
         _canMove = true;
+    }
+
+    private IEnumerator HitColorChange()
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.15f);
+        _spriteRenderer.color = _originalColor;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -161,9 +174,12 @@ public class Enemy : MonoBehaviour
     
     public void TakeDamage(float damage, bool isKnockBack = false, float knockBackForce = 5, float knockBackDuration = 0.1f)
     {
+       
         if(!_hpBar.gameObject.activeSelf) _hpBar.gameObject.SetActive(true);
         
         _currentHp -= damage;
+
+        StartCoroutine(HitColorChange());
         
         if (isKnockBack)
             StartCoroutine(KnockBack(knockBackForce,knockBackDuration));
@@ -199,7 +215,7 @@ public class Enemy : MonoBehaviour
     
     protected void LootChestSpawn()
     {
-        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, transform.rotation);
+        GameObject lootChestSpawn = Instantiate(lootChest, transform.position, quaternion.identity);
         Destroy(lootChestSpawn, 15f);
     }
     #endregion

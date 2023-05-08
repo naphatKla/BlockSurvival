@@ -442,7 +442,7 @@ public class Level : MonoBehaviour
 
         playerLevelUp.speedButton.onClick.AddListener(() =>
         {
-            _player.walkSpeed += GetClassData(_combatSystem.playerClass).upgradeSprintSpeed;
+            _player.walkSpeed += GetClassData(_combatSystem.playerClass).upgradeWalkSpeed;
             _player.sprintSpeed +=GetClassData(_combatSystem.playerClass).upgradeSprintSpeed;
             _player.sprintStaminaDrain -= GetClassData(_combatSystem.playerClass).upgradeSprintStaminaDrain;
             _player.walkSpeed = Mathf.Clamp(_player.walkSpeed, 0, GetClassData(_combatSystem.playerClass).walkSpeedLimit);
